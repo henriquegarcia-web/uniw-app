@@ -3,8 +3,7 @@
 import React from 'react'
 import { Text, StyleSheet, TouchableOpacity, ImageBackground, View } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
-import { IProductCategory } from '@uniw/shared-types'
+import { IProductCategory, themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 
 interface CategoryCardProps {
   category: IProductCategory

@@ -12,14 +12,15 @@ import {
 } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 
-import { themeApp as theme, colors } from '@uniw/shared-constants'
 import { useHelpCenter } from '@/contexts/HelpCenterProvider'
 import { ListEmptyMessage } from '@/components/ListEmptyMessage'
 import {
   TicketHistoryScreenProps,
   getTicketStatusData,
   ISupportTicket,
-} from '@uniw/shared-types'
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 
 const TicketItem = ({
   ticket,

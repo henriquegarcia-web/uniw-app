@@ -3,8 +3,11 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView, Text } from 'react-native'
 
-import type { CheckoutSuccessScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  CheckoutSuccessScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 
 const CheckoutSuccessScreen = ({ navigation }: CheckoutSuccessScreenProps) => {
   return (

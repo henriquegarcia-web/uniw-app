@@ -4,11 +4,12 @@ import React, { useEffect } from 'react'
 import { StyleSheet, SafeAreaView, Text, View, ScrollView, Alert } from 'react-native'
 import { useForm, Controller, FieldValues } from 'react-hook-form'
 
-import type {
+import {
   NotificationsSettingsScreenProps,
   INotificationSettings,
-} from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { Switch } from '@/components/forms/Switch'
 import { ProfileHeader } from '@/components/ProfileHeader'
@@ -148,6 +149,7 @@ const NotificationsSettingsScreen = ({
     </SafeAreaView>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

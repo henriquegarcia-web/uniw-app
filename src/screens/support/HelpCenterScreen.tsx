@@ -12,8 +12,11 @@ import {
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import type { HelpCenterScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  HelpCenterScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { InputSearch } from '@/components/forms/InputSearch'
 import { Button } from '@/components/forms/Button'
 import { getHelpArticles, getHelpCategories } from '@/utils/mockGetters'

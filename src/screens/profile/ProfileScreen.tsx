@@ -1,22 +1,16 @@
 // src/screens/profile/ProfileScreen.tsx
 
 import React from 'react'
-import {
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-} from 'react-native'
+import { StyleSheet, SafeAreaView, Text, View, TouchableOpacity } from 'react-native'
 
-import type {
+import {
   AppStackParamList,
-  MaterialCommunityIconsIcon,
+  MaterialCommunityIconsIconType,
   ProfileScreenProps,
   ProfileStackParamList,
-} from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
@@ -29,7 +23,7 @@ import { EditableUserName } from '@/components/forms/EditableUserName'
 const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
   const { user } = useClientAuth()
 
-  const userHasPhoto = !!user?.baseProfile?.foto
+  const userHasPhoto = !!user?.baseProfile?.photo
 
   return (
     <SafeAreaView style={styles.container}>
@@ -215,7 +209,7 @@ const profileMenuStyles = StyleSheet.create({
 
 interface ProfileNavigatorItemProps {
   label: string
-  icon: MaterialCommunityIconsIcon
+  icon: MaterialCommunityIconsIconType
   screen?: keyof ProfileStackParamList
   appScreen?: keyof AppStackParamList
   onPress?: () => void
@@ -290,7 +284,7 @@ const profileNavigatorItemStyles = StyleSheet.create({
 interface ProfileMenuItemProps {
   type?: 'default' | 'negative'
   label: string
-  icon?: MaterialCommunityIconsIcon
+  icon?: MaterialCommunityIconsIconType
   screen?: keyof ProfileStackParamList
   appScreen?: keyof AppStackParamList
   onPress?: () => void

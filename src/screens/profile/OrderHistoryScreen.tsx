@@ -15,10 +15,11 @@ import {
   OrderHistoryScreenProps,
   getOrderStatusData,
   IPurchaseOrder,
-} from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+  themeApp as theme,
+  colors,
+  applyMask,
+} from '@papaya-punch/uniw-shared-modules'
 import { mockPurchaseHistory } from '@/types/auth'
-import { applyMask } from '@uniw/shared-utils'
 import { ProfileHeader } from '@/components/ProfileHeader'
 
 const OrderHistoryScreen = ({ navigation }: OrderHistoryScreenProps) => {

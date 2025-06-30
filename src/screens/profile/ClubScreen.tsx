@@ -11,16 +11,17 @@ import {
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import { themeApp as theme, colors } from '@uniw/shared-constants'
-import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import {
-  ClubStatus,
+  themeApp as theme,
+  colors,
+  ClubStatusType,
   getClubStatusData,
   ClubScreenProps,
-  MaterialCommunityIconsIcon,
-} from '@uniw/shared-types'
+  MaterialCommunityIconsIconType,
+  applyMask,
+} from '@papaya-punch/uniw-shared-modules'
+import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { Button } from '@/components/forms/Button'
-import { applyMask } from '@uniw/shared-utils'
 import { ProfileHeader } from '@/components/ProfileHeader'
 import { ProfileMenu, ProfileMenuItem } from './ProfileScreen'
 
@@ -30,7 +31,7 @@ const BenefitCard = ({
   title,
   description,
 }: {
-  icon: MaterialCommunityIconsIcon
+  icon: MaterialCommunityIconsIconType
   title: string
   description: string
 }) => (
@@ -55,9 +56,9 @@ const BenefitItem = ({ title }: { title: string }) => (
 const ClubScreen = ({ navigation }: ClubScreenProps) => {
   const { user } = useClientAuth()
 
-  const clubInfo = user?.clientProfile?.clube
-  const loyaltyInfo = user?.clientProfile?.fidelidade
-  const isMember = !!clubInfo && clubInfo.status === ClubStatus.ATIVO
+  const clubInfo = user?.clientProfile?.club
+  const loyaltyInfo = user?.clientProfile?.loyalty
+  const isMember = !!clubInfo && clubInfo.status === ClubStatusType.ATIVO
 
   const paymentHistory = [
     { id: '1', date: '15 de Junho, 2025', amount: 30.0 },
@@ -74,7 +75,7 @@ const ClubScreen = ({ navigation }: ClubScreenProps) => {
       ? new Date(clubInfo.memberSince).toLocaleDateString('pt-BR')
       : 'N/A'
 
-    const defaultCard = user?.clientProfile?.cartoesSalvos?.find((c) => c.isDefault)
+    const defaultCard = user?.clientProfile?.savedCards?.find((c) => c.isDefault)
 
     return (
       <View style={styles.viewWrapper}>

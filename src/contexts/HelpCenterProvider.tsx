@@ -2,8 +2,7 @@
 
 import React, { createContext, useContext, ReactNode, useState } from 'react'
 import { useClientAuth } from './ClientAuthProvider'
-import * as services from '@uniw/shared-services'
-import { ISupportTicket } from '@uniw/shared-types'
+import { ISupportTicket, sharedSupportService } from '@papaya-punch/uniw-shared-modules'
 
 interface HelpCenterContextData {
   isLoading: boolean
@@ -36,7 +35,7 @@ export const HelpCenterProvider = ({ children }: { children: ReactNode }) => {
     setIsLoading(true)
     setError(null)
     try {
-      await services.createSupportTicket(user.id, data)
+      await sharedSupportService.createSupportTicket(user.id, data)
       await loadUserTickets() // Recarrega a lista após o envio
     } catch (e) {
       setError(e)
@@ -51,7 +50,7 @@ export const HelpCenterProvider = ({ children }: { children: ReactNode }) => {
     setIsLoading(true)
     setError(null)
     try {
-      const userTickets = await services.fetchUserTickets(user.id)
+      const userTickets = await sharedSupportService.fetchUserTickets(user.id)
       setTickets(userTickets.sort((a, b) => b.updatedAt - a.updatedAt))
     } catch (e) {
       setError(e)

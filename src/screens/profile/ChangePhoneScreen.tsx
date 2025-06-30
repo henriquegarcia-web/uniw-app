@@ -12,18 +12,20 @@ import {
   Platform,
 } from 'react-native'
 import { useForm, Controller, type FieldValues } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha'
+import { zodResolver } from '@hookform/resolvers/zod'
+// import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha'
 
-import {  ChangePhoneScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  ChangePhoneScreenProps,
+  themeApp as theme,
+  colors,
+  changePhoneSchema,
+  applyMask,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { firebaseConfig } from '@/services/firebaseConfig'
-import { applyMask } from '@uniw/shared-utils'
 import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
-import { ProfileHeader } from '@/components/ProfileHeader'
-import { changePhoneSchema } from '@uniw/shared-schemas'
 
 const ChangePhoneScreen = ({ navigation }: ChangePhoneScreenProps) => {
   const {
@@ -46,7 +48,7 @@ const ChangePhoneScreen = ({ navigation }: ChangePhoneScreenProps) => {
     setError,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(changePhoneSchema),
+    resolver: zodResolver(changePhoneSchema),
     mode: 'onBlur',
     defaultValues: { currentPassword: '', newPhone: '' },
   })
@@ -60,7 +62,7 @@ const ChangePhoneScreen = ({ navigation }: ChangePhoneScreenProps) => {
   })
 
   const handleSendVerificationCode = async (data: FieldValues) => {
-    if (data.newPhone.replace(/\D/g, '') === user?.baseProfile.telefone) {
+    if (data.newPhone.replace(/\D/g, '') === user?.baseProfile.phone) {
       setError('newPhone', {
         type: 'manual',
         message: 'O novo telefone deve ser diferente do atual.',
@@ -113,8 +115,8 @@ const ChangePhoneScreen = ({ navigation }: ChangePhoneScreenProps) => {
         <Text style={styles.subtitle}>
           Seu telefone atual é{' '}
           <Text style={{ fontFamily: theme.fonts.family.bold }}>
-            {user?.baseProfile.telefone
-              ? applyMask(user.baseProfile.telefone, 'phone')
+            {user?.baseProfile.phone
+              ? applyMask(user.baseProfile.phone, 'phone')
               : 'não informado'}
           </Text>
           .
@@ -208,12 +210,12 @@ const ChangePhoneScreen = ({ navigation }: ChangePhoneScreenProps) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FirebaseRecaptchaVerifierModal
+      {/* <FirebaseRecaptchaVerifierModal
         ref={recaptchaVerifier}
         firebaseConfig={firebaseConfig}
         title="Confirmar que não é um robô"
         cancelLabel="Cancelar"
-      />
+      /> */}
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

@@ -3,8 +3,11 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView, ScrollView } from 'react-native'
 
-import type { SettingsScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  SettingsScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { ProfileMenu, ProfileMenuItem } from './ProfileScreen'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 

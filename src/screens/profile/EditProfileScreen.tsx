@@ -12,29 +12,32 @@ import {
 } from 'react-native'
 
 import { useForm, Controller, type FieldValues } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import type {
   EditProfileScreenProps,
-  IBGEState,
-  IBGECity,
+  IIBGEState,
+  IIBGECity,
   IBaseProfile,
-} from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+  themeApp as theme,
+  colors,
+  ibgeService,
+  viacepService,
+  applyMask,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
-import { clientUpdateProfileSchema } from '@uniw/shared-schemas'
 
 // Importando todos os nossos componentes e serviços
 import { InputText } from '@/components/forms/InputText'
 import { Dropdown, DropdownItem } from '@/components/forms/Dropdown'
 import { Button } from '@/components/forms/Button'
-import { applyMask } from '@uniw/shared-utils'
-import { ibgeService, viacepService } from '@uniw/shared-services'
 import { EditableUserPicture } from '@/components/forms/EditableUserPicture'
 import { EditableUserName } from '@/components/forms/EditableUserName'
 import { EditableUserPassword } from '@/components/forms/EditableUserPassword'
 import { useFocusEffect } from '@react-navigation/native'
 
+{
+  /* 
 const EditProfileScreen = ({ navigation }: EditProfileScreenProps) => {
   // const { user, updateProfile, isLoadingAuthFunctions } = useClientAuth()
 
@@ -51,7 +54,7 @@ const EditProfileScreen = ({ navigation }: EditProfileScreenProps) => {
   //   watch,
   //   reset,
   // } = useForm({
-  //   resolver: yupResolver(clientUpdateProfileSchema),
+  //   resolver: zodResolver(clientUpdateProfileSchema),
   //   mode: 'onBlur',
   // })
 
@@ -158,7 +161,7 @@ const EditProfileScreen = ({ navigation }: EditProfileScreenProps) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      {/* <ScrollView
+      <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.contentContainer}
         keyboardShouldPersistTaps="handled"
@@ -331,7 +334,7 @@ const EditProfileScreen = ({ navigation }: EditProfileScreenProps) => {
             />
           </View>
         </View>
-      </ScrollView> */}
+      </ScrollView> 
     </SafeAreaView>
   )
 }
@@ -385,3 +388,5 @@ const styles = StyleSheet.create({
 })
 
 export default EditProfileScreen
+*/
+}

@@ -3,8 +3,11 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView, Text } from 'react-native'
 
-import type { AwardsScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  AwardsScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 
 const AwardsScreen = ({ navigation }: AwardsScreenProps) => {
   return (

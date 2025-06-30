@@ -12,24 +12,26 @@ import {
   KeyboardAvoidingView,
 } from 'react-native'
 import { useForm, Controller, FieldValues } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import {
-  type AddNewAddressScreenProps,
-  type IAddress,
-  type IBGEState,
-  type IBGECity,
-} from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+  AddNewAddressScreenProps,
+  IAddress,
+  IIBGEState,
+  IIBGECity,
+  themeApp as theme,
+  colors,
+  applyMask,
+  addAddressSchema,
+  ibgeService,
+  viacepService,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientProfile } from '@/contexts/ClientProfileProvider'
-import { applyMask } from '@uniw/shared-utils'
 
 import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
 import { Switch } from '@/components/forms/Switch'
 import { Dropdown, DropdownItem } from '@/components/forms/Dropdown'
-import { addAddressSchema } from '@uniw/shared-schemas'
-import { ibgeService, viacepService } from '@uniw/shared-services'
 
 const AddNewAddressScreen = ({ navigation }: AddNewAddressScreenProps) => {
   const { addAddress, isProfileLoading } = useClientProfile()
@@ -46,28 +48,28 @@ const AddNewAddressScreen = ({ navigation }: AddNewAddressScreenProps) => {
     watch,
     formState: { errors, isDirty },
   } = useForm({
-    resolver: yupResolver(addAddressSchema),
+    resolver: zodResolver(addAddressSchema),
     mode: 'onBlur',
     defaultValues: {
-      nome: '',
+      name: '',
       cep: '',
-      rua: '',
-      numero: '',
-      bairro: '',
-      cidade: '',
-      estado: '',
-      complemento: '',
+      street: '',
+      number: '',
+      neighborhood: '',
+      city: '',
+      state: '',
+      complement: '',
       isDefault: false,
     },
   })
 
-  const watchedState = watch('estado')
+  const watchedState = watch('state')
 
   useEffect(() => {
     ibgeService
       .getStates()
       .then((data) =>
-        setStates(data.map((s: IBGEState) => ({ label: s.nome, value: s.sigla }))),
+        setStates(data.map((s: IIBGEState) => ({ label: s.nome, value: s.sigla }))),
       )
   }, [])
 
@@ -77,7 +79,7 @@ const AddNewAddressScreen = ({ navigation }: AddNewAddressScreenProps) => {
       ibgeService
         .getCitiesByState(watchedState)
         .then((data) =>
-          setCities(data.map((c: IBGECity) => ({ label: c.nome, value: c.nome }))),
+          setCities(data.map((c: IIBGECity) => ({ label: c.nome, value: c.nome }))),
         )
         .finally(() => setIsLoadingCities(false))
     }
@@ -89,10 +91,10 @@ const AddNewAddressScreen = ({ navigation }: AddNewAddressScreenProps) => {
       try {
         const endereco = await viacepService.getAddressByCep(cep)
         if (!endereco.erro) {
-          setValue('rua', endereco.logradouro, { shouldValidate: true })
-          setValue('bairro', endereco.bairro, { shouldValidate: true })
-          setValue('estado', endereco.uf, { shouldValidate: true })
-          setValue('cidade', endereco.localidade, { shouldValidate: true })
+          setValue('street', endereco.logradouro, { shouldValidate: true })
+          setValue('neighborhood', endereco.bairro, { shouldValidate: true })
+          setValue('state', endereco.uf, { shouldValidate: true })
+          setValue('city', endereco.localidade, { shouldValidate: true })
         }
       } finally {
         setIsCepLoading(false)
@@ -123,7 +125,7 @@ const AddNewAddressScreen = ({ navigation }: AddNewAddressScreenProps) => {
         >
           <Controller
             control={control}
-            name="nome"
+            name="name"
             render={({ field: { onChange, onBlur, value } }) => (
               <InputText
                 label="Nome do Endereço"
@@ -131,7 +133,7 @@ const AddNewAddressScreen = ({ navigation }: AddNewAddressScreenProps) => {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                error={errors.nome?.message}
+                error={errors.name?.message}
               />
             )}
           />
@@ -159,7 +161,7 @@ const AddNewAddressScreen = ({ navigation }: AddNewAddressScreenProps) => {
           <View style={styles.row}>
             <Controller
               control={control}
-              name="rua"
+              name="street"
               render={({ field: { onChange, onBlur, value } }) => (
                 <InputText
                   label="Rua"
@@ -167,13 +169,13 @@ const AddNewAddressScreen = ({ navigation }: AddNewAddressScreenProps) => {
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
-                  error={errors.rua?.message}
+                  error={errors.street?.message}
                 />
               )}
             />
             <Controller
               control={control}
-              name="numero"
+              name="number"
               render={({ field: { onChange, onBlur, value } }) => (
                 <InputText
                   label="Número"
@@ -181,7 +183,7 @@ const AddNewAddressScreen = ({ navigation }: AddNewAddressScreenProps) => {
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
-                  error={errors.numero?.message}
+                  error={errors.number?.message}
                   width={30}
                 />
               )}
@@ -190,7 +192,7 @@ const AddNewAddressScreen = ({ navigation }: AddNewAddressScreenProps) => {
 
           <Controller
             control={control}
-            name="bairro"
+            name="neighborhood"
             render={({ field: { onChange, onBlur, value } }) => (
               <InputText
                 label="Bairro"
@@ -198,21 +200,21 @@ const AddNewAddressScreen = ({ navigation }: AddNewAddressScreenProps) => {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                error={errors.bairro?.message}
+                error={errors.neighborhood?.message}
               />
             )}
           />
 
           <Controller
             control={control}
-            name="estado"
+            name="state"
             render={({ field: { onChange, value } }) => (
               <Dropdown
                 label="Estado"
                 items={states}
                 value={value}
                 onValueChange={onChange}
-                error={errors.estado?.message}
+                error={errors.state?.message}
                 placeholder="Selecione seu estado"
               />
             )}
@@ -220,14 +222,14 @@ const AddNewAddressScreen = ({ navigation }: AddNewAddressScreenProps) => {
 
           <Controller
             control={control}
-            name="cidade"
+            name="city"
             render={({ field: { onChange, value } }) => (
               <Dropdown
                 label="Cidade"
                 items={cities}
                 value={value}
                 onValueChange={onChange}
-                error={errors.cidade?.message}
+                error={errors.city?.message}
                 placeholder="Selecione sua cidade"
                 disabled={!watchedState || isLoadingCities}
               />
@@ -236,7 +238,7 @@ const AddNewAddressScreen = ({ navigation }: AddNewAddressScreenProps) => {
 
           <Controller
             control={control}
-            name="complemento"
+            name="complement"
             render={({ field: { onChange, onBlur, value } }) => (
               <InputText
                 label="Complemento (Opcional)"

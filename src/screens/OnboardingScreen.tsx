@@ -11,8 +11,11 @@ import {
 } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 
-import type { OnboardingScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  OnboardingScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { Button } from '@/components/forms/Button'
 

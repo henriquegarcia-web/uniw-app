@@ -3,8 +3,12 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
-import { getProductBadge, ProductBadge } from '@uniw/shared-types'
+import {
+  getProductBadge,
+  ProductBadge,
+  themeApp,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { ProductTag } from './ProductTag'
 
 interface ProductDetailsProps {

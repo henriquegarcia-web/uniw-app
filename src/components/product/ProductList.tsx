@@ -4,8 +4,7 @@ import React from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 
 import { ProductCard } from './ProductCard'
-import { IProduct } from '@uniw/shared-types'
-import { themeApp, colors } from '@uniw/shared-constants'
+import { IProduct, themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 
 interface ProductListProps {
   products: IProduct[]

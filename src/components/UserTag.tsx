@@ -3,13 +3,16 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import {
+  themeApp,
+  colors,
+  MaterialCommunityIconsIconType,
+} from '@papaya-punch/uniw-shared-modules'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { MaterialCommunityIconsIcon } from '@uniw/shared-types'
 
 interface UserTagProps {
   label: string
-  icon?: MaterialCommunityIconsIcon
+  icon?: MaterialCommunityIconsIconType
 }
 
 export const UserTag = ({ label, icon }: UserTagProps) => {

@@ -12,8 +12,12 @@ import {
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import type { MyAddressesScreenProps, IAddress } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  MyAddressesScreenProps,
+  IAddress,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { useClientProfile } from '@/contexts/ClientProfileProvider'
 import { Button } from '@/components/forms/Button'
@@ -38,14 +42,14 @@ const AddressItem = ({
           size={26}
           color={colors.brand.secondary}
         />
-        <Text style={styles.cardTitle}>{address.nome}</Text>
+        <Text style={styles.cardTitle}>{address.name}</Text>
       </View>
       <View style={styles.addressDetails}>
         <Text style={styles.addressText}>
-          {address.rua}, {address.numero}
+          {address.street}, {address.number}
         </Text>
         <Text style={styles.addressText}>
-          {address.bairro}, {address.cidade} - {address.estado}
+          {address.neighborhood}, {address.city} - {address.state}
         </Text>
         <Text style={styles.addressText}>CEP: {address.cep}</Text>
       </View>
@@ -69,7 +73,7 @@ const MyAddressesScreen = ({ navigation }: MyAddressesScreenProps) => {
   const { user } = useClientAuth()
   const { removeAddress, setDefaultAddress, isProfileLoading } = useClientProfile()
 
-  const savedAddresses = user?.clientProfile?.enderecosSalvos || []
+  const savedAddresses = user?.clientProfile?.savedAddresses || []
 
   const handleRemoveAddress = (addressId: string) => {
     Alert.alert('Remover Endereço', 'Tem certeza que deseja remover este endereço?', [

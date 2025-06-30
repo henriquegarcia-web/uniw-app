@@ -11,18 +11,22 @@ import {
 } from 'react-native'
 
 import { useForm, Controller, type FieldValues } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-import { SignUpScreenProps } from '@uniw/shared-types'
-import { clientSignUpSchema } from '@uniw/shared-schemas'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  SignUpScreenProps,
+  clientSignUpSchema,
+  applyMask,
+  sharedAuthService,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
+import {} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
 import { ButtonIcon } from '@/components/forms/ButtonIcon'
 import { SocialIcon } from '@/components/SocialIcon'
-import { applyMask } from '@uniw/shared-utils'
-import { isCpfInUse, isEmailInUse } from '@uniw/shared-services'
 
 const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
   const { signUp, isLoadingAuthFunctions, isErrorAuth, errorAuth, clearAuthError } =
@@ -34,10 +38,10 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
     formState: { errors },
     setError,
   } = useForm({
-    resolver: yupResolver(clientSignUpSchema),
+    resolver: zodResolver(clientSignUpSchema),
     mode: 'onBlur',
     defaultValues: {
-      nome: '',
+      name: '',
       email: '',
       cpf: '',
       password: '',
@@ -46,13 +50,13 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
   })
 
   const handleSignUp = async (data: FieldValues) => {
-    const isEmailTaken = await isEmailInUse(data.email)
+    const isEmailTaken = await sharedAuthService.isEmailInUse(data.email)
     if (isEmailTaken) {
       setError('email', { type: 'manual', message: 'Este e-mail já está em uso.' })
       return
     }
 
-    const isCpfTaken = await isCpfInUse(data.cpf)
+    const isCpfTaken = await sharedAuthService.isCpfInUse(data.cpf)
     if (isCpfTaken) {
       setError('cpf', { type: 'manual', message: 'Este CPF já está em uso.' })
       return
@@ -78,7 +82,7 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
 
           <Controller
             control={control}
-            name="nome"
+            name="name"
             render={({ field: { onChange, onBlur, value } }) => (
               <InputText
                 iconName="user"
@@ -87,7 +91,7 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
                 onChangeText={onChange}
                 value={value}
                 autoCapitalize="words"
-                error={errors.nome?.message}
+                error={errors.name?.message}
               />
             )}
           />

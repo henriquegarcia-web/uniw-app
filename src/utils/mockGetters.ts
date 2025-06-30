@@ -10,7 +10,7 @@ import {
   IPurchaseOrder,
   IRedeemedCoupon,
   ISupportTicket,
-} from '@uniw/shared-types'
+} from '@papaya-punch/uniw-shared-modules'
 
 import { mockHelpArticles, mockHelpCategories, mockSupportTickets } from '@/types/support'
 import { mockPurchaseHistory } from '@/types/auth'

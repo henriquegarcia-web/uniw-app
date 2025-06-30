@@ -12,8 +12,12 @@ import {
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import type { MyCardsScreenProps, ICreditCard } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  MyCardsScreenProps,
+  ICreditCard,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { useClientProfile } from '@/contexts/ClientProfileProvider'
 import { Button } from '@/components/forms/Button'
@@ -64,7 +68,7 @@ const MyCardsScreen = ({ navigation }: MyCardsScreenProps) => {
   const { user } = useClientAuth()
   const { removeCreditCard, setDefaultCreditCard, isProfileLoading } = useClientProfile()
 
-  const savedCards = user?.clientProfile?.cartoesSalvos || []
+  const savedCards = user?.clientProfile?.savedCards || []
 
   const handleRemoveCard = (cardId: string) => {
     Alert.alert('Remover Cartão', 'Tem certeza que deseja remover este cartão?', [

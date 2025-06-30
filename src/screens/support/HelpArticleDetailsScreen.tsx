@@ -11,8 +11,11 @@ import {
 } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 
-import type { HelpArticleDetailsScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  HelpArticleDetailsScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { getHelpArticleById } from '@/utils/mockGetters'
 
 const HelpArticleDetailsScreen = ({ route }: HelpArticleDetailsScreenProps) => {

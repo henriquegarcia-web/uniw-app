@@ -3,7 +3,7 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 import { FontAwesome } from '@expo/vector-icons'
 import { useClientProfile } from '@/contexts/ClientProfileProvider'
 

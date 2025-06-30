@@ -19,7 +19,7 @@ import TicketHistoryScreen from '@/screens/support/TicketHistoryScreen'
 import ContactSupportScreen from '@/screens/support/ContactSupportScreen'
 import HelpTopicDetailsScreen from '@/screens/support/HelpTopicDetailsScreen'
 import { getHelpCategoryById } from '@/utils/mockGetters'
-import { AppStackParamList } from '@uniw/shared-types'
+import { AppStackParamList } from '@papaya-punch/uniw-shared-modules'
 
 const Stack = createNativeStackNavigator<AppStackParamList>()
 

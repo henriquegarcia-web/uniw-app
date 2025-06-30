@@ -11,7 +11,7 @@ import {
   SafeAreaView,
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { themeApp, colors } from '@uniw/shared-constants'
+import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 
 interface ModalProps {
   variant: 'fade' | 'slide'

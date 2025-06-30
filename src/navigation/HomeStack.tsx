@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import HomeScreen from '@/screens/HomeScreen'
 import { Header } from '@/components/Header'
-import { HomeStackParamList } from '@uniw/shared-types'
+import { HomeStackParamList } from '@papaya-punch/uniw-shared-modules'
 
 const Stack = createNativeStackNavigator<HomeStackParamList>()
 

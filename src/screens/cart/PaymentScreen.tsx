@@ -3,8 +3,11 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView, Text } from 'react-native'
 
-import type { PaymentScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  PaymentScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 
 const PaymentScreen = ({ navigation }: PaymentScreenProps) => {
   return (

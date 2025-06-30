@@ -1,10 +1,10 @@
 import {
-  CouponStatus,
+  CouponStatusType,
   CouponType,
   ICoupon,
   IRedeemedCoupon,
-  RedeemedCouponStatus,
-} from '@uniw/shared-types'
+  RedeemedCouponStatusType,
+} from '@papaya-punch/uniw-shared-modules'
 
 export const mockCoupons: ICoupon[] = [
   {
@@ -15,7 +15,7 @@ export const mockCoupons: ICoupon[] = [
     costInPoints: 500,
     type: CouponType.PERCENTAGE,
     discountValue: 10,
-    status: CouponStatus.AVALIABLE,
+    status: CouponStatusType.AVALIABLE,
   },
   {
     id: 'coupon-002',
@@ -25,7 +25,7 @@ export const mockCoupons: ICoupon[] = [
     costInPoints: 1000,
     type: CouponType.FREE_SHIPPING,
     discountValue: 0,
-    status: CouponStatus.AVALIABLE,
+    status: CouponStatusType.AVALIABLE,
   },
   {
     id: 'coupon-003',
@@ -36,7 +36,7 @@ export const mockCoupons: ICoupon[] = [
     costInPoints: 2500,
     type: CouponType.FIXED_AMOUNT,
     discountValue: 50,
-    status: CouponStatus.AVALIABLE,
+    status: CouponStatusType.AVALIABLE,
   },
   {
     id: 'coupon-004',
@@ -46,7 +46,7 @@ export const mockCoupons: ICoupon[] = [
     costInPoints: 7500,
     type: CouponType.PERCENTAGE,
     discountValue: 25,
-    status: CouponStatus.UNAVALIABLE,
+    status: CouponStatusType.UNAVALIABLE,
   },
 ]
 
@@ -59,11 +59,11 @@ export const mockRedeemedCoupons: IRedeemedCoupon[] = [
   {
     id: 'redeemed-coupon-002',
     couponId: 'coupon-002',
-    status: RedeemedCouponStatus.AVALIABLE,
+    status: RedeemedCouponStatusType.AVALIABLE,
   },
   {
     id: 'redeemed-coupon-003',
     couponId: 'coupon-004',
-    status: RedeemedCouponStatus.USED,
+    status: RedeemedCouponStatusType.USED,
   },
 ]

@@ -1,9 +1,14 @@
 // src/contexts/ClientProfileProvider.tsx
 
 import React, { createContext, useContext, ReactNode, useState } from 'react'
-import * as services from '@uniw/shared-services'
 import { useClientAuth } from './ClientAuthProvider'
-import { IAddress, ICreditCard, INotificationSettings } from '@uniw/shared-types'
+import {
+  IAddress,
+  ICreditCard,
+  INotificationSettings,
+  clientProfileService,
+  clientFavoritesService,
+} from '@papaya-punch/uniw-shared-modules'
 
 interface ProfileContextData {
   isProfileLoading: boolean
@@ -27,7 +32,7 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
 
   const [isProfileLoading, setIsProfileLoading] = useState(false)
 
-  const favorites = user?.clientProfile?.favoritos || []
+  const favorites = user?.clientProfile?.favorites || []
 
   const isFavorite = (productId: string): boolean => {
     return favorites.includes(productId)
@@ -36,14 +41,14 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
   const addFavorite = async (productId: string) => {
     if (!user) throw new Error('Usuário não autenticado.')
     setIsProfileLoading(true)
-    await services.addFavoriteProduct(user.id, productId)
+    await clientFavoritesService.addFavoriteProduct(user.id, productId)
     setIsProfileLoading(false)
   }
 
   const removeFavorite = async (productId: string) => {
     if (!user) throw new Error('Usuário não autenticado.')
     setIsProfileLoading(true)
-    await services.removeFavoriteProduct(user.id, productId)
+    await clientFavoritesService.removeFavoriteProduct(user.id, productId)
     setIsProfileLoading(false)
   }
 
@@ -53,7 +58,7 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
     setIsProfileLoading(true)
 
     try {
-      await services.updateNotificationSettings(user.id, settings)
+      await clientProfileService.updateNotificationSettings(user.id, settings)
     } catch (error: any) {
       throw error
     } finally {
@@ -65,7 +70,7 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
     if (!user) throw new Error('Usuário não autenticado.')
     setIsProfileLoading(true)
     try {
-      await services.addCreditCard(user.id, cardData)
+      await clientProfileService.addCreditCard(user.id, cardData)
     } finally {
       setIsProfileLoading(false)
     }
@@ -75,7 +80,7 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
     if (!user) throw new Error('Usuário não autenticado.')
     setIsProfileLoading(true)
     try {
-      await services.removeCreditCard(user.id, cardId)
+      await clientProfileService.removeCreditCard(user.id, cardId)
     } finally {
       setIsProfileLoading(false)
     }
@@ -85,7 +90,7 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
     if (!user) throw new Error('Usuário não autenticado.')
     setIsProfileLoading(true)
     try {
-      await services.setDefaultCreditCard(user.id, cardId)
+      await clientProfileService.setDefaultCreditCard(user.id, cardId)
     } finally {
       setIsProfileLoading(false)
     }
@@ -95,7 +100,7 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
     if (!user) throw new Error('Usuário não autenticado.')
     setIsProfileLoading(true)
     try {
-      await services.addAddress(user.id, addressData)
+      await clientProfileService.addAddress(user.id, addressData)
     } finally {
       setIsProfileLoading(false)
     }
@@ -105,7 +110,7 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
     if (!user) throw new Error('Usuário não autenticado.')
     setIsProfileLoading(true)
     try {
-      await services.removeAddress(user.id, addressId)
+      await clientProfileService.removeAddress(user.id, addressId)
     } finally {
       setIsProfileLoading(false)
     }
@@ -115,7 +120,7 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
     if (!user) throw new Error('Usuário não autenticado.')
     setIsProfileLoading(true)
     try {
-      await services.setDefaultAddress(user.id, addressId)
+      await clientProfileService.setDefaultAddress(user.id, addressId)
     } finally {
       setIsProfileLoading(false)
     }

@@ -11,8 +11,11 @@ import {
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import type { HelpTopicDetailsScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  HelpTopicDetailsScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { getHelpArticlesByCategoryId, getHelpCategoryById } from '@/utils/mockGetters'
 import { ListEmptyMessage } from '@/components/ListEmptyMessage'
 

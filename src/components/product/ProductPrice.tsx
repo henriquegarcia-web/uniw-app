@@ -3,8 +3,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
-import { applyMask } from '@uniw/shared-utils'
+import { themeApp, colors, applyMask } from '@papaya-punch/uniw-shared-modules'
 
 interface ProductPriceProps {
   price: number

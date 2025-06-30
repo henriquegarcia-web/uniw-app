@@ -14,8 +14,11 @@ import {
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import type { TicketDetailsScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  TicketDetailsScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { useHelpCenter } from '@/contexts/HelpCenterProvider'
 import { getTicketById, getTicketsByUserId } from '@/utils/mockGetters' // Usando getters para simplicidade
 import { useClientAuth } from '@/contexts/ClientAuthProvider'

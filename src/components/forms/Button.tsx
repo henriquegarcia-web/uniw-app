@@ -10,9 +10,12 @@ import {
   Animated,
 } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import {
+  themeApp,
+  colors,
+  MaterialCommunityIconsIconType,
+} from '@papaya-punch/uniw-shared-modules'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { MaterialCommunityIconsIcon } from '@uniw/shared-types'
 
 const variantStyles = {
   primary: {
@@ -77,7 +80,7 @@ interface ButtonProps extends TouchableOpacityProps {
   title: string
   variant?: ButtonVariant
   loading?: boolean
-  leftIcon?: MaterialCommunityIconsIcon
+  leftIcon?: MaterialCommunityIconsIconType
 }
 
 export const Button = ({

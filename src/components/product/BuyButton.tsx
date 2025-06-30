@@ -3,7 +3,7 @@
 import React from 'react'
 import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 
 type MaterialIconsIconName = keyof typeof MaterialIcons.glyphMap

@@ -10,8 +10,13 @@ import React, {
 } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import * as services from '@uniw/shared-services'
-import { IBaseProfile, IUser } from '@uniw/shared-types'
+import {
+  IBaseProfile,
+  IUser,
+  sharedProfileSecurityService,
+  sharedAuthService,
+  clientAuthService,
+} from '@papaya-punch/uniw-shared-modules'
 import { useFirebase } from './FirebaseContext'
 
 type AuthContextData = {
@@ -71,7 +76,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       return
     }
 
-    const unsubscribe = services.listenForAuthChanges(({ user }) => {
+    const unsubscribe = sharedAuthService.onAuthStateChanged(({ user }) => {
       setUser(user)
       setIsLoadingAuth(false)
     })
@@ -113,7 +118,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoadingAuthFunctions(true)
     setErrorAuth(null)
     try {
-      await services.clientSignIn(email, password)
+      await clientAuthService.clientSignIn(email, password)
     } catch (error: any) {
       setErrorAuth(error.message)
     } finally {
@@ -124,7 +129,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const signOut = async () => {
     setIsLoadingAuthFunctions(true)
     try {
-      await services.logout()
+      await sharedAuthService.logout()
     } catch (error) {
     } finally {
       setIsLoadingAuthFunctions(false)
@@ -135,7 +140,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoadingAuthFunctions(true)
     setErrorAuth(null)
     try {
-      await services.clientSignUp(name, email, cpf, password)
+      await clientAuthService.clientSignUp(name, email, cpf, password)
     } catch (error: any) {
       setErrorAuth(error.message)
     } finally {
@@ -147,7 +152,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoadingAuthFunctions(true)
     setErrorAuth(null)
     try {
-      await services.resetPassword(email)
+      await sharedAuthService.resetPassword(email)
     } catch (error: any) {
       setErrorAuth(error.message)
       throw error
@@ -183,7 +188,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setErrorAuth(null)
 
     try {
-      await services.updateUserName(user.id, newName)
+      await sharedAuthService.updateUserName(user.id, newName)
     } catch (error: any) {
       setErrorAuth(error.message)
       throw error
@@ -197,7 +202,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoadingAuthFunctions(true)
     setErrorAuth(null)
     try {
-      await services.updateUserProfilePicture(user.id, imageUri)
+      await sharedAuthService.updateUserProfilePicture(user.id, imageUri)
     } catch (error: any) {
       setErrorAuth(error.message)
       throw error
@@ -207,11 +212,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
   const removeUserProfilePicture = async () => {
-    if (!user?.baseProfile.foto) throw new Error('Usuário não tem foto para remover.')
+    if (!user?.baseProfile.photo) throw new Error('Usuário não tem foto para remover.')
     setIsLoadingAuthFunctions(true)
     setErrorAuth(null)
     try {
-      await services.removeUserProfilePicture(user.id, user.baseProfile.foto)
+      await sharedAuthService.removeUserProfilePicture(user.id, user.baseProfile.photo)
     } catch (error: any) {
       setErrorAuth(error.message)
       throw error
@@ -224,7 +229,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoadingAuthFunctions(true)
     setErrorAuth(null)
     try {
-      await services.reauthenticate(password)
+      await sharedProfileSecurityService.reauthenticate(password)
     } catch (error: any) {
       setErrorAuth(error.message)
       throw error
@@ -237,7 +242,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoadingAuthFunctions(true)
     setErrorAuth(null)
     try {
-      await services.changePassword(newPassword)
+      await sharedProfileSecurityService.changePassword(newPassword)
     } catch (error: any) {
       setErrorAuth(error.message)
       throw error
@@ -250,7 +255,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoadingAuthFunctions(true)
     setErrorAuth(null)
     try {
-      await services.clientDeleteUserAccount(password)
+      await sharedProfileSecurityService.clientDeleteUserAccount(password)
     } catch (error: any) {
       setErrorAuth(error.message)
       throw error
@@ -264,7 +269,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoadingAuthFunctions(true)
     setErrorAuth(null)
     try {
-      await services.updateUserEmail(user.id, newEmail)
+      await sharedProfileSecurityService.updateUserEmail(user.id, newEmail)
     } catch (error: any) {
       setErrorAuth(error.message)
       throw error
@@ -280,7 +285,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoadingAuthFunctions(true)
     setErrorAuth(null)
     try {
-      return await services.startPhoneNumberVerification(phoneNumber, recaptchaVerifier)
+      return await sharedProfileSecurityService.startPhoneNumberVerification(
+        phoneNumber,
+        recaptchaVerifier,
+      )
     } catch (error: any) {
       setErrorAuth(error.message)
       throw error
@@ -298,7 +306,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoadingAuthFunctions(true)
     setErrorAuth(null)
     try {
-      await services.confirmPhoneNumberUpdate(user.id, verificationId, otpCode, newPhone)
+      await sharedProfileSecurityService.confirmPhoneNumberUpdate(
+        user.id,
+        verificationId,
+        otpCode,
+        newPhone,
+      )
     } catch (error: any) {
       setErrorAuth(error.message)
       throw error

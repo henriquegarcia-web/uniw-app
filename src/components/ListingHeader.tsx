@@ -11,9 +11,15 @@ import {
 } from 'react-native'
 import { Feather, Octicons } from '@expo/vector-icons'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import {
+  themeApp,
+  colors,
+  FilterState,
+  ProductBadge,
+  SortOption,
+  sortOptions,
+} from '@papaya-punch/uniw-shared-modules'
 import { Button } from './forms/Button'
-import { FilterState, ProductBadge, SortOption, sortOptions } from '@uniw/shared-types'
 import { InputText } from './forms/InputText'
 
 type FeatherIconName = keyof typeof Octicons.glyphMap

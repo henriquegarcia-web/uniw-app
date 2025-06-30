@@ -1,4 +1,8 @@
-import { IProduct, IProductCategory, ProductBadge } from '@uniw/shared-types'
+import {
+  IProduct,
+  IProductCategory,
+  ProductBadge,
+} from '@papaya-punch/uniw-shared-modules'
 
 export const mockCategories: IProductCategory[] = [
   {

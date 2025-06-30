@@ -1,11 +1,15 @@
-import { BannerCategory, BannerType, IBanner } from '@uniw/shared-types'
+import {
+  BannerCategoryType,
+  BannerType,
+  IBanner,
+} from '@papaya-punch/uniw-shared-modules'
 
 export const sampleProductIds = ['prod-16', 'prod-17', 'prod-2', 'prod-22', 'prod-10']
 
 export const mockBanners: IBanner[] = [
   {
     id: 'banner-1',
-    category: BannerCategory.OFFERS,
+    category: BannerCategoryType.OFFERS,
     type: BannerType.OFFER_CAROUSEL,
     slides: [
       {
@@ -27,7 +31,7 @@ export const mockBanners: IBanner[] = [
 
   {
     id: 'banner-4',
-    category: BannerCategory.OFFERS,
+    category: BannerCategoryType.OFFERS,
     type: BannerType.OFFER_CTA,
     title: 'Ofertas do Dia',
     endDate: Date.now() + 24 * 60 * 60 * 1000,
@@ -39,14 +43,14 @@ export const mockBanners: IBanner[] = [
 
   {
     id: 'banner-2',
-    category: BannerCategory.PRODUCTS,
+    category: BannerCategoryType.PRODUCTS,
     type: BannerType.PRODUCT_SCROLL,
     productIds: sampleProductIds.slice(0, 4),
   },
 
   {
     id: 'banner-3',
-    category: BannerCategory.OFFERS,
+    category: BannerCategoryType.OFFERS,
     type: BannerType.OFFER_SIMPLE,
     title: 'Ofertas Especiais',
     subtitle:
@@ -57,7 +61,7 @@ export const mockBanners: IBanner[] = [
 
   {
     id: 'banner-22',
-    category: BannerCategory.PRODUCTS,
+    category: BannerCategoryType.PRODUCTS,
     type: BannerType.PRODUCT_FEATURED,
     title: 'Novidades da Semana',
     legend: 'essa é sua chance, aproveite!',
@@ -66,7 +70,7 @@ export const mockBanners: IBanner[] = [
 
   {
     id: 'banner-4ss',
-    category: BannerCategory.OFFERS,
+    category: BannerCategoryType.OFFERS,
     type: BannerType.OFFER_CTA,
     title: 'Produtos em Alta',
     endDate: Date.now() + 24 * 60 * 60 * 1000,
@@ -78,7 +82,7 @@ export const mockBanners: IBanner[] = [
 
   {
     id: 'banner-22d',
-    category: BannerCategory.PRODUCTS,
+    category: BannerCategoryType.PRODUCTS,
     type: BannerType.PRODUCT_SCROLL,
     title: 'Novidades da Semana',
     productIds: sampleProductIds.slice(0, 4),
@@ -86,7 +90,7 @@ export const mockBanners: IBanner[] = [
 
   {
     id: 'banner-7',
-    category: BannerCategory.OFFERS,
+    category: BannerCategoryType.OFFERS,
     type: BannerType.OFFER_CTA_WITH_BANNER,
     title: 'Plano e Salto',
     subtitle: 'essa é sua chance, aproveite!',
@@ -100,7 +104,7 @@ export const mockBanners: IBanner[] = [
 
   {
     id: 'banner-5',
-    category: BannerCategory.OFFERS,
+    category: BannerCategoryType.OFFERS,
     type: BannerType.OFFER_ADVERTISEMENT,
     title: 'Patrocinado',
     media: {

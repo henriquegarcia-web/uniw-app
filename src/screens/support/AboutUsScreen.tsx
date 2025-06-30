@@ -13,8 +13,11 @@ import {
 } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 
-import type { AboutUsScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  AboutUsScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { ProfileHeader } from '@/components/ProfileHeader'
 
 // Subcomponente para cada item de "Nossos Valores"

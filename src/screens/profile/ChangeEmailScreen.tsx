@@ -13,15 +13,17 @@ import {
 } from 'react-native'
 
 import { useForm, Controller, type FieldValues } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-import { ChangeEmailScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  ChangeEmailScreenProps,
+  themeApp as theme,
+  colors,
+  changeEmailSchema,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
-import { ProfileHeader } from '@/components/ProfileHeader'
-import { changeEmailSchema } from '@uniw/shared-schemas'
 
 const ChangeEmailScreen = ({ navigation }: ChangeEmailScreenProps) => {
   const { user, reauthenticate, updateUserEmail, isLoadingAuthFunctions } =
@@ -33,7 +35,7 @@ const ChangeEmailScreen = ({ navigation }: ChangeEmailScreenProps) => {
     setError,
     formState: { errors, isDirty },
   } = useForm({
-    resolver: yupResolver(changeEmailSchema),
+    resolver: zodResolver(changeEmailSchema),
     mode: 'onBlur',
     defaultValues: {
       currentPassword: '',

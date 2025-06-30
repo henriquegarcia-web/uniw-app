@@ -3,8 +3,11 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView } from 'react-native'
 
-import type { CategoryListScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  CategoryListScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { CategoryList } from '@/components/category/CategoriesList'
 import { mockCategories } from '@/types/products'
 

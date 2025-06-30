@@ -12,14 +12,17 @@ import {
   Platform,
 } from 'react-native'
 import { useForm, Controller, FieldValues } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-import { ContactSupportScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  ContactSupportScreenProps,
+  themeApp as theme,
+  colors,
+  contactSupportSchema,
+} from '@papaya-punch/uniw-shared-modules'
 import { useHelpCenter } from '@/contexts/HelpCenterProvider'
 import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
-import { contactSupportSchema } from '@uniw/shared-schemas'
 
 const ContactSupportScreen = ({ navigation, route }: ContactSupportScreenProps) => {
   const { orderId } = route.params
@@ -31,7 +34,7 @@ const ContactSupportScreen = ({ navigation, route }: ContactSupportScreenProps) 
     setValue,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(contactSupportSchema),
+    resolver: zodResolver(contactSupportSchema),
     defaultValues: { subject: '', message: '', orderId: '' },
   })
 

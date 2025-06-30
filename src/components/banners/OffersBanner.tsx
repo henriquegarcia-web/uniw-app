@@ -9,11 +9,12 @@ import {
   IOfferCtaBanner,
   IOfferCtaWithBannerBanner,
   IOfferSimpleBanner,
-} from '@uniw/shared-types'
+  themeApp,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { ProductImageCarousel } from '../product/ProductImageCarousel'
 import { Feather } from '@expo/vector-icons'
-import { themeApp, colors } from '@uniw/shared-constants'
 import { CtaButton } from '../forms/CtaButton'
 
 const useCountdown = (endDate: number) => {

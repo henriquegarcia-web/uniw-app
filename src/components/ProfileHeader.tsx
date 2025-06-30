@@ -3,7 +3,7 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacityProps, View, Text } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 
 interface ProfileHeaderProps extends TouchableOpacityProps {
   size?: 'default' | 'large'

@@ -6,7 +6,7 @@ import { Image } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 
 type Provider = 'google' | 'facebook' | 'apple'
 

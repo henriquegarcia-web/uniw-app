@@ -1,4 +1,8 @@
-import { ICardBrand, IPurchaseOrder, OrderStatus } from '@uniw/shared-types'
+import {
+  CardBrandType,
+  IPurchaseOrder,
+  OrderStatusType,
+} from '@papaya-punch/uniw-shared-modules'
 // src/types/auth.ts
 
 // ─── MOCKS ──────────────────────────────────────────────────────────────────
@@ -9,7 +13,7 @@ export const mockPurchaseHistory: IPurchaseOrder[] = [
     userId: 'user-123',
     orderNumber: '#1001-2025',
     createdAt: new Date('2025-06-10T10:30:00').getTime(),
-    status: OrderStatus.DELIVERED,
+    status: OrderStatusType.DELIVERED,
     items: [
       {
         productId: 'prod-16',
@@ -32,18 +36,18 @@ export const mockPurchaseHistory: IPurchaseOrder[] = [
     ],
     payment: {
       method: 'credit_card',
-      cardBrand: ICardBrand.MASTERCARD,
+      cardBrand: CardBrandType.MASTERCARD,
       cardLast4: '1234',
       installments: 3,
     },
     shipping: {
       address: {
         cep: '59000-000',
-        rua: 'Avenida da Praia',
-        numero: '100',
-        bairro: 'Ponta Negra',
-        cidade: 'Natal',
-        estado: 'RN',
+        street: 'Avenida da Praia',
+        number: '100',
+        neighborhood: 'Ponta Negra',
+        city: 'Natal',
+        state: 'RN',
       },
       shippingMethod: 'SEDEX',
       shippingCost: 25.5,
@@ -61,7 +65,7 @@ export const mockPurchaseHistory: IPurchaseOrder[] = [
     userId: 'user-123',
     orderNumber: '#1002-2025',
     createdAt: new Date('2025-06-15T18:00:00').getTime(),
-    status: OrderStatus.PROCESSING,
+    status: OrderStatusType.PROCESSING,
     items: [
       {
         productId: 'prod-10',
@@ -79,11 +83,11 @@ export const mockPurchaseHistory: IPurchaseOrder[] = [
     shipping: {
       address: {
         cep: '59000-000',
-        rua: 'Avenida da Praia',
-        numero: '100',
-        bairro: 'Ponta Negra',
-        cidade: 'Natal',
-        estado: 'RN',
+        street: 'Avenida da Praia',
+        number: '100',
+        neighborhood: 'Ponta Negra',
+        city: 'Natal',
+        state: 'RN',
       },
       shippingMethod: 'Retirada no Local',
       shippingCost: 0,
@@ -100,7 +104,7 @@ export const mockPurchaseHistory: IPurchaseOrder[] = [
     userId: 'user-123',
     orderNumber: '#1002-2025',
     createdAt: new Date('2025-06-15T18:00:00').getTime(),
-    status: OrderStatus.PROCESSING,
+    status: OrderStatusType.PROCESSING,
     items: [
       {
         productId: 'prod-10',
@@ -118,11 +122,11 @@ export const mockPurchaseHistory: IPurchaseOrder[] = [
     shipping: {
       address: {
         cep: '59000-000',
-        rua: 'Avenida da Praia',
-        numero: '100',
-        bairro: 'Ponta Negra',
-        cidade: 'Natal',
-        estado: 'RN',
+        street: 'Avenida da Praia',
+        number: '100',
+        neighborhood: 'Ponta Negra',
+        city: 'Natal',
+        state: 'RN',
       },
       shippingMethod: 'Retirada no Local',
       shippingCost: 0,
@@ -139,7 +143,7 @@ export const mockPurchaseHistory: IPurchaseOrder[] = [
     userId: 'user-123',
     orderNumber: '#1002-2025',
     createdAt: new Date('2025-06-15T18:00:00').getTime(),
-    status: OrderStatus.PROCESSING,
+    status: OrderStatusType.PROCESSING,
     items: [
       {
         productId: 'prod-10',
@@ -157,11 +161,11 @@ export const mockPurchaseHistory: IPurchaseOrder[] = [
     shipping: {
       address: {
         cep: '59000-000',
-        rua: 'Avenida da Praia',
-        numero: '100',
-        bairro: 'Ponta Negra',
-        cidade: 'Natal',
-        estado: 'RN',
+        street: 'Avenida da Praia',
+        number: '100',
+        neighborhood: 'Ponta Negra',
+        city: 'Natal',
+        state: 'RN',
       },
       shippingMethod: 'Retirada no Local',
       shippingCost: 0,
@@ -178,7 +182,7 @@ export const mockPurchaseHistory: IPurchaseOrder[] = [
     userId: 'user-123',
     orderNumber: '#1002-2025',
     createdAt: new Date('2025-06-15T18:00:00').getTime(),
-    status: OrderStatus.PROCESSING,
+    status: OrderStatusType.PROCESSING,
     items: [
       {
         productId: 'prod-10',
@@ -196,11 +200,11 @@ export const mockPurchaseHistory: IPurchaseOrder[] = [
     shipping: {
       address: {
         cep: '59000-000',
-        rua: 'Avenida da Praia',
-        numero: '100',
-        bairro: 'Ponta Negra',
-        cidade: 'Natal',
-        estado: 'RN',
+        street: 'Avenida da Praia',
+        number: '100',
+        neighborhood: 'Ponta Negra',
+        city: 'Natal',
+        state: 'RN',
       },
       shippingMethod: 'Retirada no Local',
       shippingCost: 0,
@@ -217,7 +221,7 @@ export const mockPurchaseHistory: IPurchaseOrder[] = [
     userId: 'user-123',
     orderNumber: '#1002-2025',
     createdAt: new Date('2025-06-15T18:00:00').getTime(),
-    status: OrderStatus.PROCESSING,
+    status: OrderStatusType.PROCESSING,
     items: [
       {
         productId: 'prod-10',
@@ -235,11 +239,11 @@ export const mockPurchaseHistory: IPurchaseOrder[] = [
     shipping: {
       address: {
         cep: '59000-000',
-        rua: 'Avenida da Praia',
-        numero: '100',
-        bairro: 'Ponta Negra',
-        cidade: 'Natal',
-        estado: 'RN',
+        street: 'Avenida da Praia',
+        number: '100',
+        neighborhood: 'Ponta Negra',
+        city: 'Natal',
+        state: 'RN',
       },
       shippingMethod: 'Retirada no Local',
       shippingCost: 0,

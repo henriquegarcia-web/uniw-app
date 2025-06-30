@@ -17,9 +17,10 @@ import {
   CouponsScreenProps,
   ICoupon,
   IRedeemedCoupon,
-  RedeemedCouponStatus,
-} from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+  RedeemedCouponStatusType,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { mockCoupons, mockRedeemedCoupons } from '@/types/rewards'
 import { Button } from '@/components/forms/Button'
@@ -121,7 +122,7 @@ const MyCouponCard = ({
   couponDetails: ICoupon
   userCoupon: IRedeemedCoupon
 }) => {
-  const isUsed = userCoupon.status === RedeemedCouponStatus.USED
+  const isUsed = userCoupon.status === RedeemedCouponStatusType.USED
 
   const handleCopyCode = async () => {
     await Clipboard.setStringAsync(couponDetails.code)

@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import Feather from '@expo/vector-icons/Feather'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 
 interface ButtonEditProps extends TouchableOpacityProps {
   size?: 'sm' | 'md'

@@ -3,8 +3,11 @@
 import React, { useMemo } from 'react'
 import { StyleSheet, SafeAreaView } from 'react-native'
 
-import type { CategoryDetailsScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  CategoryDetailsScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { ProductList } from '@/components/product/ProductList'
 import { getCategoryById, getProductsByCategoryId } from '@/utils/mockGetters'
 import { ListingHeader } from '@/components/ListingHeader'

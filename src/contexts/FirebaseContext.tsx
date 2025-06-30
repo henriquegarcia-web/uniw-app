@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react'
-import { initializeFirebase } from '@uniw/shared-services'
+import { initializeFirebase } from '@papaya-punch/uniw-shared-modules'
 import { firebaseConfig } from '@/services/firebaseConfig'
 
 interface FirebaseContextType {

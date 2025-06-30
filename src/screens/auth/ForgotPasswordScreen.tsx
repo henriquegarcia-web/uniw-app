@@ -11,15 +11,19 @@ import {
 } from 'react-native'
 
 import { useForm, Controller, type FieldValues } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-import { ForgotPasswordScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  ForgotPasswordScreenProps,
+  resetPasswordSchema,
+  sharedAuthService,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
+import {} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
-import { isEmailInUse } from '@uniw/shared-services'
-import { forgotPasswordSchema } from '@uniw/shared-schemas'
 
 const ForgotPasswordScreen = ({ navigation }: ForgotPasswordScreenProps) => {
   const { resetPassword, isLoadingAuthFunctions } = useClientAuth()
@@ -30,7 +34,7 @@ const ForgotPasswordScreen = ({ navigation }: ForgotPasswordScreenProps) => {
     formState: { errors },
     setError,
   } = useForm({
-    resolver: yupResolver(forgotPasswordSchema),
+    resolver: zodResolver(resetPasswordSchema),
     mode: 'onBlur',
     defaultValues: {
       email: '',
@@ -38,7 +42,7 @@ const ForgotPasswordScreen = ({ navigation }: ForgotPasswordScreenProps) => {
   })
 
   const handlePasswordReset = async (data: FieldValues) => {
-    const isExists = await isEmailInUse(data.email)
+    const isExists = await sharedAuthService.isEmailInUse(data.email)
     if (!isExists) {
       setError('email', { type: 'manual', message: 'Este e-mail não está em uso.' })
       return

@@ -4,8 +4,12 @@ import React from 'react'
 import { StyleSheet, SafeAreaView, Text, View, ScrollView, FlatList } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import type { LoyaltyProgramScreenProps, IPointTransaction } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  LoyaltyProgramScreenProps,
+  IPointTransaction,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { ProfileHeader } from '@/components/ProfileHeader'
 import { Button } from '@/components/forms/Button'
@@ -35,7 +39,7 @@ const TransactionItem = ({ transaction }: { transaction: IPointTransaction }) =>
 
 const LoyaltyProgramScreen = ({ navigation }: LoyaltyProgramScreenProps) => {
   const { user } = useClientAuth()
-  const loyaltyData = user?.clientProfile?.fidelidade
+  const loyaltyData = user?.clientProfile?.loyalty
 
   // Renderiza uma mensagem se o usuário não tiver dados de fidelidade
   if (!loyaltyData) {

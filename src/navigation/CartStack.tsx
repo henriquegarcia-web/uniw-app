@@ -8,7 +8,7 @@ import OrderSummaryScreen from '@/screens/cart/OrderSummaryScreen'
 import PaymentScreen from '@/screens/cart/PaymentScreen'
 import CheckoutSuccessScreen from '@/screens/cart/CheckoutSuccessScreen'
 import { Header } from '@/components/Header'
-import { CartStackParamList } from '@uniw/shared-types'
+import { CartStackParamList } from '@papaya-punch/uniw-shared-modules'
 
 const Stack = createNativeStackNavigator<CartStackParamList>()
 

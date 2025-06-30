@@ -3,8 +3,11 @@
 import React, { useMemo } from 'react'
 import { StyleSheet, SafeAreaView, Text, ScrollView, View } from 'react-native'
 
-import type { ProductDetailsScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  ProductDetailsScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { ProductImageCarousel } from '@/components/product/ProductImageCarousel'
 import { ProductDetails } from '@/components/product/ProductDetails'
 import { FavouriteButton } from '@/components/product/FavouriteButton'

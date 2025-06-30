@@ -3,7 +3,7 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet, TouchableOpacityProps } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 
 interface ButtonIconProps extends TouchableOpacityProps {
   children: React.ReactNode

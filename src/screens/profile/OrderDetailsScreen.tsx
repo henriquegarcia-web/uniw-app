@@ -16,10 +16,11 @@ import {
   IOrderItem,
   OrderDetailsScreenProps,
   getOrderStatusData,
-} from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+  applyMask,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { getOrderById } from '@/utils/mockGetters'
-import { applyMask } from '@uniw/shared-utils'
 import { ProfileHeader } from '@/components/ProfileHeader'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Button } from '@/components/forms/Button'
@@ -153,11 +154,11 @@ const OrderDetailsScreen = ({ navigation, route }: OrderDetailsScreenProps) => {
 
           <View style={styles.section}>
             <Text style={styles.addressText}>
-              {orderData.shipping.address.rua}, {orderData.shipping.address.numero}
+              {orderData.shipping.address.street}, {orderData.shipping.address.number}
             </Text>
             <Text style={styles.addressText}>
-              {orderData.shipping.address.bairro}, {orderData.shipping.address.cidade} -{' '}
-              {orderData.shipping.address.estado}
+              {orderData.shipping.address.neighborhood}, {orderData.shipping.address.city}{' '}
+              - {orderData.shipping.address.state}
             </Text>
             <Text style={styles.addressText}>CEP: {orderData.shipping.address.cep}</Text>
           </View>

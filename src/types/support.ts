@@ -4,9 +4,9 @@ import {
   IHelpArticle,
   IHelpCategory,
   ISupportTicket,
-  TicketPriority,
-  TicketStatus,
-} from '@uniw/shared-types'
+  TicketPriorityType,
+  TicketStatusType,
+} from '@papaya-punch/uniw-shared-modules'
 
 // --- DADOS MOCADOS ---
 
@@ -88,8 +88,8 @@ export const mockSupportTickets: ISupportTicket[] = [
     userId: 'user-123', // ID do usuário logado
     subject: 'Produto veio com defeito',
     orderId: 'order-001',
-    status: TicketStatus.IN_PROGRESS,
-    priority: TicketPriority.HIGH,
+    status: TicketStatusType.IN_PROGRESS,
+    priority: TicketPriorityType.HIGH,
     createdAt: Date.now() - 3 * 24 * 60 * 60 * 1000,
     updatedAt: Date.now() - 1 * 24 * 60 * 60 * 1000,
     messages: [
@@ -112,8 +112,8 @@ export const mockSupportTickets: ISupportTicket[] = [
     id: 'ticket-2',
     userId: 'user-123',
     subject: 'Dúvida sobre cupom',
-    status: TicketStatus.RESOLVED,
-    priority: TicketPriority.LOW,
+    status: TicketStatusType.RESOLVED,
+    priority: TicketPriorityType.LOW,
     createdAt: Date.now() - 10 * 24 * 60 * 60 * 1000,
     updatedAt: Date.now() - 8 * 24 * 60 * 60 * 1000,
     messages: [

@@ -4,14 +4,13 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import { Alert, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useForm, Controller, type FieldValues } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import { changePasswordSchema, themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 import { InputText } from './InputText'
 import { Button } from './Button'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { useFocusEffect } from '@react-navigation/native'
-import { changePasswordSchema } from '@uniw/shared-schemas'
 
 interface EditableUserPasswordProps {}
 
@@ -29,7 +28,7 @@ export const EditableUserPassword = ({}: EditableUserPasswordProps) => {
     getValues,
     clearErrors,
   } = useForm({
-    resolver: yupResolver(changePasswordSchema),
+    resolver: zodResolver(changePasswordSchema),
     mode: 'onBlur',
     defaultValues: { currentPassword: '', newPassword: '', confirmNewPassword: '' },
   })

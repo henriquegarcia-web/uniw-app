@@ -10,8 +10,9 @@ import {
   NotificationDetailsScreenProps,
   AppStackParamList,
   getNotificationTypeData,
-} from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { Button } from '@/components/forms/Button'
 import { getNotificationById } from '@/utils/mockGetters'
 

@@ -6,9 +6,12 @@ import { useNavigation } from '@react-navigation/native'
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 
 import { CategoryCard } from './CategoryCard'
-import { IProductCategory } from '@uniw/shared-types'
-import { MainTabParamList } from '@uniw/shared-types'
-import { themeApp, colors } from '@uniw/shared-constants'
+import {
+  IProductCategory,
+  MainTabParamList,
+  themeApp,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { SectionHeader } from '../SectionHeader'
 
 interface CategoryListProps {

@@ -11,9 +11,8 @@ import {
 } from 'react-native'
 
 import { Feather } from '@expo/vector-icons'
-import { themeApp, colors } from '@uniw/shared-constants'
+import { AppStackParamList, themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 import { useNavigation } from '@react-navigation/native'
-import { AppStackParamList } from '@uniw/shared-types'
 import { useSearch } from '@/contexts/SearchProvider'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 

@@ -15,9 +15,8 @@ import { Feather } from '@expo/vector-icons'
 
 import { useMenu } from '@/contexts/MenuProvider'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
-import { themeApp, colors } from '@uniw/shared-constants'
+import { themeApp, colors, MainTabParamList } from '@papaya-punch/uniw-shared-modules'
 import { navigate } from '@/services/navigation'
-import { MainTabParamList } from '@uniw/shared-types'
 
 const { width } = Dimensions.get('window')
 const MENU_WIDTH = width * 0.75

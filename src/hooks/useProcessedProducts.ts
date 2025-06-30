@@ -1,7 +1,7 @@
 // src/hooks/useProcessedProducts.ts
 
 import { useState, useMemo } from 'react'
-import { FilterState, IProduct, SortOption } from '@uniw/shared-types'
+import { FilterState, IProduct, SortOption } from '@papaya-punch/uniw-shared-modules'
 
 export const useProcessedProducts = (baseProducts: IProduct[], searchTerm?: string) => {
   const [filters, setFilters] = useState<FilterState>({})

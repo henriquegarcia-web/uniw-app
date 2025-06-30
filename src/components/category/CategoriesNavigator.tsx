@@ -3,11 +3,14 @@
 import React from 'react'
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
-import type { IProductCategory } from '@uniw/shared-types'
+import {
+  IProductCategory,
+  MainTabParamList,
+  themeApp,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { useNavigation } from '@react-navigation/native'
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
-import { MainTabParamList } from '@uniw/shared-types'
 
 interface CategoriesNavigatorProps {
   categories: IProductCategory[]

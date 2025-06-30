@@ -10,7 +10,7 @@ import {
   Animated,
 } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 import { Feather } from '@expo/vector-icons'
 
 const variantStyles = {

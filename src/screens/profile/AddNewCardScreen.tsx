@@ -12,18 +12,23 @@ import {
   Platform,
 } from 'react-native'
 import { useForm, Controller, type FieldValues } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import { AddNewCardScreenProps, ICreditCard, ICardBrand } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  applyMask,
+  addCardSchema,
+  AddNewCardScreenProps,
+  ICreditCard,
+  CardBrandType,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientProfile } from '@/contexts/ClientProfileProvider'
-import { applyMask } from '@uniw/shared-utils'
 
 import { InputText } from '@/components/forms/InputText'
 import { Switch } from '@/components/forms/Switch'
 import { Button } from '@/components/forms/Button'
-import { addCardSchema } from '@uniw/shared-schemas'
 
 // Subcomponente para o preview do cartão
 const CardPreview = ({
@@ -63,7 +68,7 @@ const AddNewCardScreen = ({ navigation }: AddNewCardScreenProps) => {
     formState: { errors, isDirty },
   } = useForm({
     mode: 'onBlur',
-    resolver: yupResolver(addCardSchema),
+    resolver: zodResolver(addCardSchema),
     defaultValues: {
       cardNumber: '',
       cardHolderName: '',
@@ -80,11 +85,11 @@ const AddNewCardScreen = ({ navigation }: AddNewCardScreenProps) => {
   ])
 
   // Função para detectar a bandeira do cartão (simplificada)
-  const detectCardBrand = (number: string): ICardBrand => {
-    if (number.startsWith('4')) return ICardBrand.VISA
-    if (number.startsWith('5')) return ICardBrand.MASTERCARD
-    if (number.startsWith('3')) return ICardBrand.AMEX
-    return ICardBrand.UNKNOWN
+  const detectCardBrand = (number: string): CardBrandType => {
+    if (number.startsWith('4')) return CardBrandType.VISA
+    if (number.startsWith('5')) return CardBrandType.MASTERCARD
+    if (number.startsWith('3')) return CardBrandType.AMEX
+    return CardBrandType.UNKNOWN
   }
 
   const handleSaveCard = async (data: FieldValues) => {

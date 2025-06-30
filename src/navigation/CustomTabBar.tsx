@@ -4,10 +4,13 @@ import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
 // import { Svg, Path } from 'react-native-svg'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import {
+  MaterialCommunityIconsIconType,
+  themeApp,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 
 import { CommonActions } from '@react-navigation/native'
-import { MaterialCommunityIconsIcon } from '@uniw/shared-types'
 
 const { width } = Dimensions.get('window')
 const TAB_BAR_HEIGHT = 75
@@ -103,7 +106,7 @@ export const CustomTabBar = ({ state, descriptors, navigation }: BottomTabBarPro
 }
 
 // Função auxiliar para mapear nomes de rota para nomes de ícones
-const getIconName = (routeName: string): MaterialCommunityIconsIcon => {
+const getIconName = (routeName: string): MaterialCommunityIconsIconType => {
   switch (routeName) {
     case 'HomeStack':
       return 'home-outline'

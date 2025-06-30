@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Alert, Image, StyleSheet, View } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 import { ButtonEdit } from './ButtonEdit'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { Button } from './Button'
@@ -71,13 +71,13 @@ export const EditableUserPicture = ({}: EditableUserPictureProps) => {
     )
   }
 
-  const userHasPhoto = !!user?.baseProfile?.foto
+  const userHasPhoto = !!user?.baseProfile?.photo
 
   return (
     <View style={styles.avatarContainer}>
       <View style={styles.avatarWrapper}>
         {userHasPhoto ? (
-          <Image source={{ uri: user.baseProfile.foto! }} style={styles.avatar} />
+          <Image source={{ uri: user.baseProfile.photo! }} style={styles.avatar} />
         ) : (
           <Image
             source={require('@/assets/images/avatar.jpg')}

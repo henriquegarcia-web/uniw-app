@@ -6,12 +6,13 @@ import {
   IProductBanner,
   IProductFeaturedBanner,
   IProductListBanner,
-} from '@uniw/shared-types'
+  themeApp,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { getProductById, getProductsByIds } from '@/utils/mockGetters'
 import { Dimensions, FlatList, Image, StyleSheet, Text, View } from 'react-native'
 import { ProductList } from '../product/ProductList'
 import { ProductCard } from '../product/ProductCard'
-import { themeApp, colors } from '@uniw/shared-constants'
 import { SectionHeader } from '../SectionHeader'
 import { CtaButton } from '../forms/CtaButton'
 

@@ -1,7 +1,7 @@
 // src/hooks/useProductVariations.ts
 
 import { useState, useEffect, useMemo, useCallback } from 'react'
-import { IProduct, IProductSKU } from '@uniw/shared-types'
+import { IProduct, IProductSKU } from '@papaya-punch/uniw-shared-modules'
 
 interface UseProductVariationsReturn {
   selectedSku: IProductSKU | undefined

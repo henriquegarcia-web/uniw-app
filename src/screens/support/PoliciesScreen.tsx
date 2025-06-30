@@ -3,8 +3,11 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView, Text, View, ScrollView } from 'react-native'
 
-import type { PoliciesScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  PoliciesScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { ProfileHeader } from '@/components/ProfileHeader' // Reutilizando o header de seção
 
 const PoliciesScreen = ({ navigation }: PoliciesScreenProps) => {

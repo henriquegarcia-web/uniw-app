@@ -12,8 +12,12 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
 
-import { themeApp, colors } from '@uniw/shared-constants'
-import { AppStackParamList, MaterialCommunityIconsIcon } from '@uniw/shared-types'
+import {
+  themeApp,
+  colors,
+  AppStackParamList,
+  MaterialCommunityIconsIconType,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { useMenu } from '@/contexts/MenuProvider'
 import { InputSearch } from './forms/InputSearch'
@@ -31,7 +35,7 @@ type HeaderVariant =
 export interface HeaderProps {
   variant: HeaderVariant
   title?: string
-  rightIconName?: MaterialCommunityIconsIcon
+  rightIconName?: MaterialCommunityIconsIconType
   onRightIconPress?: () => void
 }
 
@@ -46,7 +50,7 @@ export const Header = ({
   const { user } = useClientAuth()
   const { openMenu } = useMenu()
 
-  const userHasPhoto = !!user?.baseProfile?.foto
+  const userHasPhoto = !!user?.baseProfile?.photo
   const isVariantProfile = variant === 'profile' || variant === 'back-profile'
 
   const backgroundColor = isVariantProfile ? colors.brand.secondary : colors.ui.surface
@@ -180,7 +184,7 @@ export const Header = ({
         return (
           <TouchableOpacity onPress={onProfilePress}>
             {userHasPhoto ? (
-              <Image source={{ uri: user.baseProfile.foto! }} style={styles.avatar} />
+              <Image source={{ uri: user.baseProfile.photo! }} style={styles.avatar} />
             ) : (
               <Image
                 source={require('@/assets/images/avatar.jpg')}

@@ -8,7 +8,7 @@ import {
   StyleSheet,
   SwitchProps as NativeSwitchProps,
 } from 'react-native'
-import { themeApp, colors } from '@uniw/shared-constants'
+import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 
 interface SwitchProps extends NativeSwitchProps {
   label: string

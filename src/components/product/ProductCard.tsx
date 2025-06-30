@@ -3,12 +3,15 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
-import { IProduct } from '@uniw/shared-types'
+import {
+  AppStackParamList,
+  IProduct,
+  themeApp,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { ProductRating } from './ProductRating'
 import { ProductPrice } from './ProductPrice'
 import { useNavigation } from '@react-navigation/native'
-import { AppStackParamList } from '@uniw/shared-types'
 import { FavouriteButton } from './FavouriteButton'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 

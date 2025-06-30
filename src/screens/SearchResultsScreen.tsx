@@ -3,8 +3,11 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView } from 'react-native'
 
-import type { SearchResultsScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  SearchResultsScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { ProductList } from '@/components/product/ProductList'
 import { mockProducts } from '@/types/products'
 import { useProcessedProducts } from '@/hooks/useProcessedProducts'

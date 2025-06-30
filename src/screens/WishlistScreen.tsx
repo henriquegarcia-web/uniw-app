@@ -3,8 +3,11 @@
 import React, { useMemo } from 'react'
 import { StyleSheet, SafeAreaView } from 'react-native'
 
-import type { WishlistScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  WishlistScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { ProductList } from '@/components/product/ProductList'
 import { getProductsByIds } from '@/utils/mockGetters'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
@@ -16,8 +19,8 @@ const WishlistScreen = ({ navigation }: WishlistScreenProps) => {
   const { user } = useClientAuth()
 
   const favoriteProducts = useMemo(() => {
-    if (!user?.clientProfile?.favoritos) return []
-    return getProductsByIds(user.clientProfile.favoritos)
+    if (!user?.clientProfile?.favorites) return []
+    return getProductsByIds(user.clientProfile.favorites)
   }, [user])
 
   const { processedProducts, sortOption, setSortOption, filters, setFilters } =

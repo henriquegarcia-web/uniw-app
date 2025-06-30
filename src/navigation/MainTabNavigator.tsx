@@ -11,7 +11,7 @@ import { CustomTabBar } from './CustomTabBar'
 import { CategoryStack } from './CategoryStack'
 import WishlistScreen from '@/screens/WishlistScreen'
 import { Header } from '@/components/Header'
-import { MainTabParamList } from '@uniw/shared-types'
+import { MainTabParamList } from '@papaya-punch/uniw-shared-modules'
 
 const Tab = createBottomTabNavigator<MainTabParamList>()
 

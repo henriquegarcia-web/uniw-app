@@ -4,8 +4,7 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 
-import { themeApp, colors } from '@uniw/shared-constants'
-import { IProductRating } from '@uniw/shared-types'
+import { themeApp, colors, IProductRating } from '@papaya-punch/uniw-shared-modules'
 
 interface ProductRatingProps {
   rating?: IProductRating

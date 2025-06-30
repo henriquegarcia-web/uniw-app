@@ -1,5 +1,5 @@
 import { createNavigationContainerRef } from '@react-navigation/native'
-import { MainTabParamList } from '@uniw/shared-types'
+import { MainTabParamList } from '@papaya-punch/uniw-shared-modules'
 
 let isMounted = false
 // Fila para guardar a primeira ação de navegação, caso ela chegue cedo demais

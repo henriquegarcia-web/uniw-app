@@ -3,8 +3,11 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView, Text } from 'react-native'
 
-import type { ChatsListScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  ChatsListScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 
 const ChatsListScreen = ({ navigation }: ChatsListScreenProps) => {
   return (

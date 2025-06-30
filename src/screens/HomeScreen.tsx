@@ -8,8 +8,9 @@ import {
   IBanner,
   isOfferBanner,
   isProductListBanner,
-} from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { CategoriesNavigator } from '@/components/category/CategoriesNavigator'
 import { mockCategories } from '@/types/products'
 import { mockBanners } from '@/types/banners'

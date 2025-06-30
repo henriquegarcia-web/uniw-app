@@ -4,8 +4,11 @@ import React, { useState } from 'react'
 import { StyleSheet, SafeAreaView, Text, View, ScrollView, Alert } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 
-import type { DeleteAccountScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  DeleteAccountScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { Button } from '@/components/forms/Button'
 import { InputText } from '@/components/forms/InputText'

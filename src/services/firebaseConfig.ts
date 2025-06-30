@@ -2,7 +2,7 @@ import Constants from 'expo-constants'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { getReactNativePersistence } from 'firebase/auth'
 
-import { initializeFirebase, FirebaseConfig } from '@uniw/shared-services'
+import { initializeFirebase, FirebaseConfig } from '@papaya-punch/uniw-shared-modules'
 
 export const firebaseConfig: FirebaseConfig = {
   apiKey: Constants.expoConfig?.extra?.firebaseApiKey,

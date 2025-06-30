@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { Text, StyleSheet, View, Alert, TouchableOpacity } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 import { ButtonEdit } from './ButtonEdit'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { Button } from './Button'
@@ -16,10 +16,10 @@ export const EditableUserName = ({}: EditableUserNameProps) => {
   const { user, updateUserName, isLoadingAuthFunctions } = useClientAuth()
 
   const [modalVisible, setModalVisible] = useState(false)
-  const [newName, setNewName] = useState(user?.baseProfile?.nome || '')
+  const [newName, setNewName] = useState(user?.baseProfile?.name || '')
 
   const handleOpenModal = () => {
-    setNewName(user?.baseProfile?.nome || '')
+    setNewName(user?.baseProfile?.name || '')
     setModalVisible(true)
   }
 
@@ -41,7 +41,7 @@ export const EditableUserName = ({}: EditableUserNameProps) => {
   return (
     <View style={styles.nameContainer}>
       <View style={styles.nameWrapper}>
-        <Text style={styles.name}>{user?.baseProfile.nome}</Text>
+        <Text style={styles.name}>{user?.baseProfile.name}</Text>
 
         <View style={styles.nameEdit}>
           <ButtonEdit size="sm" onPress={handleOpenModal} />

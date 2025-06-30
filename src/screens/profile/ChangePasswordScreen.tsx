@@ -13,15 +13,17 @@ import {
 } from 'react-native'
 
 import { useForm, Controller, type FieldValues } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-import { ChangePasswordScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  ChangePasswordScreenProps,
+  themeApp as theme,
+  colors,
+  changePasswordSchema,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
-import { ProfileHeader } from '@/components/ProfileHeader'
-import { changePasswordSchema } from '@uniw/shared-schemas'
 
 const ChangePasswordScreen = ({ navigation }: ChangePasswordScreenProps) => {
   const { reauthenticate, changePassword, isLoadingAuthFunctions } = useClientAuth()
@@ -32,7 +34,7 @@ const ChangePasswordScreen = ({ navigation }: ChangePasswordScreenProps) => {
     setError,
     formState: { errors, isDirty },
   } = useForm({
-    resolver: yupResolver(changePasswordSchema),
+    resolver: zodResolver(changePasswordSchema),
     mode: 'onBlur',
     defaultValues: {
       currentPassword: '',

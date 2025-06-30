@@ -11,11 +11,14 @@ import {
 } from 'react-native'
 
 import { useForm, Controller, type FieldValues } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-import { SignInScreenProps } from '@uniw/shared-types'
-import { signInSchema } from '@uniw/shared-schemas'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  SignInScreenProps,
+  signInSchema,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
@@ -31,7 +34,7 @@ const SignInScreen = ({ navigation }: SignInScreenProps) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(signInSchema),
+    resolver: zodResolver(signInSchema),
     mode: 'onBlur',
     defaultValues: { email: '', password: '' },
   })

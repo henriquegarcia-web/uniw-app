@@ -3,9 +3,8 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
+import { themeApp, colors, IShippingDetails } from '@papaya-punch/uniw-shared-modules'
 import { Feather } from '@expo/vector-icons'
-import { IShippingDetails } from '@uniw/shared-types'
 
 type FeatherIconName = keyof typeof Feather.glyphMap
 

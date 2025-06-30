@@ -15,8 +15,9 @@ import {
   NotificationsScreenProps,
   INotification,
   getNotificationTypeData,
-} from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { mockNotifications } from '@/types/notifications'
 import { ProfileHeader } from '@/components/ProfileHeader'
 
@@ -32,7 +33,7 @@ const NotificationItem = ({
 
   return (
     <TouchableOpacity
-      style={[styles.itemContainer, !notification.isRead && styles.unreadItem]}
+      style={[styles.itemContainer, !notification.read && styles.unreadItem]}
       onPress={onPress}
       activeOpacity={0.7}
     >
@@ -44,10 +45,10 @@ const NotificationItem = ({
           {notification.title}
         </Text>
         <Text style={styles.body} numberOfLines={2}>
-          {notification.body}
+          {notification.message}
         </Text>
       </View>
-      {!notification.isRead && <View style={styles.unreadIndicator} />}
+      {!notification.read && <View style={styles.unreadIndicator} />}
     </TouchableOpacity>
   )
 }

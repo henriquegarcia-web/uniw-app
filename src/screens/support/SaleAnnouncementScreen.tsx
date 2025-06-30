@@ -12,8 +12,11 @@ import {
 } from 'react-native'
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
 
-import type { SaleAnnouncementScreenProps } from '@uniw/shared-types'
-import { themeApp as theme, colors } from '@uniw/shared-constants'
+import {
+  SaleAnnouncementScreenProps,
+  themeApp as theme,
+  colors,
+} from '@papaya-punch/uniw-shared-modules'
 import { Button } from '@/components/forms/Button'
 
 // Subcomponente para cada passo da instrução

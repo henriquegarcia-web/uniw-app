@@ -8,7 +8,7 @@ import ProfileScreen from '@/screens/profile/ProfileScreen'
 import AddNewCardScreen from '@/screens/profile/AddNewCardScreen'
 import OrderHistoryScreen from '@/screens/profile/OrderHistoryScreen'
 import SettingsScreen from '@/screens/profile/SettingsScreen'
-import EditProfileScreen from '@/screens/profile/EditProfileScreen'
+// import EditProfileScreen from '@/screens/profile/EditProfileScreen'
 import AwardsScreen from '@/screens/profile/AwardsScreen'
 import ChangeEmailScreen from '@/screens/profile/ChangeEmailScreen'
 import ChangeLanguageScreen from '@/screens/profile/ChangeLanguageScreen'
@@ -27,7 +27,7 @@ import ClubSignatureScreen from '@/screens/profile/ClubSignatureScreen'
 import CouponsScreen from '@/screens/profile/CouponsScreen'
 import NotificationDetailsScreen from '@/screens/profile/NotificationDetailsScreen'
 import AddNewAddressScreen from '@/screens/profile/AddNewAddressScreen'
-import { ProfileStackParamList } from '@uniw/shared-types'
+import { ProfileStackParamList } from '@papaya-punch/uniw-shared-modules'
 
 const Stack = createNativeStackNavigator<ProfileStackParamList>()
 
@@ -42,14 +42,14 @@ export function ProfileStack() {
           header: () => <Header variant="profile" title="Perfil Usuário" />,
         }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="EditProfile"
         component={EditProfileScreen}
         options={{
           headerShown: true,
           header: () => <Header variant="back-profile" title="Perfil Usuário" />,
         }}
-      />
+      /> */}
       <Stack.Screen
         name="Settings"
         component={SettingsScreen}

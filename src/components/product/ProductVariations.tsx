@@ -3,8 +3,7 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
-import { themeApp, colors } from '@uniw/shared-constants'
-import type { IVariationType } from '@uniw/shared-types'
+import { themeApp, colors, IVariationType } from '@papaya-punch/uniw-shared-modules'
 
 interface ProductVariationsProps {
   variationTypes: IVariationType[]
