@@ -23,6 +23,7 @@ export default {
     },
     android: {
       package: 'com.uniw.app',
+      googleServicesFile: './google-services.json',
       adaptiveIcon: {
         foregroundImage: './src/assets/adaptive-icon.png',
         backgroundColor: '#ffffff',

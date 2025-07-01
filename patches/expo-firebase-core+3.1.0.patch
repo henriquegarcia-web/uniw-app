@@ -1,0 +1,12 @@
+diff --git a/node_modules/expo-firebase-core/android/build.gradle b/node_modules/expo-firebase-core/android/build.gradle
+index 3fc2412..990af38 100644
+--- a/node_modules/expo-firebase-core/android/build.gradle
++++ b/node_modules/expo-firebase-core/android/build.gradle
+@@ -1,6 +1,6 @@
+ apply plugin: 'com.android.library'
+ apply plugin: 'kotlin-android'
+-apply plugin: 'maven'
++// apply plugin: 'maven'
+ 
+ group = 'host.exp.exponent'
+ version = '3.1.0'

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1020669490249",
+    "firebase_url": "https://uniw-marketplace-default-rtdb.firebaseio.com",
+    "project_id": "uniw-marketplace",
+    "storage_bucket": "uniw-marketplace.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1020669490249:android:1932fdc5429c48ab933b98",
+        "android_client_info": {
+          "package_name": "com.uniw.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChUQ0oRvo-EevB1b1b0VRwUMqB5b9Irpc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,18 +8,19 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
     "@expo/vector-icons": "^14.1.0",
     "@hookform/resolvers": "^5.1.1",
-    "@papaya-punch/uniw-shared-modules": "^1.0.36",
+    "@papaya-punch/uniw-shared-modules": "^1.0.38",
     "@react-native-async-storage/async-storage": "2.1.2",
     "@react-native-firebase/app": "^22.2.1",
     "@react-navigation/bottom-tabs": "^7.4.2",
     "@react-navigation/native": "^7.1.14",
-    "@react-navigation/native-stack": "^7.4.2",
+    "@react-navigation/native-stack": "^7.3.21",
     "@react-navigation/stack": "^7.4.2",
     "axios": "^1.9.0",
     "expo": "~53.0.11",
@@ -47,6 +48,7 @@
     "@types/react": "~19.0.10",
     "babel-plugin-module-resolver": "^5.0.2",
     "globals": "^16.2.0",
+    "patch-package": "^8.0.0",
     "prettier": "^3.5.3",
     "typescript": "~5.8.3"
   },
