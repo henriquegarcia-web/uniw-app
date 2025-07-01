@@ -16,6 +16,8 @@ import {
   sharedProfileSecurityService,
   sharedAuthService,
   clientAuthService,
+  ClientSignUpSchemaType,
+  SignInSchemaType,
 } from '@papaya-punch/uniw-shared-modules'
 import { useFirebase } from './FirebaseContext'
 
@@ -29,9 +31,9 @@ type AuthContextData = {
   clearAuthError: () => void
   hasCompletedOnboarding: boolean
   isLoadingOnboarding: boolean
-  signIn(email: string, password: string): Promise<void>
+  signIn(data: SignInSchemaType): Promise<void>
   signOut(): void
-  signUp(name: string, email: string, cpf: string, password: string): Promise<void>
+  signUp(data: ClientSignUpSchemaType): Promise<void>
   completeOnboarding(): Promise<void>
   resetPassword(email: string): Promise<void>
   updateProfile(data: Partial<IBaseProfile>): Promise<void>
@@ -114,7 +116,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = async (data: SignInSchemaType) => {
+    const { email, password } = data
+
     setIsLoadingAuthFunctions(true)
     setErrorAuth(null)
     try {
@@ -136,7 +140,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }
 
-  const signUp = async (name: string, email: string, cpf: string, password: string) => {
+  const signUp = async (data: ClientSignUpSchemaType) => {
+    const { name, email, cpf, password } = data
     setIsLoadingAuthFunctions(true)
     setErrorAuth(null)
     try {

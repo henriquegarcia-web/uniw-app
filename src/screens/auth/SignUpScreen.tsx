@@ -20,8 +20,8 @@ import {
   sharedAuthService,
   themeApp as theme,
   colors,
+  ClientSignUpSchemaType,
 } from '@papaya-punch/uniw-shared-modules'
-import {} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
@@ -49,7 +49,7 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
     },
   })
 
-  const handleSignUp = async (data: FieldValues) => {
+  const handleSignUp = async (data: ClientSignUpSchemaType) => {
     const isEmailTaken = await sharedAuthService.isEmailInUse(data.email)
     if (isEmailTaken) {
       setError('email', { type: 'manual', message: 'Este e-mail já está em uso.' })
@@ -63,7 +63,10 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
     }
 
     const cleanedCpf = data.cpf.replace(/\D/g, '')
-    signUp(data.nome, data.email, cleanedCpf, data.password)
+    await signUp({
+      ...data,
+      cpf: cleanedCpf,
+    })
   }
 
   return (

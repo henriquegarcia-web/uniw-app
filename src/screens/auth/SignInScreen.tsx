@@ -18,6 +18,7 @@ import {
   signInSchema,
   themeApp as theme,
   colors,
+  SignInSchemaType,
 } from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { InputText } from '@/components/forms/InputText'
@@ -39,8 +40,8 @@ const SignInScreen = ({ navigation }: SignInScreenProps) => {
     defaultValues: { email: '', password: '' },
   })
 
-  const handleSignIn = (data: FieldValues) => {
-    signIn(data.email, data.password)
+  const handleSignIn = async (data: SignInSchemaType) => {
+    await signIn(data)
   }
 
   return (

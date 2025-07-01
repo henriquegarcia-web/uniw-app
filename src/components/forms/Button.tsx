@@ -37,11 +37,11 @@ const variantStyles = {
     },
     text: {
       fontSize: themeApp.fonts.size.lg,
-      color: colors.brand.primary,
+      color: colors.text.onBrand,
       fontFamily: themeApp.fonts.family.bold,
     },
     icon: {
-      color: colors.brand.primary,
+      color: colors.text.onBrand,
     },
   },
   tertiary: {

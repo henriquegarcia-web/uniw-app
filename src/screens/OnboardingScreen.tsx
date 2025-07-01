@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   gradient: {
+    zIndex: 10,
     position: 'absolute',
     left: 0,
     right: 0,
@@ -65,11 +66,13 @@ const styles = StyleSheet.create({
     height: '50%',
   },
   safeArea: {
+    zIndex: 100,
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
     paddingHorizontal: theme.spacing.lg,
-    paddingBottom: theme.spacing.xl,
+    paddingBottom: theme.spacing.xxl,
   },
   contentContainer: {
     maxWidth: 280,
