@@ -19,7 +19,7 @@ import { themeApp, colors, MainTabParamList } from '@papaya-punch/uniw-shared-mo
 import { navigate } from '@/services/navigation'
 
 const { width } = Dimensions.get('window')
-const MENU_WIDTH = width * 0.75
+const MENU_WIDTH = width * 0.8
 
 export const SideMenu = () => {
   const { isOpen, closeMenu } = useMenu()
@@ -59,9 +59,9 @@ export const SideMenu = () => {
       >
         <View style={styles.menuHeader}>
           <Image
-            source={require('@/assets/uniw_logo.png')}
+            source={require('@/assets/backgrounds/side-menu-background-1.png')}
             style={styles.logo}
-            resizeMode="contain"
+            // resizeMode="contain"
           />
         </View>
         <SafeAreaView style={styles.menuWrapper}>
@@ -127,21 +127,29 @@ const styles = StyleSheet.create({
     left: 0,
     width: MENU_WIDTH,
     backgroundColor: colors.ui.background,
-    paddingTop: themeApp.spacing.custom['phone-default-header'],
+    // paddingTop: themeApp.spacing.custom['phone-default-header'],
   },
   menuWrapper: {
     flex: 1,
   },
   menuHeader: {
-    height: 70,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: colors.ui.border,
+    // position: 'relative',
+    height: 200,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: colors.brand.secondary,
   },
   logo: {
-    height: 40,
-    width: 80,
+    // zIndex: 1000,
+    // position: 'absolute',
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // bottom: 0,
+    width: '100%',
+    height: '100%',
+    // width: 80,
   },
   menuItems: {
     flex: 1,

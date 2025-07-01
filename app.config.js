@@ -20,6 +20,8 @@ export default {
     },
     ios: {
       supportsTablet: true,
+      bundleIdentifier: 'com.uniw.app',
+      googleServicesFile: './GoogleService-Info.plist',
     },
     android: {
       package: 'com.uniw.app',
