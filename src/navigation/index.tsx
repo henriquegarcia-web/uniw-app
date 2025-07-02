@@ -10,6 +10,7 @@ import SplashScreen from '@/screens/SplashScreen'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { navigationRef, onNavigationReady } from '@/services/navigation'
 import { AppStack } from './AppStack'
+import { SideMenu } from '@/components/SideMenu'
 
 export function Routes() {
   const { isAuthenticated, isLoadingAuth, hasCompletedOnboarding, isLoadingOnboarding } =
@@ -24,7 +25,10 @@ export function Routes() {
       {!hasCompletedOnboarding ? (
         <OnBoardingStack />
       ) : isAuthenticated ? (
-        <AppStack />
+        <>
+          <AppStack />
+          <SideMenu />
+        </>
       ) : (
         <AuthStack />
       )}

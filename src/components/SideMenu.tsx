@@ -11,6 +11,8 @@ import {
   Image,
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useMenu } from '@/contexts/MenuProvider'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
@@ -18,6 +20,7 @@ import {
   themeApp,
   colors,
   MainTabParamList,
+  AppStackParamList,
   MaterialCommunityIconsIconType,
 } from '@papaya-punch/uniw-shared-modules'
 import { navigate } from '@/services/navigation'
@@ -38,6 +41,7 @@ interface MenuItem {
 export const SideMenu = () => {
   const { isOpen, closeMenu } = useMenu()
   const { user, signOut } = useClientAuth()
+  const navigation = useNavigation<NativeStackNavigationProp<AppStackParamList>>()
 
   const position = useRef(new Animated.Value(-MENU_WIDTH)).current
 
@@ -50,10 +54,18 @@ export const SideMenu = () => {
   }, [isOpen, position])
 
   const navigateAndClose = (
-    name: keyof MainTabParamList,
-    params?: MainTabParamList[keyof MainTabParamList],
+    name: keyof MainTabParamList | keyof AppStackParamList,
+    params?:
+      | MainTabParamList[keyof MainTabParamList]
+      | AppStackParamList[keyof AppStackParamList],
   ) => {
-    navigate(name, params)
+    // Check if it's an AppStack screen
+    if (name === 'DailyOffers') {
+      navigation.navigate(name as keyof AppStackParamList, params as any)
+    } else {
+      // Use the navigation service for MainTabParamList screens
+      navigate(name as keyof MainTabParamList, params as any)
+    }
     closeMenu()
   }
 

@@ -5,7 +5,6 @@ import { Routes } from '@/navigation'
 import { AuthProvider } from '@/contexts/ClientAuthProvider'
 import { ProfileProvider } from '@/contexts/ClientProfileProvider'
 import { MenuProvider } from '@/contexts/MenuProvider'
-import { SideMenu } from './components/SideMenu'
 import { SearchProvider } from '@/contexts/SearchProvider'
 import { HelpCenterProvider } from '@/contexts/HelpCenterProvider'
 import { FirebaseProvider } from '@/contexts/FirebaseContext'
@@ -37,7 +36,6 @@ export default function App() {
               <SearchProvider>
                 <StatusBar style="auto" />
                 <Routes />
-                <SideMenu />
               </SearchProvider>
             </MenuProvider>
           </ProfileProvider>
