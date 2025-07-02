@@ -8,18 +8,32 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
-  SafeAreaView,
   Image,
 } from 'react-native'
-import { Feather } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import { useMenu } from '@/contexts/MenuProvider'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
-import { themeApp, colors, MainTabParamList } from '@papaya-punch/uniw-shared-modules'
+import {
+  themeApp,
+  colors,
+  MainTabParamList,
+  MaterialCommunityIconsIconType,
+} from '@papaya-punch/uniw-shared-modules'
 import { navigate } from '@/services/navigation'
+import { UserAvatar } from './UserAvatar'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const { width } = Dimensions.get('window')
-const MENU_WIDTH = width * 0.8
+const MENU_WIDTH = width * 0.65
+const HEADER_HEIGHT = MENU_WIDTH * (1 / 2)
+
+interface MenuItem {
+  id: string
+  label: string
+  icon: MaterialCommunityIconsIconType
+  onPress: () => void
+}
 
 export const SideMenu = () => {
   const { isOpen, closeMenu } = useMenu()
@@ -48,6 +62,51 @@ export const SideMenu = () => {
     signOut()
   }
 
+  const menuItems: MenuItem[] = [
+    {
+      id: 'profile',
+      label: 'Meu Perfil',
+      icon: 'account-outline',
+      onPress: () => navigateAndClose('ProfileStack', { screen: 'Profile' }),
+    },
+    {
+      id: 'offers',
+      label: 'Ofertas',
+      icon: 'tag-outline',
+      onPress: () => navigateAndClose('DailyOffers'),
+    },
+    {
+      id: 'order-history',
+      label: 'Meus Pedidos',
+      icon: 'history',
+      onPress: () => navigateAndClose('ProfileStack', { screen: 'OrderHistory' }),
+    },
+    {
+      id: 'notifications',
+      label: 'Notificações',
+      icon: 'bell-outline',
+      onPress: () => navigateAndClose('ProfileStack', { screen: 'Notifications' }),
+    },
+    {
+      id: 'loyalty-program',
+      label: 'Fidelidade',
+      icon: 'handshake-outline',
+      onPress: () => navigateAndClose('ProfileStack', { screen: 'LoyaltyProgram' }),
+    },
+    {
+      id: 'club',
+      label: 'Clube',
+      icon: 'crown-outline',
+      onPress: () => navigateAndClose('ProfileStack', { screen: 'Club' }),
+    },
+    {
+      id: 'settings',
+      label: 'Configurações',
+      icon: 'cog-outline',
+      onPress: () => navigateAndClose('ProfileStack', { screen: 'Settings' }),
+    },
+  ]
+
   if (!isOpen) {
     return null
   }
@@ -57,50 +116,71 @@ export const SideMenu = () => {
       <Animated.View
         style={[styles.menuContainer, { transform: [{ translateX: position }] }]}
       >
-        <View style={styles.menuHeader}>
-          <Image
-            source={require('@/assets/backgrounds/side-menu-background-1.png')}
-            style={styles.logo}
-            // resizeMode="contain"
-          />
-        </View>
-        <SafeAreaView style={styles.menuWrapper}>
+        <SafeAreaView style={styles.menuWrapper} edges={['bottom']}>
+          <View style={styles.menuHeader}>
+            <Image
+              source={require('@/assets/backgrounds/side-menu-background-1.png')}
+              style={styles.logo}
+            />
+
+            <View style={styles.menuHeaderContent}>
+              <UserAvatar
+                size="lg"
+                onPress={() => navigateAndClose('ProfileStack', { screen: 'Profile' })}
+              />
+              <View style={styles.menuHeaderInfos}>
+                <Text style={styles.menuHeaderUserName} numberOfLines={1}>
+                  {user?.baseProfile?.name}
+                </Text>
+                <View style={styles.menuHeaderUserPoints}>
+                  <MaterialCommunityIcons
+                    name="star-circle"
+                    size={16}
+                    color={colors.text.onBrand}
+                    style={{
+                      marginBottom: 2,
+                    }}
+                  />
+                  <Text style={styles.menuHeaderUserPointsValue}>
+                    {user?.clientProfile?.loyalty.pointsBalance}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.menuHeaderUserPointsValue,
+                      styles.menuHeaderUserPointsLabel,
+                    ]}
+                  >
+                    pontos
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
           <View style={styles.menuItems}>
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => navigateAndClose('ProfileStack', { screen: 'Profile' })}
-            >
-              <Feather name="user" size={22} color={colors.text.primary} />
-              <Text style={styles.menuItemText}>Meu Perfil</Text>
-            </TouchableOpacity>
-
-            {/* <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => navigateAndClose('ProfileStack', { screen: 'Wishlist' })}
-            >
-              <Feather name="heart" size={22} color={colors.text.primary} />
-              <Text style={styles.menuItemText}>Favoritos</Text>
-            </TouchableOpacity> */}
-
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => navigateAndClose('ProfileStack', { screen: 'OrderHistory' })}
-            >
-              <Feather name="shopping-bag" size={22} color={colors.text.primary} />
-              <Text style={styles.menuItemText}>Meus Pedidos</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => navigateAndClose('ProfileStack', { screen: 'Settings' })}
-            >
-              <Feather name="settings" size={22} color={colors.text.primary} />
-              <Text style={styles.menuItemText}>Configurações</Text>
-            </TouchableOpacity>
+            {menuItems.map((menu) => {
+              return (
+                <TouchableOpacity
+                  key={menu.id}
+                  style={styles.menuItem}
+                  onPress={menu.onPress}
+                >
+                  <MaterialCommunityIcons
+                    name={menu.icon}
+                    size={22}
+                    color={colors.text.primary}
+                  />
+                  <Text style={styles.menuItemText}>{menu.label}</Text>
+                </TouchableOpacity>
+              )
+            })}
           </View>
 
           <TouchableOpacity style={styles.logoutButton} onPress={handleSignOut}>
-            <Feather name="log-out" size={22} color={colors.semantic.error} />
+            <MaterialCommunityIcons
+              name="exit-to-app"
+              size={22}
+              color={colors.semantic.error}
+            />
             <Text style={[styles.menuItemText, { color: colors.semantic.error }]}>
               Sair
             </Text>
@@ -127,29 +207,59 @@ const styles = StyleSheet.create({
     left: 0,
     width: MENU_WIDTH,
     backgroundColor: colors.ui.background,
-    // paddingTop: themeApp.spacing.custom['phone-default-header'],
   },
   menuWrapper: {
     flex: 1,
   },
   menuHeader: {
-    // position: 'relative',
-    height: 200,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: colors.brand.secondary,
+    position: 'relative',
+    height: HEADER_HEIGHT,
   },
-  logo: {
-    // zIndex: 1000,
-    // position: 'absolute',
-    // top: 0,
-    // left: 0,
-    // right: 0,
-    // bottom: 0,
+  menuHeaderContent: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     width: '100%',
     height: '100%',
-    // width: 80,
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: themeApp.spacing.sm,
+    paddingLeft: 25,
+    paddingRight: 20,
+    paddingTop: 14,
+  },
+  menuHeaderInfos: {
+    width: MENU_WIDTH - 130,
+    // borderWidth: 1,
+    // borderColor: 'blue',
+  },
+  menuHeaderUserName: {
+    // flex: 1,
+    fontFamily: themeApp.fonts.family.semiBold,
+    fontSize: themeApp.fonts.size.md,
+    color: colors.text.onBrand,
+
+    // borderWidth: 1,
+    // borderColor: 'blue',
+  },
+  menuHeaderUserPoints: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: 4,
+  },
+  menuHeaderUserPointsValue: {
+    fontFamily: themeApp.fonts.family.semiBold,
+    fontSize: themeApp.fonts.size.sm,
+    color: colors.text.onBrand,
+  },
+  menuHeaderUserPointsLabel: {
+    opacity: 0.8,
+  },
+  logo: {
+    width: '100%',
+    height: '100%',
   },
   menuItems: {
     flex: 1,
@@ -168,7 +278,8 @@ const styles = StyleSheet.create({
   logoutButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: themeApp.spacing.lg,
+    height: 75,
+    paddingLeft: themeApp.spacing.lg,
     borderTopWidth: 1,
     borderTopColor: colors.ui.border,
   },

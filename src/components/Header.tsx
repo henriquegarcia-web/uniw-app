@@ -18,9 +18,9 @@ import {
   AppStackParamList,
   MaterialCommunityIconsIconType,
 } from '@papaya-punch/uniw-shared-modules'
-import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { useMenu } from '@/contexts/MenuProvider'
 import { InputSearch } from './forms/InputSearch'
+import { UserAvatar } from './UserAvatar'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 type HeaderVariant =
@@ -47,10 +47,8 @@ export const Header = ({
 }: HeaderProps) => {
   const navigation = useNavigation<NativeStackNavigationProp<AppStackParamList>>()
 
-  const { user } = useClientAuth()
   const { openMenu } = useMenu()
 
-  const userHasPhoto = !!user?.baseProfile?.photo
   const isVariantProfile = variant === 'profile' || variant === 'back-profile'
 
   const backgroundColor = isVariantProfile ? colors.brand.secondary : colors.ui.surface
@@ -181,18 +179,7 @@ export const Header = ({
     switch (variant) {
       case 'main':
       case 'main-full':
-        return (
-          <TouchableOpacity onPress={onProfilePress}>
-            {userHasPhoto ? (
-              <Image source={{ uri: user.baseProfile.photo! }} style={styles.avatar} />
-            ) : (
-              <Image
-                source={require('@/assets/images/avatar.jpg')}
-                style={styles.avatarPlaceholder}
-              />
-            )}
-          </TouchableOpacity>
-        )
+        return <UserAvatar size="md" onPress={onProfilePress} />
       case 'back-cart':
         return (
           <TouchableOpacity onPress={onCartPress} style={styles.cartButton}>
@@ -292,16 +279,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 80,
   },
-  avatar: {
-    height: 36,
-    width: 36,
-    borderRadius: themeApp.borders.radius.full,
-  },
-  avatarPlaceholder: {
-    height: 36,
-    width: 36,
-    borderRadius: themeApp.borders.radius.full,
-  },
+
   cartButton: {
     backgroundColor: colors.brand.secondary,
     width: 40,
