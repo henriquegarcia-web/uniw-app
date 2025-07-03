@@ -7,7 +7,7 @@ import { MainTabNavigator } from './MainTabNavigator'
 import SearchResultsScreen from '@/screens/SearchResultsScreen'
 import { Header } from '@/components/Header'
 import ProductDetailsScreen from '@/screens/ProductDetailsScreen'
-import DailyOffersScreen from '@/screens/profile/DailyOffersScreen'
+import DailyOffersScreen from '@/screens/DailyOffersScreen'
 import AboutUsScreen from '@/screens/support/AboutUsScreen'
 import DeleteAccountScreen from '@/screens/support/DeleteAccountScreen'
 import PoliciesScreen from '@/screens/support/PoliciesScreen'
@@ -18,7 +18,7 @@ import TicketDetailsScreen from '@/screens/support/TicketDetailsScreen'
 import TicketHistoryScreen from '@/screens/support/TicketHistoryScreen'
 import ContactSupportScreen from '@/screens/support/ContactSupportScreen'
 import HelpTopicDetailsScreen from '@/screens/support/HelpTopicDetailsScreen'
-import { getHelpCategoryById } from '@/utils/mockGetters'
+import { getHelpCategoryById, getProductById } from '@/utils/mockGetters'
 import { AppStackParamList } from '@papaya-punch/uniw-shared-modules'
 
 const Stack = createNativeStackNavigator<AppStackParamList>()
@@ -43,10 +43,13 @@ export function AppStack() {
       <Stack.Screen
         name="ProductDetails"
         component={ProductDetailsScreen}
-        options={{
+        options={({ route }) => ({
           headerShown: true,
-          header: () => <Header variant="back-cart" />,
-        }}
+          header: () => {
+            const product = getProductById(route.params.productId)
+            return <Header variant="back-title-cart" title={product?.name} />
+          },
+        })}
       />
       <Stack.Screen
         name="DailyOffers"

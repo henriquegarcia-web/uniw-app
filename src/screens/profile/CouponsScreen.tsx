@@ -1,15 +1,7 @@
 // src/screens/profile/CouponsScreen.tsx
 
 import React, { useMemo } from 'react'
-import {
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  Alert,
-} from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import * as Clipboard from 'expo-clipboard'
 
@@ -25,6 +17,8 @@ import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { mockCoupons, mockRedeemedCoupons } from '@/types/rewards'
 import { Button } from '@/components/forms/Button'
 import { ProfileHeader } from '@/components/ProfileHeader'
+import { Screen } from '@/components/Screen'
+import { ListEmptyMessage } from '@/components/ListEmptyMessage'
 
 // --- Subcomponente para o Card de Cupom ---
 
@@ -161,7 +155,6 @@ const myCouponCardStyles = StyleSheet.create({
     backgroundColor: colors.ui.background,
     borderRadius: theme.borders.radius.sm,
     padding: theme.spacing.md,
-    marginBottom: theme.spacing.sm,
     borderWidth: 1,
     borderTopColor: colors.ui.border,
     borderRightColor: colors.ui.border,
@@ -240,11 +233,11 @@ const CouponsScreen = ({ navigation }: CouponsScreenProps) => {
   // Renderiza um estado de carregamento ou vazio se os dados não estiverem disponíveis
   if (!loyaltyData) {
     return (
-      <SafeAreaView style={styles.container}>
+      <Screen type="tab" style={styles.container}>
         <View style={styles.emptyContainer}>
           <Text style={styles.emptyText}>Não foi possível carregar seus cupons.</Text>
         </View>
-      </SafeAreaView>
+      </Screen>
     )
   }
 
@@ -255,18 +248,20 @@ const CouponsScreen = ({ navigation }: CouponsScreenProps) => {
   const myCouponIds = myRedeemedCoupons.map((c) => c.couponId)
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={mockCoupons.filter((c) => c.status === 'avaliable')}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+    <Screen
+      type="tab"
+      style={styles.container}
+      listing={{
+        data: mockCoupons.filter((c) => c.status === 'avaliable'),
+        renderItem: ({ item }) => (
           <CouponCard
             coupon={item}
             userPoints={userPoints}
             userOwnedCouponIds={myCouponIds}
           />
-        )}
-        ListHeaderComponent={
+        ),
+        keyExtractor: (item) => item.id,
+        header: (
           <View>
             <TouchableOpacity
               activeOpacity={0.9}
@@ -292,8 +287,8 @@ const CouponsScreen = ({ navigation }: CouponsScreenProps) => {
 
             <ProfileHeader title="Ofertas disponíveis" />
           </View>
-        }
-        ListFooterComponent={
+        ),
+        footer: (
           <View style={styles.footerContainer}>
             <ProfileHeader title="Meus Cupons" />
             {myRedeemedCoupons.length > 0 ? (
@@ -319,23 +314,15 @@ const CouponsScreen = ({ navigation }: CouponsScreenProps) => {
               </View>
             )}
           </View>
-        }
-        contentContainerStyle={styles.contentContainer}
-      />
-    </SafeAreaView>
+        ),
+        // empty: <ListEmptyMessage message={`Nenhuma oferta disponível`} />,
+      }}
+    />
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-    backgroundColor: colors.ui.surface,
-  },
-  contentContainer: {
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-  },
+  container: {},
   pointsHeader: {
     backgroundColor: colors.brand.secondary,
     borderRadius: theme.borders.radius.sm,
@@ -370,7 +357,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.ui.background,
     borderRadius: theme.borders.radius.sm,
     padding: theme.spacing.md,
-    marginBottom: theme.spacing.sm,
     borderWidth: 1,
     borderTopColor: colors.ui.border,
     borderRightColor: colors.ui.border,
@@ -430,7 +416,8 @@ const styles = StyleSheet.create({
     color: colors.text.secondary,
   },
   footerContainer: {
-    marginTop: theme.spacing.sm,
+    marginTop: theme.spacing.xs,
+    rowGap: theme.spacing.xs,
   },
   emptyHistory: {
     padding: theme.spacing.lg,

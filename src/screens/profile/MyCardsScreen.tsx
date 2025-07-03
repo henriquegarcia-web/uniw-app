@@ -1,15 +1,7 @@
 // src/screens/profile/MyCardsScreen.tsx
 
 import React from 'react'
-import {
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  Alert,
-} from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import {
@@ -22,6 +14,8 @@ import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { useClientProfile } from '@/contexts/ClientProfileProvider'
 import { Button } from '@/components/forms/Button'
 import { ProfileHeader } from '@/components/ProfileHeader'
+import { Screen } from '@/components/Screen'
+import { ListEmptyMessage } from '@/components/ListEmptyMessage'
 
 // Subcomponente para renderizar um único cartão
 const CreditCardItem = ({
@@ -78,19 +72,19 @@ const MyCardsScreen = ({ navigation }: MyCardsScreenProps) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={savedCards}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+    <Screen
+      type="tab"
+      listing={{
+        data: savedCards,
+        keyExtractor: (item) => item.id,
+        renderItem: ({ item }) => (
           <CreditCardItem
             card={item}
             onRemove={() => handleRemoveCard(item.id)}
             onSetDefault={() => setDefaultCreditCard(item.id)}
           />
-        )}
-        contentContainerStyle={styles.contentContainer}
-        ListHeaderComponent={
+        ),
+        header: (
           <View style={styles.headerContainer}>
             <Button
               title="Adicionar Novo Cartão"
@@ -101,29 +95,16 @@ const MyCardsScreen = ({ navigation }: MyCardsScreenProps) => {
             />
             <ProfileHeader title="Cartões salvos" />
           </View>
-        }
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>
-              Você ainda não possui cartões cadastrados.
-            </Text>
-          </View>
-        }
-      />
-    </SafeAreaView>
+        ),
+        empty: <ListEmptyMessage message="Você ainda não possui cartões cadastrados." />,
+      }}
+      style={styles.container}
+    />
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-    backgroundColor: colors.ui.surface,
-  },
-  contentContainer: {
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-  },
+  container: {},
   card: {
     backgroundColor: colors.ui.background,
     borderRadius: theme.borders.radius.sm,
@@ -195,16 +176,6 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     rowGap: theme.spacing.md,
-  },
-  emptyContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 50,
-  },
-  emptyText: {
-    fontSize: theme.fonts.size.md,
-    color: colors.text.secondary,
-    textAlign: 'center',
   },
 })
 

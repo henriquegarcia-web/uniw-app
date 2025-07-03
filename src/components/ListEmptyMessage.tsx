@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     padding: themeApp.spacing.md,
   },
   emptyMessage: {
+    textAlign: 'center',
     fontFamily: themeApp.fonts.family.regular,
     fontSize: themeApp.fonts.size.md,
     color: colors.text.primary,

@@ -15,6 +15,7 @@ import { Switch } from '@/components/forms/Switch'
 import { ProfileHeader } from '@/components/ProfileHeader'
 import { Button } from '@/components/forms/Button'
 import { useClientProfile } from '@/contexts/ClientProfileProvider'
+import { Screen } from '@/components/Screen'
 
 const NotificationsSettingsScreen = ({
   navigation,
@@ -53,89 +54,87 @@ const NotificationsSettingsScreen = ({
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        {/* Seção de Promoções */}
-        <View style={styles.section}>
-          <ProfileHeader title="Promoções e Ofertas" />
-          <View style={styles.sectionWrapper}>
-            <Controller
-              control={control}
-              name="promotions.push"
-              render={({ field: { onChange, value } }) => (
-                <Switch
-                  label="Notificações Push"
-                  description="Receba alertas de ofertas e cupons."
-                  onValueChange={onChange}
-                  value={value}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="promotions.email"
-              render={({ field: { onChange, value } }) => (
-                <Switch
-                  label="E-mail"
-                  description="Novidades e promoções semanais no seu e-mail."
-                  onValueChange={onChange}
-                  value={value}
-                />
-              )}
-            />
-          </View>
+    <Screen style={styles.container}>
+      {/* Seção de Promoções */}
+      <View style={styles.section}>
+        <ProfileHeader title="Promoções e Ofertas" />
+        <View style={styles.sectionWrapper}>
+          <Controller
+            control={control}
+            name="promotions.push"
+            render={({ field: { onChange, value } }) => (
+              <Switch
+                label="Notificações Push"
+                description="Receba alertas de ofertas e cupons."
+                onValueChange={onChange}
+                value={value}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="promotions.email"
+            render={({ field: { onChange, value } }) => (
+              <Switch
+                label="E-mail"
+                description="Novidades e promoções semanais no seu e-mail."
+                onValueChange={onChange}
+                value={value}
+              />
+            )}
+          />
         </View>
+      </View>
 
-        {/* Seção de Atualizações de Pedidos */}
-        <View style={styles.section}>
-          <ProfileHeader title="Atualizações de Pedidos" />
-          <View style={styles.sectionWrapper}>
-            <Controller
-              control={control}
-              name="orderUpdates.push"
-              render={({ field: { onChange, value } }) => (
-                <Switch
-                  label="Notificações Push"
-                  description="Status de envio, entrega e agendamentos."
-                  onValueChange={onChange}
-                  value={value}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="orderUpdates.whatsapp"
-              render={({ field: { onChange, value } }) => (
-                <Switch
-                  label="WhatsApp"
-                  description="Receba atualizações importantes pelo WhatsApp."
-                  onValueChange={onChange}
-                  value={value}
-                />
-              )}
-            />
-          </View>
+      {/* Seção de Atualizações de Pedidos */}
+      <View style={styles.section}>
+        <ProfileHeader title="Atualizações de Pedidos" />
+        <View style={styles.sectionWrapper}>
+          <Controller
+            control={control}
+            name="orderUpdates.push"
+            render={({ field: { onChange, value } }) => (
+              <Switch
+                label="Notificações Push"
+                description="Status de envio, entrega e agendamentos."
+                onValueChange={onChange}
+                value={value}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="orderUpdates.whatsapp"
+            render={({ field: { onChange, value } }) => (
+              <Switch
+                label="WhatsApp"
+                description="Receba atualizações importantes pelo WhatsApp."
+                onValueChange={onChange}
+                value={value}
+              />
+            )}
+          />
         </View>
+      </View>
 
-        {/* Seção de Avisos da Plataforma */}
-        <View style={styles.section}>
-          <ProfileHeader title="Avisos da Plataforma" />
-          <View style={styles.sectionWrapper}>
-            <Controller
-              control={control}
-              name="announcements.push"
-              render={({ field: { onChange, value } }) => (
-                <Switch
-                  label="Notificações Push"
-                  description="Avisos sobre sua conta e atualizações do app."
-                  onValueChange={onChange}
-                  value={value}
-                />
-              )}
-            />
-          </View>
+      {/* Seção de Avisos da Plataforma */}
+      <View style={styles.section}>
+        <ProfileHeader title="Avisos da Plataforma" />
+        <View style={styles.sectionWrapper}>
+          <Controller
+            control={control}
+            name="announcements.push"
+            render={({ field: { onChange, value } }) => (
+              <Switch
+                label="Notificações Push"
+                description="Avisos sobre sua conta e atualizações do app."
+                onValueChange={onChange}
+                value={value}
+              />
+            )}
+          />
         </View>
-      </ScrollView>
+      </View>
 
       {/* Botão de Salvar aparece no rodapé da tela */}
       <View style={styles.footer}>
@@ -146,33 +145,20 @@ const NotificationsSettingsScreen = ({
           disabled={!isDirty || isLoadingAuthFunctions}
         />
       </View>
-    </SafeAreaView>
+    </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingBottom: 75,
-    backgroundColor: colors.ui.surface,
-  },
-  contentContainer: {
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-  },
+  container: {},
   section: {
-    marginBottom: theme.spacing.md,
+    rowGap: theme.spacing.xs,
   },
   sectionWrapper: {
-    gap: theme.spacing.sm,
+    gap: theme.spacing.xs,
   },
   footer: {
-    paddingTop: theme.spacing.md,
-    paddingBottom: theme.spacing.lg,
-    paddingHorizontal: theme.spacing.lg,
-    backgroundColor: colors.ui.background,
-    borderTopWidth: 1,
-    borderColor: colors.ui.border,
+    marginTop: theme.spacing.xs,
   },
 })
 export default NotificationsSettingsScreen

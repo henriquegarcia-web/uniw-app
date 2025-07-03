@@ -3,7 +3,6 @@
 import React, { useState, useRef } from 'react'
 import {
   StyleSheet,
-  SafeAreaView,
   View,
   Text,
   Alert,
@@ -26,6 +25,7 @@ import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { firebaseConfig } from '@/services/firebaseConfig'
 import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
+import { Screen } from '@/components/Screen'
 
 const ChangePhoneScreen = ({ navigation }: ChangePhoneScreenProps) => {
   const {
@@ -209,39 +209,14 @@ const ChangePhoneScreen = ({ navigation }: ChangePhoneScreenProps) => {
   )
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <FirebaseRecaptchaVerifierModal
-        ref={recaptchaVerifier}
-        firebaseConfig={firebaseConfig}
-        title="Confirmar que não é um robô"
-        cancelLabel="Cancelar"
-      /> */}
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      >
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          keyboardShouldPersistTaps="handled"
-        >
-          {step === 'enterPhone' ? EnterPhoneView : EnterOtpView}
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+    <Screen type="tab" enableKeyboardAvoiding style={styles.container}>
+      {step === 'enterPhone' ? EnterPhoneView : EnterOtpView}
+    </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-    backgroundColor: colors.ui.surface,
-  },
-  contentContainer: {
-    flexGrow: 1,
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-  },
+  container: {},
   header: {
     marginBottom: theme.spacing.lg,
   },

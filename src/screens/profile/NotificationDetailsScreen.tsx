@@ -1,7 +1,7 @@
 // src/screens/profile/NotificationDetailsScreen.tsx
 
 import React, { useMemo } from 'react'
-import { StyleSheet, SafeAreaView, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
@@ -15,6 +15,8 @@ import {
 } from '@papaya-punch/uniw-shared-modules'
 import { Button } from '@/components/forms/Button'
 import { getNotificationById } from '@/utils/mockGetters'
+import { Screen } from '@/components/Screen'
+import { ListEmptyMessage } from '@/components/ListEmptyMessage'
 
 const NotificationDetailsScreen = ({ route }: NotificationDetailsScreenProps) => {
   const { notificationId } = route.params
@@ -28,9 +30,9 @@ const NotificationDetailsScreen = ({ route }: NotificationDetailsScreenProps) =>
 
   if (!notification) {
     return (
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.errorText}>Notificação não encontrada.</Text>
-      </SafeAreaView>
+      <Screen type="tab" style={styles.container}>
+        <ListEmptyMessage message="Notificação não encontrada." />
+      </Screen>
     )
   }
 
@@ -41,51 +43,39 @@ const NotificationDetailsScreen = ({ route }: NotificationDetailsScreenProps) =>
   })
 
   const handleLinkPress = () => {
-    if (notification?.link) {
-      const { screen, params } = notification.link
+    if (notification?.data) {
+      const { screen, params } = notification.data
       navigation.navigate(screen as any, params as any)
     }
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        <View style={styles.header}>
-          <View style={[styles.iconContainer, { backgroundColor: typeData.color }]}>
-            <MaterialCommunityIcons name={typeData.icon} size={28} color="white" />
-          </View>
-          <View style={styles.headerTextContainer}>
-            <Text style={styles.title}>{notification.title}</Text>
-            <Text style={styles.date}>{notificationDate}</Text>
-          </View>
+    <Screen type="tab" style={styles.container}>
+      <View style={styles.header}>
+        <View style={[styles.iconContainer, { backgroundColor: typeData.color }]}>
+          <MaterialCommunityIcons name={typeData.icon} size={28} color="white" />
         </View>
+        <View style={styles.headerTextContainer}>
+          <Text style={styles.title}>{notification.title}</Text>
+          <Text style={styles.date}>{notificationDate}</Text>
+        </View>
+      </View>
 
-        <Text style={styles.content}>{notification.content}</Text>
+      <Text style={styles.content}>{notification.message}</Text>
 
-        {notification.link && (
-          <Button
-            title="Ver Mais Detalhes"
-            onPress={handleLinkPress}
-            style={{ marginTop: 20 }}
-          />
-        )}
-      </ScrollView>
-    </SafeAreaView>
+      {notification.data && (
+        <Button
+          title="Ver Mais Detalhes"
+          onPress={handleLinkPress}
+          style={{ marginTop: theme.spacing.xs }}
+        />
+      )}
+    </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.ui.background,
-  },
-  contentContainer: {
-    padding: theme.spacing.lg,
-  },
-  errorText: {
-    textAlign: 'center',
-    marginTop: 50,
-  },
+  container: {},
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -118,9 +108,7 @@ const styles = StyleSheet.create({
     fontSize: theme.fonts.size.md,
     lineHeight: 24,
     color: colors.text.primary,
-    marginTop: theme.spacing.lg,
-
-    // borderWidth: 1,
+    marginTop: theme.spacing.xs,
   },
 })
 

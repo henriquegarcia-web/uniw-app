@@ -1,16 +1,7 @@
 // src/screens/support/AboutUsScreen.tsx
 
 import React from 'react'
-import {
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  View,
-  ScrollView,
-  Image,
-  Linking,
-  TouchableOpacity,
-} from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 
 import {
@@ -19,6 +10,7 @@ import {
   colors,
 } from '@papaya-punch/uniw-shared-modules'
 import { ProfileHeader } from '@/components/ProfileHeader'
+import { Screen } from '@/components/Screen'
 
 // Subcomponente para cada item de "Nossos Valores"
 const ValueItem = ({
@@ -43,81 +35,65 @@ const ValueItem = ({
 
 const AboutUsScreen = ({ navigation }: AboutUsScreenProps) => {
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.contentContainer}
-      >
-        {/* Seção Hero com a imagem e o título principal */}
-        <View style={styles.header}>
-          <Image
-            source={require('@/assets/uniw_logo.png')} // Reutilizando o logo
-            style={styles.logo}
-            resizeMode="contain"
-          />
-          <Text style={styles.title}>Unindo Clientes e Negócios</Text>
-          <Text style={styles.subtitle}>
-            Nossa missão é criar a ponte perfeita entre você e os melhores serviços e
-            produtos do mercado.
-          </Text>
-        </View>
+    <Screen style={styles.container}>
+      {/* Seção Hero com a imagem e o título principal */}
+      <View style={styles.header}>
+        <Image
+          source={require('@/assets/uniw_logo.png')} // Reutilizando o logo
+          style={styles.logo}
+          resizeMode="contain"
+        />
+        <Text style={styles.title}>Unindo Clientes e Negócios</Text>
+        <Text style={styles.subtitle}>
+          Nossa missão é criar a ponte perfeita entre você e os melhores serviços e
+          produtos do mercado.
+        </Text>
+      </View>
 
-        {/* Seção "Nossa História" */}
-        <View style={styles.section}>
-          <ProfileHeader title="Nossa História" />
-          <Text style={styles.paragraph}>
-            A UNIW nasceu da simples ideia de que encontrar serviços de qualidade e
-            produtos autênticos não deveria ser complicado. Observamos a necessidade de
-            uma plataforma que não apenas listasse negócios, mas que criasse uma
-            comunidade real, baseada na confiança e na excelência.
-          </Text>
-          <Text style={styles.paragraph}>
-            Desde o início, nosso foco tem sido empoderar tanto os clientes, dando-lhes
-            acesso fácil e seguro, quanto os lojistas e fornecedores, oferecendo
-            ferramentas para que seus negócios prosperem.
-          </Text>
-        </View>
+      {/* Seção "Nossa História" */}
+      <View style={styles.section}>
+        <ProfileHeader title="Nossa História" />
+        <Text style={styles.paragraph}>
+          A UNIW nasceu da simples ideia de que encontrar serviços de qualidade e produtos
+          autênticos não deveria ser complicado. Observamos a necessidade de uma
+          plataforma que não apenas listasse negócios, mas que criasse uma comunidade
+          real, baseada na confiança e na excelência.
+        </Text>
+        <Text style={styles.paragraph}>
+          Desde o início, nosso foco tem sido empoderar tanto os clientes, dando-lhes
+          acesso fácil e seguro, quanto os lojistas e fornecedores, oferecendo ferramentas
+          para que seus negócios prosperem.
+        </Text>
+      </View>
 
-        {/* Seção "Nossos Valores" */}
-        <View style={styles.section}>
-          <ProfileHeader title="Nossos Valores" />
-          <ValueItem
-            icon="link"
-            title="Conexão"
-            description="Criamos laços duradouros entre clientes e empresas, promovendo confiança e lealdade."
-          />
-          <ValueItem
-            icon="zap"
-            title="Inovação"
-            description="Buscamos constantemente as melhores tecnologias para simplificar a vida dos nossos usuários."
-          />
-          <ValueItem
-            icon="shield"
-            title="Confiança"
-            description="Garantimos um ambiente seguro para transações, avaliações e interações."
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      {/* Seção "Nossos Valores" */}
+      <View style={styles.section}>
+        <ProfileHeader title="Nossos Valores" />
+        <ValueItem
+          icon="link"
+          title="Conexão"
+          description="Criamos laços duradouros entre clientes e empresas, promovendo confiança e lealdade."
+        />
+        <ValueItem
+          icon="zap"
+          title="Inovação"
+          description="Buscamos constantemente as melhores tecnologias para simplificar a vida dos nossos usuários."
+        />
+        <ValueItem
+          icon="shield"
+          title="Confiança"
+          description="Garantimos um ambiente seguro para transações, avaliações e interações."
+        />
+      </View>
+    </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.ui.surface,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  contentContainer: {
-    paddingHorizontal: theme.spacing.lg,
-    paddingTop: theme.spacing.sm,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-  },
+  container: {},
   header: {
     alignItems: 'center',
-    marginBottom: theme.spacing.xl,
+    marginBottom: theme.spacing.sm,
     padding: theme.spacing.md,
     backgroundColor: colors.ui.background,
     borderRadius: theme.borders.radius.sm,
@@ -143,19 +119,19 @@ const styles = StyleSheet.create({
     marginTop: theme.spacing.sm,
   },
   section: {
-    marginBottom: theme.spacing.lg,
+    // marginBottom: theme.spacing.lg,
+    rowGap: theme.spacing.xs,
   },
   paragraph: {
     fontFamily: theme.fonts.family.regular,
     fontSize: theme.fonts.size.md,
     lineHeight: 24,
     color: colors.text.secondary,
-    marginBottom: theme.spacing.md,
   },
   valueItem: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    marginVertical: theme.spacing.sm,
+    marginVertical: 2,
   },
   valueIconContainer: {
     width: 44,

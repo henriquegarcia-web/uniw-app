@@ -11,6 +11,7 @@ import {
 } from '@papaya-punch/uniw-shared-modules'
 
 import { CommonActions } from '@react-navigation/native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const { width } = Dimensions.get('window')
 const TAB_BAR_HEIGHT = 75
@@ -21,7 +22,7 @@ export const CustomTabBar = ({ state, descriptors, navigation }: BottomTabBarPro
   const d = `M0,20 Q0,0 20,0 H${width / 2 - 40} Q${width / 2 - 20},0 ${width / 2 - 15},15 L${width / 2},50 L${width / 2 + 15},15 Q${width / 2 + 20},0 ${width / 2 + 40},0 H${width - 20} Q${width},0 ${width},20 V${SVG_HEIGHT} H0 Z`
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView edges={['bottom']} style={styles.container}>
       {/* Botão central flutuante */}
       <TouchableOpacity
         style={styles.centerButton}
@@ -85,13 +86,13 @@ export const CustomTabBar = ({ state, descriptors, navigation }: BottomTabBarPro
               <MaterialCommunityIcons
                 name={iconName}
                 size={iconName === 'home-outline' ? 26 : 24}
-                color={isFocused ? colors.text.secondary : colors.text.secondary}
+                color={isFocused ? colors.brand.secondary : colors.text.secondary}
               />
               <Text
                 style={[
                   styles.tabLabel,
                   {
-                    color: isFocused ? colors.text.secondary : colors.text.secondary,
+                    color: isFocused ? colors.brand.secondary : colors.text.secondary,
                   },
                 ]}
               >
@@ -101,7 +102,7 @@ export const CustomTabBar = ({ state, descriptors, navigation }: BottomTabBarPro
           )
         })}
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 

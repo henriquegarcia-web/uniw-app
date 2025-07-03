@@ -1,7 +1,7 @@
 // src/screens/profile/LoyaltyProgramScreen.tsx
 
 import React from 'react'
-import { StyleSheet, SafeAreaView, Text, View, ScrollView, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import {
@@ -13,6 +13,8 @@ import {
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { ProfileHeader } from '@/components/ProfileHeader'
 import { Button } from '@/components/forms/Button'
+import { Screen } from '@/components/Screen'
+import { ListEmptyMessage } from '@/components/ListEmptyMessage'
 
 // Componente para renderizar um item do extrato de pontos
 const TransactionItem = ({ transaction }: { transaction: IPointTransaction }) => {
@@ -44,20 +46,23 @@ const LoyaltyProgramScreen = ({ navigation }: LoyaltyProgramScreenProps) => {
   // Renderiza uma mensagem se o usuário não tiver dados de fidelidade
   if (!loyaltyData) {
     return (
-      <SafeAreaView style={styles.container}>
+      <Screen type="tab" style={styles.container}>
         <View style={styles.emptyContainer}>
           <Text style={styles.emptyText}>Programa de fidelidade indisponível.</Text>
         </View>
-      </SafeAreaView>
+      </Screen>
     )
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        ListHeaderComponent={
-          <>
-            {/* Card de Saldo de Pontos */}
+    <Screen
+      type="tab"
+      listing={{
+        data: loyaltyData.pointsHistory ?? [],
+        renderItem: ({ item }) => <TransactionItem transaction={item} />,
+        keyExtractor: (item) => item.id,
+        header: (
+          <View style={styles.headerContainer}>
             <ProfileHeader title="Programa de Fidelidade" />
             <View style={styles.card}>
               <Text style={styles.pointsLabel}>Seu Saldo Atual</Text>
@@ -77,7 +82,6 @@ const LoyaltyProgramScreen = ({ navigation }: LoyaltyProgramScreenProps) => {
               <Text style={styles.pointsSubtitle}>Pontos para usar como quiser!</Text>
             </View>
 
-            {/* Card de "Como Funciona" */}
             <ProfileHeader title="Como funciona?" />
             <View style={[styles.card, styles.infoCard]}>
               <Text style={styles.infoText}>
@@ -91,50 +95,36 @@ const LoyaltyProgramScreen = ({ navigation }: LoyaltyProgramScreenProps) => {
             </View>
 
             <ProfileHeader title="Extrato de Pontos" />
-          </>
-        }
-        ListFooterComponent={
-          <View>
+          </View>
+        ),
+        footer: (
+          <View style={styles.footerContainer}>
             <ProfileHeader title="Ações" />
             <Button
               title="Ver cupons"
               variant="primary"
-              style={{
-                height: 45,
-              }}
               onPress={() => navigation.navigate('Coupons')}
             />
           </View>
-        }
-        data={loyaltyData.pointsHistory}
-        renderItem={({ item }) => <TransactionItem transaction={item} />}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.contentContainer}
-        ListEmptyComponent={
-          <View style={styles.emptyHistory}>
-            <Text style={styles.emptyHistoryText}>Seu extrato está vazio.</Text>
-          </View>
-        }
-      />
-    </SafeAreaView>
+        ),
+        empty: <ListEmptyMessage message={`Seu extrato está vazio.`} />,
+      }}
+      style={styles.container}
+    />
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.ui.surface,
-  },
-  contentContainer: {
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
+  container: {},
+  headerContainer: {
+    rowGap: theme.spacing.xs,
+    marginBottom: theme.spacing.xs,
   },
   card: {
     backgroundColor: colors.ui.background,
     borderRadius: theme.borders.radius.sm,
     padding: theme.spacing.lg,
     alignItems: 'center',
-    marginBottom: theme.spacing.md,
     borderWidth: 1,
     borderColor: colors.ui.border,
   },
@@ -212,6 +202,9 @@ const styles = StyleSheet.create({
   emptyHistoryText: {
     fontSize: theme.fonts.size.md,
     color: colors.text.secondary,
+  },
+  footerContainer: {
+    rowGap: theme.spacing.xs,
   },
 })
 

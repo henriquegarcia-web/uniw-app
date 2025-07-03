@@ -1,16 +1,9 @@
 // src/screens/SignInScreen.tsx
 
 import React from 'react'
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native'
 
-import { useForm, Controller, type FieldValues } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import {
@@ -25,6 +18,7 @@ import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
 import { SocialIcon } from '@/components/SocialIcon'
 import { ButtonIcon } from '@/components/forms/ButtonIcon'
+import { Screen } from '@/components/Screen'
 
 const SignInScreen = ({ navigation }: SignInScreenProps) => {
   const { signIn, isLoadingAuthFunctions, isErrorAuth, errorAuth, clearAuthError } =
@@ -45,7 +39,7 @@ const SignInScreen = ({ navigation }: SignInScreenProps) => {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <Screen style={styles.safeArea}>
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.contentContainer}
@@ -139,7 +133,7 @@ const SignInScreen = ({ navigation }: SignInScreenProps) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </Screen>
   )
 }
 

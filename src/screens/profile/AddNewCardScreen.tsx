@@ -3,7 +3,6 @@
 import React from 'react'
 import {
   StyleSheet,
-  SafeAreaView,
   Text,
   View,
   ScrollView,
@@ -29,6 +28,7 @@ import { useClientProfile } from '@/contexts/ClientProfileProvider'
 import { InputText } from '@/components/forms/InputText'
 import { Switch } from '@/components/forms/Switch'
 import { Button } from '@/components/forms/Button'
+import { Screen } from '@/components/Screen'
 
 // Subcomponente para o preview do cartão
 const CardPreview = ({
@@ -117,104 +117,88 @@ const AddNewCardScreen = ({ navigation }: AddNewCardScreenProps) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      >
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          keyboardShouldPersistTaps="handled"
-        >
-          <CardPreview number={cardNumber} name={cardHolderName} expiry={expiryDate} />
+    <Screen type="tab" enableKeyboardAvoiding style={styles.container}>
+      <CardPreview number={cardNumber} name={cardHolderName} expiry={expiryDate} />
 
-          <View style={styles.formContainer}>
-            <Controller
-              control={control}
-              name="cardNumber"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <InputText
-                  label="Número do Cartão"
-                  placeholder="0000 0000 0000 0000"
-                  keyboardType="numeric"
-                  maxLength={19} // 16 dígitos + 3 espaços
-                  onBlur={onBlur}
-                  onChangeText={(text) => onChange(applyMask(text, 'cardNumber'))} // Uma nova máscara será necessária
-                  value={value}
-                  error={errors.cardNumber?.message}
-                />
-              )}
+      <View style={styles.formContainer}>
+        <Controller
+          control={control}
+          name="cardNumber"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputText
+              label="Número do Cartão"
+              placeholder="0000 0000 0000 0000"
+              keyboardType="numeric"
+              maxLength={19} // 16 dígitos + 3 espaços
+              onBlur={onBlur}
+              onChangeText={(text) => onChange(applyMask(text, 'cardNumber'))} // Uma nova máscara será necessária
+              value={value}
+              error={errors.cardNumber?.message}
             />
+          )}
+        />
 
-            <Controller
-              control={control}
-              name="cardHolderName"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <InputText
-                  label="Nome impresso no cartão"
-                  placeholder="NOME COMPLETO"
-                  autoCapitalize="characters"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  error={errors.cardHolderName?.message}
-                />
-              )}
+        <Controller
+          control={control}
+          name="cardHolderName"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputText
+              label="Nome impresso no cartão"
+              placeholder="NOME COMPLETO"
+              autoCapitalize="characters"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              error={errors.cardHolderName?.message}
             />
+          )}
+        />
 
-            <View style={styles.row}>
-              <Controller
-                control={control}
-                name="expiryDate"
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <InputText
-                    label="Validade"
-                    placeholder="MM/AA"
-                    keyboardType="numeric"
-                    maxLength={5}
-                    onBlur={onBlur}
-                    onChangeText={(text) => onChange(applyMask(text, 'expiryDate'))}
-                    value={value}
-                    error={errors.expiryDate?.message}
-                    // containerStyle={{ flex: 1 }}
-                  />
-                )}
+        <View style={styles.row}>
+          <Controller
+            control={control}
+            name="expiryDate"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <InputText
+                label="Validade"
+                placeholder="MM/AA"
+                keyboardType="numeric"
+                maxLength={5}
+                onBlur={onBlur}
+                onChangeText={(text) => onChange(applyMask(text, 'expiryDate'))}
+                value={value}
+                error={errors.expiryDate?.message}
+                // containerStyle={{ flex: 1 }}
               />
-              {/* O campo CVV normalmente não é salvo, mas seria inserido aqui */}
-            </View>
-
-            <Controller
-              control={control}
-              name="isDefault"
-              render={({ field: { onChange, value } }) => (
-                <Switch
-                  label="Definir como cartão padrão"
-                  onValueChange={onChange}
-                  value={value}
-                />
-              )}
-            />
-          </View>
-          <Button
-            title="Salvar Cartão"
-            variant="primary"
-            onPress={handleSubmit(handleSaveCard)}
-            loading={isProfileLoading}
-            disabled={!isDirty || isProfileLoading}
+            )}
           />
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+          {/* O campo CVV normalmente não é salvo, mas seria inserido aqui */}
+        </View>
+
+        <Controller
+          control={control}
+          name="isDefault"
+          render={({ field: { onChange, value } }) => (
+            <Switch
+              label="Definir como cartão padrão"
+              onValueChange={onChange}
+              value={value}
+            />
+          )}
+        />
+      </View>
+      <Button
+        title="Salvar Cartão"
+        variant="primary"
+        onPress={handleSubmit(handleSaveCard)}
+        loading={isProfileLoading}
+        disabled={!isDirty || isProfileLoading}
+      />
+    </Screen>
   )
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.ui.background,
-  },
-  contentContainer: {
-    padding: theme.spacing.lg,
-  },
+  container: {},
   cardPreview: {
     backgroundColor: colors.brand.secondary,
     borderRadius: theme.borders.radius.sm,

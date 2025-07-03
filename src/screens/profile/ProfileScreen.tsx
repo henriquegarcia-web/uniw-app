@@ -1,7 +1,7 @@
 // src/screens/profile/ProfileScreen.tsx
 
 import React from 'react'
-import { StyleSheet, SafeAreaView, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 
 import {
   AppStackParamList,
@@ -23,26 +23,14 @@ import { EditableUserName } from '@/components/forms/EditableUserName'
 const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
   const { user } = useClientAuth()
 
-  const userHasPhoto = !!user?.baseProfile?.photo
-
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.topContainer}>
         <View style={styles.userPictureContainer}>
           <EditableUserPicture />
-
-          {/* {userHasPhoto ? (
-            <Image source={{ uri: user.baseProfile.foto! }} style={styles.userPicture} />
-          ) : (
-            <Image
-              source={require('@/assets/images/avatar.jpg')}
-              style={styles.placeholder}
-            />
-          )} */}
         </View>
         <View style={styles.userMainInfos}>
           <EditableUserName />
-          {/* <Text style={styles.userName}>{user?.baseProfile.nome}</Text> */}
           <Text style={styles.userEmail}>{user?.baseProfile.email}</Text>
         </View>
       </View>
@@ -95,7 +83,7 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
           <ProfileMenuItem label="Sobre nós" icon="domain" appScreen="AboutUs" />
         </ProfileMenu>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -104,6 +92,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.brand.secondary,
     marginBottom: theme.spacing.custom['botom-tab-height'],
+    // borderWidth: 1,
+    // borderColor: 'red',
   },
   topContainer: {
     position: 'relative',
@@ -150,12 +140,9 @@ const styles = StyleSheet.create({
   userBadges: {
     height: 40,
     flexDirection: 'row',
-    columnGap: theme.spacing.xs,
+    columnGap: 6,
     paddingLeft: 111,
     marginTop: -5,
-
-    // borderWidth: 1,
-    // borderColor: 'red',
   },
 })
 
@@ -187,7 +174,9 @@ export const ProfileMenu = ({ type, sectionTitle, children }: IProfileMenu) => {
 }
 
 const profileMenuStyles = StyleSheet.create({
-  profileMenuWraper: {},
+  profileMenuWraper: {
+    rowGap: theme.spacing.xs,
+  },
   gridContainer: {
     // borderWidth: 1,
     // borderColor: 'red',

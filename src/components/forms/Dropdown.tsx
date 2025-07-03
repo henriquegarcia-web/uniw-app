@@ -1,17 +1,10 @@
 // src/components/forms/Dropdown.tsx
 
 import React, { useState } from 'react'
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Modal,
-  FlatList,
-  SafeAreaView,
-} from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Modal, FlatList } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 type FeatherIconName = keyof typeof Feather.glyphMap
 

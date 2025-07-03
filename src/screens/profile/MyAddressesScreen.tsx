@@ -99,7 +99,7 @@ const MyAddressesScreen = ({ navigation }: MyAddressesScreenProps) => {
           <View style={styles.headerContainer}>
             <Button
               title="Adicionar Novo Endereço"
-              variant="primary"
+              variant="secondary"
               leftIcon="map-marker-plus-outline"
               onPress={() => navigation.navigate('AddNewAddress')}
               loading={isProfileLoading}

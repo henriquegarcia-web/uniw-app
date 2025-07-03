@@ -1,20 +1,23 @@
 // src/screens/SearchResultsScreen.tsx
 
 import React from 'react'
-import { StyleSheet, SafeAreaView } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 import {
   SearchResultsScreenProps,
   themeApp as theme,
   colors,
+  IProduct,
 } from '@papaya-punch/uniw-shared-modules'
-import { ProductList } from '@/components/product/ProductList'
 import { mockProducts } from '@/types/products'
 import { useProcessedProducts } from '@/hooks/useProcessedProducts'
 import { ListingHeader } from '@/components/ListingHeader'
 import { ListEmptyMessage } from '@/components/ListEmptyMessage'
 import { useSearch } from '@/contexts/SearchProvider'
 import { useFocusEffect } from '@react-navigation/native'
+import { Screen } from '@/components/Screen'
+import { ProductCard } from '@/components/product/ProductCard'
+import { globalStyles } from '@/styles/global'
 
 const SearchResultsScreen = ({ navigation, route }: SearchResultsScreenProps) => {
   const { searchTerm: submittedSearchTerm } = route.params || {}
@@ -32,17 +35,26 @@ const SearchResultsScreen = ({ navigation, route }: SearchResultsScreenProps) =>
     }, [clearSearch]),
   )
 
+  const data = [...processedProducts]
+  if (data.length % 2 !== 0) {
+    data.push({ id: 'placeholder-item', empty: true } as any)
+  }
+
+  const renderItem = ({ item }: { item: IProduct & { empty?: boolean } }) => {
+    if (item.empty) {
+      return <View style={globalStyles.itemInvisible} />
+    }
+
+    return <ProductCard product={item} type="search" />
+  }
+
   return (
-    <SafeAreaView style={styles.container}>
-      <ProductList
-        type="search"
-        products={processedProducts}
-        EmptyComponent={
-          <ListEmptyMessage
-            message={`Nenhum produto encontrado para a busca: "${submittedSearchTerm}"`}
-          />
-        }
-        HeaderComponent={
+    <Screen
+      listing={{
+        data: processedProducts,
+        renderItem: renderItem,
+        keyExtractor: (item) => item.id,
+        header: (
           <ListingHeader
             title="Todos"
             currentSort={sortOption}
@@ -50,18 +62,18 @@ const SearchResultsScreen = ({ navigation, route }: SearchResultsScreenProps) =>
             currentFilters={filters}
             onFiltersApply={setFilters}
           />
-        }
-      />
-    </SafeAreaView>
+        ),
+        empty: (
+          <ListEmptyMessage
+            message={`Nenhum produto encontrado para a busca: "${submittedSearchTerm}".`}
+          />
+        ),
+      }}
+      style={styles.container}
+    />
   )
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.ui.surface,
-    marginBottom: theme.spacing.custom['botom-tab-height'],
-    paddingVertical: theme.spacing.md,
-    rowGap: theme.spacing.lg,
-  },
+  container: {},
 })
 export default SearchResultsScreen

@@ -18,6 +18,7 @@ import {
   colors,
 } from '@papaya-punch/uniw-shared-modules'
 import { Button } from '@/components/forms/Button'
+import { Screen } from '@/components/Screen'
 
 // Subcomponente para cada passo da instrução
 const InstructionStep = ({
@@ -50,99 +51,82 @@ const SaleAnnouncementScreen = ({ navigation }: SaleAnnouncementScreenProps) => 
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.contentContainer}
-      >
-        {/* Seção do Cabeçalho */}
-        <View style={styles.header}>
-          <MaterialCommunityIcons
-            name="storefront-outline"
-            size={50}
-            color={colors.brand.secondary}
-          />
-          <Text style={styles.title}>Venda na UNIW e Expanda seu Negócio</Text>
-          <Text style={styles.subtitle}>
-            Junte-se à nossa rede de parceiros e fornecedores e alcance milhares de novos
-            clientes.
+    <Screen style={styles.container}>
+      {/* Seção do Cabeçalho */}
+      <View style={styles.header}>
+        <MaterialCommunityIcons
+          name="storefront-outline"
+          size={50}
+          color={colors.brand.secondary}
+        />
+        <Text style={styles.title}>Venda na UNIW e Expanda seu Negócio</Text>
+        <Text style={styles.subtitle}>
+          Junte-se à nossa rede de parceiros e fornecedores e alcance milhares de novos
+          clientes.
+        </Text>
+      </View>
+
+      {/* Seção "Como Funciona" */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Começar é Simples</Text>
+        <InstructionStep
+          step={1}
+          title="Acesse o Painel do Parceiro"
+          description="Toda a gestão é feita através do nosso painel web, otimizado para desktop e celular."
+        />
+        <InstructionStep
+          step={2}
+          title="Cadastre seus Produtos e Serviços"
+          description="Adicione seu catálogo, defina preços, estoque e gerencie seu agendamento de forma fácil."
+        />
+        <InstructionStep
+          step={3}
+          title="Gerencie seu Negócio"
+          description="Acompanhe vendas, agendamentos, finanças e comunique-se com seus clientes em um só lugar."
+        />
+      </View>
+
+      {/* Seção "Vantagens" */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Principais Vantagens</Text>
+        <View style={styles.benefitItem}>
+          <Feather name="users" size={20} color={colors.brand.primary} />
+          <Text style={styles.benefitText}>
+            Visibilidade para uma nova base de clientes.
           </Text>
         </View>
-
-        {/* Seção "Como Funciona" */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Começar é Simples</Text>
-          <InstructionStep
-            step={1}
-            title="Acesse o Painel do Parceiro"
-            description="Toda a gestão é feita através do nosso painel web, otimizado para desktop e celular."
-          />
-          <InstructionStep
-            step={2}
-            title="Cadastre seus Produtos e Serviços"
-            description="Adicione seu catálogo, defina preços, estoque e gerencie seu agendamento de forma fácil."
-          />
-          <InstructionStep
-            step={3}
-            title="Gerencie seu Negócio"
-            description="Acompanhe vendas, agendamentos, finanças e comunique-se com seus clientes em um só lugar."
-          />
+        <View style={styles.benefitItem}>
+          <Feather name="calendar" size={20} color={colors.brand.primary} />
+          <Text style={styles.benefitText}>Sistema completo de agendamento online.</Text>
         </View>
-
-        {/* Seção "Vantagens" */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Principais Vantagens</Text>
-          <View style={styles.benefitItem}>
-            <Feather name="users" size={20} color={colors.brand.primary} />
-            <Text style={styles.benefitText}>
-              Visibilidade para uma nova base de clientes.
-            </Text>
-          </View>
-          <View style={styles.benefitItem}>
-            <Feather name="calendar" size={20} color={colors.brand.primary} />
-            <Text style={styles.benefitText}>
-              Sistema completo de agendamento online.
-            </Text>
-          </View>
-          <View style={styles.benefitItem}>
-            <Feather name="dollar-sign" size={20} color={colors.brand.primary} />
-            <Text style={styles.benefitText}>
-              Ferramentas de gestão financeira e de estoque.
-            </Text>
-          </View>
-        </View>
-
-        {/* Seção CTA (Call to Action) */}
-        <View style={styles.ctaContainer}>
-          <Button
-            title="Acessar Painel do Parceiro"
-            variant="primary"
-            onPress={handleOpenDashboard}
-          />
-          <Text style={styles.ctaFooterText}>
-            O cadastro e gerenciamento são feitos através do nosso site.
+        <View style={styles.benefitItem}>
+          <Feather name="dollar-sign" size={20} color={colors.brand.primary} />
+          <Text style={styles.benefitText}>
+            Ferramentas de gestão financeira e de estoque.
           </Text>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+
+      {/* Seção CTA (Call to Action) */}
+      <View style={styles.ctaContainer}>
+        <Button
+          title="Acessar Painel do Parceiro"
+          variant="primary"
+          onPress={handleOpenDashboard}
+        />
+        <Text style={styles.ctaFooterText}>
+          O cadastro e gerenciamento são feitos através do nosso site.
+        </Text>
+      </View>
+    </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.ui.surface,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  contentContainer: {
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-  },
+  container: {},
   header: {
     alignItems: 'center',
-    marginBottom: theme.spacing.xl,
+    marginBottom: theme.spacing.sm,
   },
   title: {
     fontFamily: theme.fonts.family.bold,
@@ -158,9 +142,7 @@ const styles = StyleSheet.create({
     color: colors.text.secondary,
     marginTop: theme.spacing.sm,
   },
-  section: {
-    marginBottom: theme.spacing.lg,
-  },
+  section: {},
   sectionTitle: {
     fontFamily: theme.fonts.family.bold,
     fontSize: theme.fonts.size.xl,

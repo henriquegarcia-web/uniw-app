@@ -1,14 +1,7 @@
 // src/screens/ForgotPasswordScreen.tsx
 
 import React from 'react'
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  Text,
-  Alert,
-  TouchableOpacity,
-} from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 
 import { useForm, Controller, type FieldValues } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -24,6 +17,7 @@ import {} from '@papaya-punch/uniw-shared-modules'
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
+import { Screen } from '@/components/Screen'
 
 const ForgotPasswordScreen = ({ navigation }: ForgotPasswordScreenProps) => {
   const { resetPassword, isLoadingAuthFunctions } = useClientAuth()
@@ -53,7 +47,7 @@ const ForgotPasswordScreen = ({ navigation }: ForgotPasswordScreenProps) => {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <Screen style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.content}>
           <View style={styles.titleContainer}>
@@ -99,7 +93,7 @@ const ForgotPasswordScreen = ({ navigation }: ForgotPasswordScreenProps) => {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </Screen>
   )
 }
 

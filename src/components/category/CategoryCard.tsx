@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     borderRadius: themeApp.borders.radius.sm,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: themeApp.spacing.sm,
   },
   name: {
     fontFamily: themeApp.fonts.family.bold,

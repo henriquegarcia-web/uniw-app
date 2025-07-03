@@ -21,7 +21,7 @@ export const UserTag = ({ label, icon }: UserTagProps) => {
       {icon && (
         <MaterialCommunityIcons
           name={icon}
-          size={16}
+          size={14}
           color={colors.text.secondary}
           style={styles.icon}
         />
@@ -37,9 +37,9 @@ const styles = StyleSheet.create({
     maxHeight: 28,
     flexDirection: 'row',
     alignItems: 'center',
-    columnGap: themeApp.spacing.xs,
-    paddingVertical: themeApp.spacing.xs,
-    paddingHorizontal: themeApp.spacing.sm,
+    columnGap: 4,
+    // paddingVertical: themeApp.spacing.xs,
+    paddingHorizontal: themeApp.spacing.xs,
     borderRadius: themeApp.borders.radius.xs,
     borderWidth: 1,
     borderColor: colors.text.secondary,

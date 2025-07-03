@@ -1,14 +1,7 @@
 // src/screens/support/HelpArticleDetailsScreen.tsx
 
 import React, { useMemo, useState } from 'react'
-import {
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 
 import {
@@ -17,6 +10,8 @@ import {
   colors,
 } from '@papaya-punch/uniw-shared-modules'
 import { getHelpArticleById } from '@/utils/mockGetters'
+import { Screen } from '@/components/Screen'
+import { ListEmptyMessage } from '@/components/ListEmptyMessage'
 
 const HelpArticleDetailsScreen = ({ route }: HelpArticleDetailsScreenProps) => {
   const { articleId } = route.params
@@ -25,9 +20,9 @@ const HelpArticleDetailsScreen = ({ route }: HelpArticleDetailsScreenProps) => {
 
   if (!article) {
     return (
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.errorText}>Artigo não encontrado.</Text>
-      </SafeAreaView>
+      <Screen style={styles.container}>
+        <ListEmptyMessage message="Artigo não encontrado." />
+      </Screen>
     )
   }
 
@@ -37,50 +32,42 @@ const HelpArticleDetailsScreen = ({ route }: HelpArticleDetailsScreenProps) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        <Text style={styles.title}>{article.title}</Text>
-        <Text style={styles.content}>{article.content}</Text>
+    <Screen style={styles.container}>
+      <Text style={styles.title}>{article.title}</Text>
+      <Text style={styles.content}>{article.content}</Text>
 
-        <View style={styles.feedbackContainer}>
-          {feedbackSent ? (
-            <Text style={styles.feedbackThanks}>Obrigado pelo seu feedback!</Text>
-          ) : (
-            <>
-              <Text style={styles.feedbackQuestion}>Este artigo foi útil?</Text>
-              <View style={styles.feedbackButtons}>
-                <TouchableOpacity style={styles.button} onPress={handleFeedback}>
-                  <Feather name="thumbs-up" size={20} color={colors.semantic.success} />
-                  <Text style={[styles.buttonText, { color: colors.semantic.success }]}>
-                    Sim
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={handleFeedback}>
-                  <Feather name="thumbs-down" size={20} color={colors.semantic.error} />
-                  <Text style={[styles.buttonText, { color: colors.semantic.error }]}>
-                    Não
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </>
-          )}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      <View style={styles.feedbackContainer}>
+        {feedbackSent ? (
+          <Text style={styles.feedbackThanks}>Obrigado pelo seu feedback!</Text>
+        ) : (
+          <>
+            <Text style={styles.feedbackQuestion}>Este artigo foi útil?</Text>
+            <View style={styles.feedbackButtons}>
+              <TouchableOpacity style={styles.button} onPress={handleFeedback}>
+                <Feather name="thumbs-up" size={20} color={colors.semantic.success} />
+                <Text style={[styles.buttonText, { color: colors.semantic.success }]}>
+                  Sim
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={handleFeedback}>
+                <Feather name="thumbs-down" size={20} color={colors.semantic.error} />
+                <Text style={[styles.buttonText, { color: colors.semantic.error }]}>
+                  Não
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
+      </View>
+    </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.ui.surface },
-  contentContainer: {
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-  },
-  errorText: { textAlign: 'center', marginTop: 50 },
+  container: {},
   title: {
     fontFamily: theme.fonts.family.bold,
     fontSize: theme.fonts.size.xl,
-    marginBottom: theme.spacing.md,
   },
   content: {
     fontFamily: theme.fonts.family.regular,
@@ -89,7 +76,7 @@ const styles = StyleSheet.create({
     color: colors.text.secondary,
   },
   feedbackContainer: {
-    marginTop: theme.spacing.xl,
+    marginTop: theme.spacing.xs,
     paddingTop: theme.spacing.lg,
     borderTopWidth: 1,
     borderColor: colors.ui.border,

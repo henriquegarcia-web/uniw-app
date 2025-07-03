@@ -1,15 +1,7 @@
 // src/screens/profile/OrderHistoryScreen.tsx
 
 import React from 'react'
-import {
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-  Image,
-  FlatList,
-} from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
 
 import {
   OrderHistoryScreenProps,
@@ -21,6 +13,8 @@ import {
 } from '@papaya-punch/uniw-shared-modules'
 import { mockPurchaseHistory } from '@/types/auth'
 import { ProfileHeader } from '@/components/ProfileHeader'
+import { Screen } from '@/components/Screen'
+import { ListEmptyMessage } from '@/components/ListEmptyMessage'
 
 const OrderHistoryScreen = ({ navigation }: OrderHistoryScreenProps) => {
   const handleOrderPress = (orderId: string) => {
@@ -28,57 +22,26 @@ const OrderHistoryScreen = ({ navigation }: OrderHistoryScreenProps) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={mockPurchaseHistory}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item, index }) => {
-          const isNotLastOne =
-            index + 1 < mockPurchaseHistory.length &&
-            index + 1 !== mockPurchaseHistory.length
+    <Screen
+      type="tab"
+      listing={{
+        data: mockPurchaseHistory,
+        renderItem: ({ item }) => {
           return (
-            <OrderHistoryCard
-              isNotLastOne={isNotLastOne}
-              order={item}
-              onPress={() => handleOrderPress(item.id)}
-            />
+            <OrderHistoryCard order={item} onPress={() => handleOrderPress(item.id)} />
           )
-        }}
-        contentContainerStyle={styles.contentContainer}
-        ListHeaderComponent={<ProfileHeader title="Histórico" />}
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>Você ainda não fez nenhum pedido.</Text>
-          </View>
-        }
-      />
-    </SafeAreaView>
+        },
+        keyExtractor: (item) => item.id,
+        header: <ProfileHeader title="Histórico" />,
+        empty: <ListEmptyMessage message={`Você ainda não fez nenhum pedido.`} />,
+      }}
+      style={styles.container}
+    />
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginBottom: theme.spacing.custom['botom-tab-height'],
-    rowGap: theme.spacing.lg,
-    backgroundColor: colors.ui.surface,
-  },
-  contentContainer: {
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-  },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 100,
-  },
-  emptyText: {
-    fontFamily: theme.fonts.family.medium,
-    fontSize: theme.fonts.size.lg,
-    color: colors.text.secondary,
-    textAlign: 'center',
-  },
+  container: {},
 })
 
 export default OrderHistoryScreen
@@ -86,28 +49,18 @@ export default OrderHistoryScreen
 // =============================================================
 
 interface OrderHistoryCardProps {
-  isNotLastOne: boolean
   order: IPurchaseOrder
   onPress: () => void
 }
 
-export const OrderHistoryCard = ({
-  isNotLastOne,
-  order,
-  onPress,
-}: OrderHistoryCardProps) => {
+export const OrderHistoryCard = ({ order, onPress }: OrderHistoryCardProps) => {
   const firstItem = order.items[0]
   const statusInfo = getOrderStatusData(order.status)
   const orderDate = new Date(order.createdAt).toLocaleDateString('pt-BR')
 
   return (
     <TouchableOpacity
-      style={[
-        orderHistoryCardstyles.card,
-        {
-          marginBottom: isNotLastOne ? theme.spacing.sm : 0,
-        },
-      ]}
+      style={orderHistoryCardstyles.card}
       activeOpacity={0.8}
       onPress={onPress}
     >

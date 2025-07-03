@@ -1,7 +1,7 @@
 // src/screens/ProductDetailScreen.tsx
 
 import React, { useMemo } from 'react'
-import { StyleSheet, SafeAreaView, Text, ScrollView, View } from 'react-native'
+import { StyleSheet, Text, ScrollView, View } from 'react-native'
 
 import {
   ProductDetailsScreenProps,
@@ -19,6 +19,7 @@ import { ProductRating } from '@/components/product/ProductRating'
 import { ProductPrice } from '@/components/product/ProductPrice'
 import { ProductTitle } from '@/components/product/ProductTitle'
 import { ProductShipping } from '@/components/product/ProductShipping'
+import { Screen } from '@/components/Screen'
 
 const ProductDetailsScreen = ({ route }: ProductDetailsScreenProps) => {
   const { productId } = route.params
@@ -30,53 +31,45 @@ const ProductDetailsScreen = ({ route }: ProductDetailsScreenProps) => {
 
   if (!productData) {
     return (
-      <SafeAreaView style={styles.container}>
+      <Screen style={styles.container}>
         <Text>Produto não encontrado!</Text>
-      </SafeAreaView>
+      </Screen>
     )
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.contentContainer}
-        keyboardShouldPersistTaps="handled"
-      >
-        <ProductImageCarousel images={productData.images} type="productDetail" />
-        <ProductTitle name={productData.name} caption={productData.caption} />
-        <ProductRating rating={productData.rating} large />
-        <View style={styles.priceContainer}>
-          <ProductPrice
-            price={selectedSku?.price ?? 0}
-            promotionalPrice={selectedSku?.promotionalPrice ?? 0}
-            large
-          />
-        </View>
-        <View style={styles.variationsContainer}>
-          <ProductVariations
-            variationTypes={productData.variationTypes}
-            selectedVariations={selectedVariations}
-            onSelectVariation={handleSelectVariation}
-            isOptionDisabled={isOptionDisabled}
-          />
-        </View>
-        <ProductDetails
-          description={productData.description}
-          badges={productData.badges}
+    <Screen style={styles.container}>
+      <ProductImageCarousel images={productData.images} type="productDetail" />
+      <ProductTitle name={productData.name} caption={productData.caption} />
+      <ProductRating rating={productData.rating} large />
+      <View style={styles.priceContainer}>
+        <ProductPrice
+          price={selectedSku?.price ?? 0}
+          promotionalPrice={selectedSku?.promotionalPrice ?? 0}
+          large
         />
+      </View>
+      <View style={styles.variationsContainer}>
+        <ProductVariations
+          variationTypes={productData.variationTypes}
+          selectedVariations={selectedVariations}
+          onSelectVariation={handleSelectVariation}
+          isOptionDisabled={isOptionDisabled}
+        />
+      </View>
+      <ProductDetails description={productData.description} badges={productData.badges} />
 
-        <View style={styles.buyContainer}>
-          <BuyButton type="cart" onPress={() => {}} />
-          <BuyButton type="buy" onPress={() => {}} />
-          <View style={styles.buyContainerFavourite}>
-            <FavouriteButton productId={productData.id} large />
-          </View>
+      <View style={styles.buyContainer}>
+        <BuyButton type="cart" onPress={() => {}} />
+        <BuyButton type="buy" onPress={() => {}} />
+        <View style={styles.buyContainerFavourite}>
+          <FavouriteButton productId={productData.id} large />
         </View>
+      </View>
 
-        <ProductShipping shippingDetails={selectedSku?.shippingDetails} />
+      <ProductShipping shippingDetails={selectedSku?.shippingDetails} />
 
-        {/* <View style={styles.optionsContainer}>
+      {/* <View style={styles.optionsContainer}>
           <Button
             title="Ver similares"
             leftIcon="eye"
@@ -93,7 +86,7 @@ const ProductDetailsScreen = ({ route }: ProductDetailsScreenProps) => {
           />
         </View> */}
 
-        {/* <ProductsBanner
+      {/* <ProductsBanner
           banner={{
             id: 'banner-22sd',
             category: BannerCategory.PRODUCTS,
@@ -102,27 +95,11 @@ const ProductDetailsScreen = ({ route }: ProductDetailsScreenProps) => {
             productIds: sampleProductIds.slice(0, 4),
           }}
         /> */}
-      </ScrollView>
-    </SafeAreaView>
+    </Screen>
   )
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.ui.surface,
-    marginBottom: theme.spacing.custom['botom-tab-height'],
-    paddingVertical: theme.spacing.sm,
-    rowGap: theme.spacing.lg,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  contentContainer: {
-    flexGrow: 1,
-    paddingHorizontal: theme.spacing.lg,
-    paddingBottom: theme.spacing.xl,
-    rowGap: theme.spacing.sm,
-  },
+  container: {},
   priceContainer: {
     marginTop: theme.spacing.sm,
   },

@@ -1,16 +1,9 @@
 // src/screens/SignUpScreen.tsx
 
 import React from 'react'
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native'
 
-import { useForm, Controller, type FieldValues } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import {
@@ -27,6 +20,7 @@ import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
 import { ButtonIcon } from '@/components/forms/ButtonIcon'
 import { SocialIcon } from '@/components/SocialIcon'
+import { Screen } from '@/components/Screen'
 
 const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
   const { signUp, isLoadingAuthFunctions, isErrorAuth, errorAuth, clearAuthError } =
@@ -70,7 +64,7 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <Screen style={styles.safeArea}>
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.contentContainer}
@@ -210,7 +204,7 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </Screen>
   )
 }
 

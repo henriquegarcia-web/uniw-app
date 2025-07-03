@@ -21,6 +21,7 @@ import { InputSearch } from '@/components/forms/InputSearch'
 import { Button } from '@/components/forms/Button'
 import { getHelpArticles, getHelpCategories } from '@/utils/mockGetters'
 import { ProfileHeader } from '@/components/ProfileHeader'
+import { Screen } from '@/components/Screen'
 
 const HelpCenterScreen = ({ navigation }: HelpCenterScreenProps) => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -34,93 +35,90 @@ const HelpCenterScreen = ({ navigation }: HelpCenterScreenProps) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Como podemos ajudar?</Text>
-          <InputSearch
-            placeholder="Pesquisar na Central de Ajuda"
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-            onSubmitEditing={handleSearch}
-          />
-        </View>
+    <Screen style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Como podemos ajudar?</Text>
+        <InputSearch
+          placeholder="Pesquisar na Central de Ajuda"
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+          onSubmitEditing={handleSearch}
+        />
+      </View>
 
-        <View style={styles.section}>
-          <ProfileHeader title="Tópicos de Ajuda" />
-          <View style={styles.categoriesGrid}>
-            {categories.map((category) => (
-              <TouchableOpacity
-                key={category.id}
-                style={styles.categoryCard}
-                onPress={() =>
-                  navigation.navigate('HelpTopicDetails', { categoryId: category.id })
-                }
-              >
-                <MaterialCommunityIcons
-                  name={category.icon}
-                  size={28}
-                  color={colors.brand.secondary}
-                />
-                <Text style={styles.categoryName}>{category.name}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
-
-        <View style={styles.section}>
-          <ProfileHeader title="Perguntas Frequentes" />
-          {popularArticles.map((article) => (
+      <View style={styles.section}>
+        <ProfileHeader title="Tópicos de Ajuda" />
+        <View style={styles.categoriesGrid}>
+          {categories.map((category) => (
             <TouchableOpacity
-              key={article.id}
-              style={styles.articleItem}
+              key={category.id}
+              style={styles.categoryCard}
               onPress={() =>
-                navigation.navigate('HelpArticleDetails', { articleId: article.id })
+                navigation.navigate('HelpTopicDetails', { categoryId: category.id })
               }
             >
-              <Text style={styles.articleTitle}>{article.title}</Text>
               <MaterialCommunityIcons
-                name="chevron-right"
-                size={22}
-                color={colors.text.tertiary}
+                name={category.icon}
+                size={28}
+                color={colors.brand.secondary}
               />
+              <Text style={styles.categoryName}>{category.name}</Text>
             </TouchableOpacity>
           ))}
         </View>
+      </View>
 
-        <View style={styles.footer}>
-          <Button
-            title="Meus Chamados"
-            variant="primary"
-            onPress={() => navigation.navigate('TicketHistory')}
-            style={{ width: '100%', height: 50 }}
-          />
-          <Text style={styles.footerText}>Não encontrou o que procurava?</Text>
-          <Button
-            title="Fale Conosco"
-            variant="secondary"
-            onPress={() => navigation.navigate('ContactSupport', {})}
-            style={{ width: '100%', height: 50 }}
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      <View style={styles.section}>
+        <ProfileHeader title="Perguntas Frequentes" />
+        {popularArticles.map((article) => (
+          <TouchableOpacity
+            key={article.id}
+            style={styles.articleItem}
+            onPress={() =>
+              navigation.navigate('HelpArticleDetails', { articleId: article.id })
+            }
+          >
+            <Text style={styles.articleTitle}>{article.title}</Text>
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={22}
+              color={colors.text.tertiary}
+            />
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <View style={styles.footer}>
+        <Button
+          title="Meus Chamados"
+          variant="primary"
+          onPress={() => navigation.navigate('TicketHistory')}
+          style={{ width: '100%', height: 50 }}
+        />
+        <Text style={styles.footerText}>Não encontrou o que procurava?</Text>
+        <Button
+          title="Fale Conosco"
+          variant="secondary"
+          onPress={() => navigation.navigate('ContactSupport', {})}
+          style={{ width: '100%', height: 50 }}
+        />
+      </View>
+    </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.ui.surface },
-  contentContainer: {
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
+  container: {},
+  header: {
+    alignItems: 'center',
+    marginBottom: theme.spacing.sm,
   },
-  header: { marginBottom: theme.spacing.lg, alignItems: 'center' },
   title: {
     fontFamily: theme.fonts.family.bold,
     fontSize: theme.fonts.size.xl,
     marginBottom: theme.spacing.md,
   },
-  section: { marginVertical: theme.spacing.sm },
+  section: { rowGap: theme.spacing.xs },
   categoriesGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -148,7 +146,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.ui.background,
     padding: theme.spacing.md,
     borderRadius: theme.borders.radius.sm,
-    marginBottom: theme.spacing.xs,
     borderWidth: 1,
     borderColor: colors.ui.border,
   },

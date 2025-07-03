@@ -1,15 +1,7 @@
 // src/screens/profile/OrderDetailsScreen.tsx
 
 import React, { useMemo } from 'react'
-import {
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  View,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-} from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 
 import {
   AppStackParamList,
@@ -24,6 +16,8 @@ import { getOrderById } from '@/utils/mockGetters'
 import { ProfileHeader } from '@/components/ProfileHeader'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Button } from '@/components/forms/Button'
+import { Screen } from '@/components/Screen'
+import { ListEmptyMessage } from '@/components/ListEmptyMessage'
 
 const OrderDetailsScreen = ({ navigation, route }: OrderDetailsScreenProps) => {
   const { orderId } = route.params
@@ -34,9 +28,9 @@ const OrderDetailsScreen = ({ navigation, route }: OrderDetailsScreenProps) => {
 
   if (!orderData) {
     return (
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.errorText}>Pedido não encontrado!</Text>
-      </SafeAreaView>
+      <Screen type="tab" style={styles.container}>
+        <ListEmptyMessage message="Pedido não encontrado!" />
+      </Screen>
     )
   }
 
@@ -54,151 +48,123 @@ const OrderDetailsScreen = ({ navigation, route }: OrderDetailsScreenProps) => {
   const handleReOrder = () => {}
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.contentContainer}
-      >
-        {/* Seção do Cabeçalho do Pedido */}
-        <View style={styles.sectionContainer}>
-          <ProfileHeader title="Pedido" />
+    <Screen type="tab" style={styles.container}>
+      {/* Seção do Cabeçalho do Pedido */}
+      <View style={styles.sectionContainer}>
+        <ProfileHeader title="Pedido" />
 
-          <View style={styles.section}>
-            <View style={styles.header}>
-              <Text style={styles.orderNumber}>Pedido #{orderData.orderNumber}</Text>
-              <View style={[styles.statusBadge, { backgroundColor: statusInfo.color }]}>
-                <Text style={styles.statusText}>{statusInfo.label}</Text>
-              </View>
+        <View style={styles.section}>
+          <View style={styles.header}>
+            <Text style={styles.orderNumber}>Pedido #{orderData.orderNumber}</Text>
+            <View style={[styles.statusBadge, { backgroundColor: statusInfo.color }]}>
+              <Text style={styles.statusText}>{statusInfo.label}</Text>
             </View>
-            <Text style={styles.orderDate}>Realizado em {orderDate}</Text>
           </View>
+          <Text style={styles.orderDate}>Realizado em {orderDate}</Text>
         </View>
+      </View>
 
-        {/* Seção dos Itens do Pedido */}
-        <View style={styles.sectionContainer}>
-          <ProfileHeader title="Itens do Pedido" />
+      {/* Seção dos Itens do Pedido */}
+      <View style={styles.sectionContainer}>
+        <ProfileHeader title="Itens do Pedido" />
 
-          <View style={styles.section}>
-            {orderData.items.map((item: IOrderItem, index: number) => {
-              const isNotLastOne =
-                index + 1 < orderData.items.length && index + 1 !== orderData.items.length
-              return (
-                <TouchableOpacity
-                  key={item.skuId}
-                  style={[
-                    styles.itemContainer,
-                    {
-                      borderBottomWidth: isNotLastOne ? 1 : 0,
-                      marginBottom: isNotLastOne ? 12 : 0,
-                      paddingBottom: isNotLastOne ? 12 : 0,
-                    },
-                  ]}
-                  onPress={() => handleSelectProductOrder(item.productId)}
-                >
-                  <Image source={{ uri: item.imageUrl }} style={styles.itemImage} />
-                  <View style={styles.itemDetails}>
-                    <Text style={styles.itemName} numberOfLines={2}>
-                      {item.productName}
-                    </Text>
-                    <Text style={styles.itemAttributes}>
-                      {Object.values(item.attributes).join(' / ')}
-                    </Text>
-                    <Text style={styles.itemQuantity}>Quantidade: {item.quantity}</Text>
-                  </View>
-                  <Text style={styles.itemPrice}>
-                    {applyMask(item.priceAtPurchase, 'currency')}
+        <View style={styles.section}>
+          {orderData.items.map((item: IOrderItem, index: number) => {
+            return (
+              <TouchableOpacity
+                key={item.skuId}
+                style={styles.itemContainer}
+                onPress={() => handleSelectProductOrder(item.productId)}
+              >
+                <Image source={{ uri: item.imageUrl }} style={styles.itemImage} />
+                <View style={styles.itemDetails}>
+                  <Text style={styles.itemName} numberOfLines={2}>
+                    {item.productName}
                   </Text>
-                </TouchableOpacity>
-              )
-            })}
-          </View>
-        </View>
-
-        {/* Seção de Resumo do Pagamento */}
-        <View style={styles.sectionContainer}>
-          <ProfileHeader title="Resumo do Pagamento" />
-
-          <View style={styles.section}>
-            <View style={styles.summaryRow}>
-              <Text style={styles.summaryLabel}>Subtotal</Text>
-              <Text style={styles.summaryValue}>
-                {applyMask(orderData.summary.subtotal, 'currency')}
-              </Text>
-            </View>
-            <View style={styles.summaryRow}>
-              <Text style={styles.summaryLabel}>Frete</Text>
-              <Text style={styles.summaryValue}>
-                {applyMask(orderData.summary.shippingCost, 'currency')}
-              </Text>
-            </View>
-            {orderData.summary.discountAmount > 0 && (
-              <View style={styles.summaryRow}>
-                <Text style={styles.summaryLabel}>Descontos</Text>
-                <Text style={[styles.summaryValue, styles.discountValue]}>
-                  - {applyMask(orderData.summary.discountAmount, 'currency')}
+                  <Text style={styles.itemAttributes}>
+                    {Object.values(item.attributes).join(' / ')}
+                  </Text>
+                  <Text style={styles.itemQuantity}>Quantidade: {item.quantity}</Text>
+                </View>
+                <Text style={styles.itemPrice}>
+                  {applyMask(item.priceAtPurchase, 'currency')}
                 </Text>
-              </View>
-            )}
-            <View style={[styles.summaryRow, styles.totalRow]}>
-              <Text style={styles.totalLabel}>Total</Text>
-              <Text style={styles.totalValue}>
-                {applyMask(orderData.summary.totalAmount, 'currency')}
+              </TouchableOpacity>
+            )
+          })}
+        </View>
+      </View>
+
+      {/* Seção de Resumo do Pagamento */}
+      <View style={styles.sectionContainer}>
+        <ProfileHeader title="Resumo do Pagamento" />
+
+        <View style={styles.section}>
+          <View style={styles.summaryRow}>
+            <Text style={styles.summaryLabel}>Subtotal</Text>
+            <Text style={styles.summaryValue}>
+              {applyMask(orderData.summary.subtotal, 'currency')}
+            </Text>
+          </View>
+          <View style={styles.summaryRow}>
+            <Text style={styles.summaryLabel}>Frete</Text>
+            <Text style={styles.summaryValue}>
+              {applyMask(orderData.summary.shippingCost, 'currency')}
+            </Text>
+          </View>
+          {orderData.summary.discountAmount > 0 && (
+            <View style={styles.summaryRow}>
+              <Text style={styles.summaryLabel}>Descontos</Text>
+              <Text style={[styles.summaryValue, styles.discountValue]}>
+                - {applyMask(orderData.summary.discountAmount, 'currency')}
               </Text>
             </View>
+          )}
+          <View style={[styles.summaryRow, styles.totalRow]}>
+            <Text style={styles.totalLabel}>Total</Text>
+            <Text style={styles.totalValue}>
+              {applyMask(orderData.summary.totalAmount, 'currency')}
+            </Text>
           </View>
         </View>
+      </View>
 
-        {/* Seção de Endereço de Entrega */}
-        <View style={styles.sectionContainer}>
-          <ProfileHeader title="Endereço de Entrega" />
+      {/* Seção de Endereço de Entrega */}
+      <View style={styles.sectionContainer}>
+        <ProfileHeader title="Endereço de Entrega" />
 
-          <View style={styles.section}>
-            <Text style={styles.addressText}>
-              {orderData.shipping.address.street}, {orderData.shipping.address.number}
-            </Text>
-            <Text style={styles.addressText}>
-              {orderData.shipping.address.neighborhood}, {orderData.shipping.address.city}{' '}
-              - {orderData.shipping.address.state}
-            </Text>
-            <Text style={styles.addressText}>CEP: {orderData.shipping.address.cep}</Text>
-          </View>
+        <View style={styles.section}>
+          <Text style={styles.addressText}>
+            {orderData.shipping.address.street}, {orderData.shipping.address.number}
+          </Text>
+          <Text style={styles.addressText}>
+            {orderData.shipping.address.neighborhood}, {orderData.shipping.address.city} -{' '}
+            {orderData.shipping.address.state}
+          </Text>
+          <Text style={styles.addressText}>CEP: {orderData.shipping.address.cep}</Text>
         </View>
+      </View>
 
-        {/* Seção de Ações */}
-        <View style={styles.sectionContainer}>
-          <ProfileHeader title="Ações" />
+      {/* Seção de Ações */}
+      <View style={styles.sectionContainer}>
+        <ProfileHeader title="Ações" />
 
-          <Button
-            title="Refazer esse pedido"
-            style={{
-              height: 45,
-            }}
-            onPress={handleReOrder}
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        <Button
+          title="Refazer esse pedido"
+          style={{
+            height: 45,
+          }}
+          onPress={handleReOrder}
+        />
+      </View>
+    </Screen>
   )
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginBottom: theme.spacing.custom['botom-tab-height'],
-    backgroundColor: colors.ui.surface,
+  container: {},
+  sectionContainer: {
+    rowGap: theme.spacing.xs,
   },
-  scrollView: {
-    flex: 1,
-  },
-  contentContainer: {
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-    rowGap: theme.spacing.md,
-  },
-  errorText: {
-    textAlign: 'center',
-    marginTop: 50,
-  },
-  sectionContainer: {},
   section: {
     padding: theme.spacing.md,
     backgroundColor: colors.ui.background,

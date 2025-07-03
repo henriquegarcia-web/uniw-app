@@ -1,14 +1,7 @@
 // src/screens/profile/ClubScreen.tsx
 
 import React from 'react'
-import {
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import {
@@ -24,6 +17,7 @@ import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { Button } from '@/components/forms/Button'
 import { ProfileHeader } from '@/components/ProfileHeader'
 import { ProfileMenu, ProfileMenuItem } from './ProfileScreen'
+import { Screen } from '@/components/Screen'
 
 // Componente de Card de Benefício
 const BenefitCard = ({
@@ -57,7 +51,6 @@ const ClubScreen = ({ navigation }: ClubScreenProps) => {
   const { user } = useClientAuth()
 
   const clubInfo = user?.clientProfile?.club
-  const loyaltyInfo = user?.clientProfile?.loyalty
   const isMember = !!clubInfo && clubInfo.status === ClubStatusType.ATIVO
 
   const paymentHistory = [
@@ -119,6 +112,7 @@ const ClubScreen = ({ navigation }: ClubScreenProps) => {
               <View style={styles.paymentMethodDetails}>
                 {defaultCard ? (
                   <>
+                  
                     <Text style={styles.paymentMethodText}>
                       {defaultCard.brand.charAt(0).toUpperCase() +
                         defaultCard.brand.slice(1)}{' '}
@@ -220,36 +214,23 @@ const ClubScreen = ({ navigation }: ClubScreenProps) => {
   )
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.contentContainer}
-      >
-        {isMember ? <MemberView /> : <NonMemberView />}
-      </ScrollView>
-    </SafeAreaView>
+    <Screen type="tab" style={styles.container}>
+      {isMember ? <MemberView /> : <NonMemberView />}
+    </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginBottom: theme.spacing.custom['botom-tab-height'],
-    backgroundColor: colors.ui.surface,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  contentContainer: {
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-  },
+  container: {},
   viewWrapper: {
     rowGap: theme.spacing.md,
   },
-  viewContainer: {},
+  viewContainer: {
+    rowGap: theme.spacing.xs,
+  },
   card: {
     flex: 1,
+
     backgroundColor: colors.ui.background,
     borderRadius: theme.borders.radius.sm,
     padding: theme.spacing.lg,

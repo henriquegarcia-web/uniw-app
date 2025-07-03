@@ -19,11 +19,10 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 interface InputSearchProps extends TextInputProps {
   error?: string | null
   width?: number
-  onVoicePress?: () => void
 }
 
 export const InputSearch = forwardRef<TextInput, InputSearchProps>(
-  ({ error, width, onVoicePress, ...rest }, ref) => {
+  ({ error, width, ...rest }, ref) => {
     const hasError = !!error
     const borderColor = hasError ? colors.semantic.error : colors.ui.border
 
@@ -38,6 +37,8 @@ export const InputSearch = forwardRef<TextInput, InputSearchProps>(
         searchTerm: searchTerm,
       })
     }
+
+    const handleVoicePress = () => {}
 
     const handleClearSearch = () => {
       clearSearch()
@@ -76,8 +77,8 @@ export const InputSearch = forwardRef<TextInput, InputSearchProps>(
             </TouchableOpacity>
           )}
 
-          {onVoicePress && (!searchTerm || searchTerm.trim() === '') && (
-            <TouchableOpacity onPress={onVoicePress}>
+          {(!searchTerm || searchTerm.trim() === '') && (
+            <TouchableOpacity onPress={handleVoicePress}>
               <Feather name="mic" size={20} color={colors.text.secondary} />
             </TouchableOpacity>
           )}

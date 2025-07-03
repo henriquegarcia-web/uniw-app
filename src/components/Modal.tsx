@@ -8,10 +8,10 @@ import {
   TouchableOpacity,
   StyleSheet,
   TouchableWithoutFeedback,
-  SafeAreaView,
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 interface ModalProps {
   variant: 'fade' | 'slide'
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   modalFadeOverlay: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
   },
   modalFadeSafeArea: {
     width: '100%',
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   modalSlideOverlay: {
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.25)',
   },
   modalSlideContainer: {
     // flex: 1,

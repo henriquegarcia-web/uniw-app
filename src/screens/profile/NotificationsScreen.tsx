@@ -1,14 +1,7 @@
 // src/screens/profile/NotificationsScreen.tsx
 
 import React, { useState } from 'react'
-import {
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import {
@@ -20,6 +13,8 @@ import {
 } from '@papaya-punch/uniw-shared-modules'
 import { mockNotifications } from '@/types/notifications'
 import { ProfileHeader } from '@/components/ProfileHeader'
+import { Screen } from '@/components/Screen'
+import { ListEmptyMessage } from '@/components/ListEmptyMessage'
 
 // --- Subcomponente para cada item da lista ---
 const NotificationItem = ({
@@ -70,44 +65,32 @@ const NotificationsScreen = ({ navigation }: NotificationsScreenProps) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={notifications}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+    <Screen
+      type="tab"
+      listing={{
+        data: notifications,
+        renderItem: ({ item }) => (
           <NotificationItem
             notification={item}
             onPress={() => handleNotificationPress(item)}
           />
-        )}
-        contentContainerStyle={styles.contentContainer}
-        // ItemSeparatorComponent={() => <View style={styles.separator} />}
-        ListHeaderComponent={<ProfileHeader title="Caixa de Entrada" />}
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>Nenhuma notificação por aqui.</Text>
-          </View>
-        }
-      />
-    </SafeAreaView>
+        ),
+        keyExtractor: (item: INotification) => item.id,
+        header: <ProfileHeader title="Caixa de Entrada" />,
+        empty: <ListEmptyMessage message={`Nenhuma notificação por aqui.`} />,
+      }}
+      style={styles.container}
+    />
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-    backgroundColor: colors.ui.surface,
-  },
-  contentContainer: {
-    padding: theme.spacing.lg,
-  },
+  container: {},
   itemContainer: {
     flexDirection: 'row',
     paddingHorizontal: theme.spacing.md,
     paddingVertical: theme.spacing.md,
     alignItems: 'center',
-    marginBottom: theme.spacing.xs,
     borderRadius: theme.borders.radius.sm,
     backgroundColor: colors.ui.background,
     borderWidth: 1,

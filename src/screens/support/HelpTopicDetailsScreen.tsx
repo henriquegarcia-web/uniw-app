@@ -18,6 +18,7 @@ import {
 } from '@papaya-punch/uniw-shared-modules'
 import { getHelpArticlesByCategoryId, getHelpCategoryById } from '@/utils/mockGetters'
 import { ListEmptyMessage } from '@/components/ListEmptyMessage'
+import { Screen } from '@/components/Screen'
 
 const HelpTopicDetailsScreen = ({ navigation, route }: HelpTopicDetailsScreenProps) => {
   const { categoryId } = route.params
@@ -34,22 +35,11 @@ const HelpTopicDetailsScreen = ({ navigation, route }: HelpTopicDetailsScreenPro
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={articles}
-        keyExtractor={(item) => item.id}
-        ListHeaderComponent={
-          <View style={styles.header}>
-            <MaterialCommunityIcons
-              name={category.icon}
-              size={40}
-              color={colors.brand.secondary}
-            />
-            <Text style={styles.title}>{category.name}</Text>
-            <Text style={styles.description}>{category.description}</Text>
-          </View>
-        }
-        renderItem={({ item }) => (
+    <Screen
+      listing={{
+        data: articles,
+        keyExtractor: (item) => item.id,
+        renderItem: ({ item }) => (
           <TouchableOpacity
             style={styles.articleItem}
             onPress={() =>
@@ -63,25 +53,30 @@ const HelpTopicDetailsScreen = ({ navigation, route }: HelpTopicDetailsScreenPro
               color={colors.text.tertiary}
             />
           </TouchableOpacity>
-        )}
-        contentContainerStyle={styles.contentContainer}
-        ListEmptyComponent={
-          <ListEmptyMessage message="Nenhum artigo encontrado neste tópico." />
-        }
-      />
-    </SafeAreaView>
+        ),
+        header: (
+          <View style={styles.header}>
+            <MaterialCommunityIcons
+              name={category.icon}
+              size={40}
+              color={colors.brand.secondary}
+            />
+            <Text style={styles.title}>{category.name}</Text>
+            <Text style={styles.description}>{category.description}</Text>
+          </View>
+        ),
+        empty: <ListEmptyMessage message="Nenhum artigo encontrado neste tópico." />,
+      }}
+      style={styles.container}
+    />
   )
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.ui.surface },
-  contentContainer: {
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-  },
+  container: {},
   header: {
     padding: theme.spacing.md,
-    marginBottom: theme.spacing.md,
+    marginBottom: theme.spacing.xs,
     alignItems: 'center',
     backgroundColor: colors.ui.background,
     borderRadius: theme.borders.radius.sm,
@@ -106,7 +101,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.ui.background,
     padding: theme.spacing.md,
     borderRadius: theme.borders.radius.sm,
-    marginBottom: theme.spacing.xs,
     borderWidth: 1,
     borderColor: colors.ui.border,
   },

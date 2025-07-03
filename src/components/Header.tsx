@@ -1,14 +1,7 @@
 // src/components/Header.tsx
 
 import React from 'react'
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-  SafeAreaView,
-} from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
 
@@ -22,10 +15,12 @@ import { useMenu } from '@/contexts/MenuProvider'
 import { InputSearch } from './forms/InputSearch'
 import { UserAvatar } from './UserAvatar'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 type HeaderVariant =
   | 'main'
   | 'main-full'
+  | 'back-title-cart'
   | 'back-cart'
   | 'back-title'
   | 'back-title-action'
@@ -52,6 +47,8 @@ export const Header = ({
   const isVariantProfile = variant === 'profile' || variant === 'back-profile'
 
   const backgroundColor = isVariantProfile ? colors.brand.secondary : colors.ui.surface
+  const borderBottomWidth = variant === 'main' || variant === 'back-title' ? 1 : 0
+
   const logoImage = isVariantProfile
     ? require('@/assets/uniw_logo_constrast.png')
     : require('@/assets/uniw_logo.png')
@@ -115,6 +112,7 @@ export const Header = ({
           </TouchableOpacity>
         )
       case 'back-profile':
+      case 'back-title-cart':
       case 'back-cart':
       case 'back-title':
       case 'back-title-action':
@@ -157,6 +155,7 @@ export const Header = ({
       case 'back-profile':
       case 'back-title':
       case 'back-title-action':
+      case 'back-title-cart':
       case 'back-cart':
         return (
           <Text
@@ -166,6 +165,7 @@ export const Header = ({
                 color: isVariantProfile ? colors.text.onBrand : colors.text.primary,
               },
             ]}
+            numberOfLines={1}
           >
             {title}
           </Text>
@@ -180,6 +180,7 @@ export const Header = ({
       case 'main':
       case 'main-full':
         return <UserAvatar size="md" onPress={onProfilePress} />
+      case 'back-title-cart':
       case 'back-cart':
         return (
           <TouchableOpacity onPress={onCartPress} style={styles.cartButton}>
@@ -231,15 +232,15 @@ export const Header = ({
   }
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor }]}>
-      <View style={styles.container}>
+    <SafeAreaView style={[styles.safeArea, { backgroundColor }]} edges={['top']}>
+      <View style={[styles.container, { borderBottomWidth }]}>
         <View style={styles.sideComponent}>{renderLeftComponent()}</View>
         <View style={styles.centerComponent}>{renderCenterComponent()}</View>
         <View style={styles.sideComponent}>{renderRightComponent()}</View>
       </View>
       {variant === 'main-full' && (
         <View style={styles.searchContainer}>
-          <InputSearch onVoicePress={() => {}} />
+          <InputSearch />
         </View>
       )}
     </SafeAreaView>
@@ -247,15 +248,14 @@ export const Header = ({
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    paddingTop: themeApp.spacing.custom['phone-default-header'],
-  },
+  safeArea: {},
   container: {
     height: 70,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: themeApp.spacing.lg,
+    borderColor: colors.ui.border,
   },
   sideComponent: {
     flexDirection: 'row',

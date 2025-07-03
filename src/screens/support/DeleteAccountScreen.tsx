@@ -12,6 +12,7 @@ import {
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { Button } from '@/components/forms/Button'
 import { InputText } from '@/components/forms/InputText'
+import { Screen } from '@/components/Screen'
 
 // Subcomponente para cada item da lista de alertas
 const WarningItem = ({ text }: { text: string }) => (
@@ -60,75 +61,59 @@ const DeleteAccountScreen = ({ navigation }: DeleteAccountScreenProps) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.contentContainer}
-      >
-        <View style={styles.header}>
-          <Feather name="alert-triangle" size={40} color={colors.semantic.error} />
-          <Text style={styles.title}>Excluir sua Conta</Text>
-        </View>
+    <Screen style={styles.container}>
+      <View style={styles.header}>
+        <Feather name="alert-triangle" size={40} color={colors.semantic.error} />
+        <Text style={styles.title}>Excluir sua Conta</Text>
+      </View>
 
-        <View style={styles.warningSection}>
-          <Text style={styles.paragraph}>
-            Esta é uma ação{' '}
-            <Text style={{ fontFamily: theme.fonts.family.bold }}>
-              permanente e irreversível
-            </Text>
-            . Ao continuar, todos os seus dados associados à UNIW serão removidos.
+      <View style={styles.warningSection}>
+        <Text style={styles.paragraph}>
+          Esta é uma ação{' '}
+          <Text style={{ fontFamily: theme.fonts.family.bold }}>
+            permanente e irreversível
           </Text>
+          . Ao continuar, todos os seus dados associados à UNIW serão removidos.
+        </Text>
 
-          <Text style={styles.subtitle}>Você perderá o acesso a:</Text>
-          <WarningItem text="Seu histórico de compras e agendamentos" />
-          <WarningItem text="Seus pontos de fidelidade e cupons" />
-          <WarningItem text="Seus métodos de pagamento e endereços salvos" />
-          <WarningItem text="Sua lista de produtos favoritos" />
-        </View>
+        <Text style={styles.subtitle}>Você perderá o acesso a:</Text>
+        <WarningItem text="Seu histórico de compras e agendamentos" />
+        <WarningItem text="Seus pontos de fidelidade e cupons" />
+        <WarningItem text="Seus métodos de pagamento e endereços salvos" />
+        <WarningItem text="Sua lista de produtos favoritos" />
+      </View>
 
-        <View style={styles.confirmationSection}>
-          <Text style={styles.subtitle}>Para confirmar, por favor, digite sua senha</Text>
-          <InputText
-            placeholder="Sua senha"
-            value={password}
-            onChangeText={setPassword}
-            isPassword
-            iconName="lock"
-          />
-        </View>
-
-        <Button
-          variant="negative"
-          title="Excluir Minha Conta Permanentemente"
-          onPress={handleDelete}
-          loading={isLoadingAuthFunctions}
-          // style={styles.deleteButton}
-          // textStyle={styles.deleteButtonText} // Passando estilo customizado para o texto
+      <View style={styles.confirmationSection}>
+        <Text style={styles.subtitle}>Para confirmar, por favor, digite sua senha</Text>
+        <InputText
+          placeholder="Sua senha"
+          value={password}
+          onChangeText={setPassword}
+          isPassword
+          iconName="lock"
         />
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+
+      <Button
+        variant="negative"
+        title="Excluir Minha Conta Permanentemente"
+        onPress={handleDelete}
+        loading={isLoadingAuthFunctions}
+        // style={styles.deleteButton}
+        // textStyle={styles.deleteButtonText} // Passando estilo customizado para o texto
+      />
+    </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.ui.surface,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  contentContainer: {
-    paddingHorizontal: theme.spacing.lg,
-    paddingTop: theme.spacing.sm,
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
-  },
+  container: {},
   header: {
     alignItems: 'center',
     padding: theme.spacing.md,
     backgroundColor: '#fee1e1',
     borderRadius: theme.borders.radius.sm,
-    marginBottom: theme.spacing.lg,
+    marginBottom: theme.spacing.xs,
   },
   title: {
     fontFamily: theme.fonts.family.bold,
@@ -138,14 +123,14 @@ const styles = StyleSheet.create({
     color: colors.semantic.error,
   },
   warningSection: {
-    marginBottom: theme.spacing.lg,
+    marginBottom: theme.spacing.xs,
   },
   paragraph: {
     fontFamily: theme.fonts.family.regular,
     fontSize: theme.fonts.size.md,
     color: colors.text.secondary,
     lineHeight: 22,
-    marginBottom: theme.spacing.lg,
+    marginBottom: theme.spacing.sm,
   },
   subtitle: {
     fontFamily: theme.fonts.family.bold,
@@ -156,7 +141,7 @@ const styles = StyleSheet.create({
   warningItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: theme.spacing.sm,
+    marginBottom: theme.spacing.xs,
   },
   warningText: {
     flex: 1,
@@ -166,7 +151,7 @@ const styles = StyleSheet.create({
     color: colors.text.secondary,
   },
   confirmationSection: {
-    marginBottom: theme.spacing.xl,
+    marginBottom: theme.spacing.sm,
   },
   // deleteButton: {
   //   backgroundColor: colors.semantic.error,

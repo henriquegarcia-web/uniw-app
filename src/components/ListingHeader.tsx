@@ -212,12 +212,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: themeApp.fonts.family.semiBold,
-    fontSize: themeApp.fonts.size.xl,
+    fontSize: 21,
     paddingTop: 2,
+    color: colors.text.primary,
   },
   buttonsContainer: {
     flexDirection: 'row',
-    columnGap: themeApp.spacing.sm,
+    columnGap: 6,
   },
   modalOverlay: {
     flex: 1,
@@ -323,7 +324,7 @@ const filterButtonStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    columnGap: themeApp.spacing.sm,
+    columnGap: themeApp.spacing.xs,
     height: 30,
     paddingHorizontal: themeApp.spacing.sm,
     borderRadius: themeApp.borders.radius.sm,

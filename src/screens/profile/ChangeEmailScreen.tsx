@@ -3,7 +3,6 @@
 import React from 'react'
 import {
   StyleSheet,
-  SafeAreaView,
   View,
   Text,
   Alert,
@@ -24,6 +23,7 @@ import {
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
+import { Screen } from '@/components/Screen'
 
 const ChangeEmailScreen = ({ navigation }: ChangeEmailScreenProps) => {
   const { user, reauthenticate, updateUserEmail, isLoadingAuthFunctions } =
@@ -76,84 +76,67 @@ const ChangeEmailScreen = ({ navigation }: ChangeEmailScreenProps) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      >
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          keyboardShouldPersistTaps="handled"
-        >
-          <View style={styles.header}>
-            {/* <Text style={styles.title}>Alterar E-mail</Text> */}
-            <Text style={styles.subtitle}>
-              Seu e-mail atual é{' '}
-              <Text style={{ fontFamily: theme.fonts.family.bold }}>
-                {user?.baseProfile.email}
-              </Text>
-              . Para alterá-lo, insira sua senha e o novo endereço de e-mail.
-            </Text>
-          </View>
+    <Screen type="tab" enableKeyboardAvoiding style={styles.container}>
+      <View style={styles.header}>
+        {/* <Text style={styles.title}>Alterar E-mail</Text> */}
+        <Text style={styles.subtitle}>
+          Seu e-mail atual é{' '}
+          <Text style={{ fontFamily: theme.fonts.family.bold }}>
+            {user?.baseProfile.email}
+          </Text>
+          . Para alterá-lo, insira sua senha e o novo endereço de e-mail.
+        </Text>
+      </View>
 
-          <View style={styles.formContainer}>
-            {/* <ProfileHeader title="Credenciais" /> */}
-            <Controller
-              control={control}
-              name="newEmail"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <InputText
-                  label="Novo E-mail"
-                  placeholder="Digite seu novo endereço de e-mail"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                  error={errors.newEmail?.message}
-                />
-              )}
+      <View style={styles.formContainer}>
+        {/* <ProfileHeader title="Credenciais" /> */}
+        <Controller
+          control={control}
+          name="newEmail"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputText
+              label="Novo E-mail"
+              placeholder="Digite seu novo endereço de e-mail"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              error={errors.newEmail?.message}
             />
-            <Controller
-              control={control}
-              name="currentPassword"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <InputText
-                  label="Senha Atual"
-                  placeholder="Confirme sua senha para continuar"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  isPassword
-                  error={errors.currentPassword?.message}
-                />
-              )}
+          )}
+        />
+        <Controller
+          control={control}
+          name="currentPassword"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputText
+              label="Senha Atual"
+              placeholder="Confirme sua senha para continuar"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              isPassword
+              error={errors.currentPassword?.message}
             />
-          </View>
+          )}
+        />
+      </View>
 
-          <Button
-            title="Salvar Novo E-mail"
-            variant="primary"
-            onPress={handleSubmit(handleEmailChange)}
-            loading={isLoadingAuthFunctions}
-            disabled={!isDirty || isLoadingAuthFunctions}
-            style={styles.button}
-          />
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+      <Button
+        title="Salvar Novo E-mail"
+        variant="primary"
+        onPress={handleSubmit(handleEmailChange)}
+        loading={isLoadingAuthFunctions}
+        disabled={!isDirty || isLoadingAuthFunctions}
+        style={styles.button}
+      />
+    </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.ui.surface,
-  },
-  contentContainer: {
-    flexGrow: 1,
-    padding: theme.spacing.lg,
-  },
+  container: {},
   header: {
     marginBottom: theme.spacing.lg,
   },

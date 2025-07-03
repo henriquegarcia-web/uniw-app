@@ -1,25 +1,24 @@
 // src/screens/OrderSummaryScreen.tsx
 
 import React from 'react'
-import { StyleSheet, SafeAreaView, Text } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 
 import {
   CheckoutSuccessScreenProps,
   themeApp as theme,
   colors,
 } from '@papaya-punch/uniw-shared-modules'
+import { Screen } from '@/components/Screen'
 
 const CheckoutSuccessScreen = ({ navigation }: CheckoutSuccessScreenProps) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <Screen type="tab" style={styles.container}>
       <Text>Tela de Checkout com Sucesso</Text>
-    </SafeAreaView>
+    </Screen>
   )
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: colors.ui.background,
     justifyContent: 'center',
     alignItems: 'center',
   },

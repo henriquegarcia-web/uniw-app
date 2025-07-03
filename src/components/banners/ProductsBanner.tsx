@@ -11,7 +11,6 @@ import {
 } from '@papaya-punch/uniw-shared-modules'
 import { getProductById, getProductsByIds } from '@/utils/mockGetters'
 import { Dimensions, FlatList, Image, StyleSheet, Text, View } from 'react-native'
-import { ProductList } from '../product/ProductList'
 import { ProductCard } from '../product/ProductCard'
 import { SectionHeader } from '../SectionHeader'
 import { CtaButton } from '../forms/CtaButton'
@@ -22,9 +21,6 @@ type ProductsBannerProps = {
 
 export const ProductsBanner = ({ banner }: ProductsBannerProps) => {
   switch (banner.type) {
-    case BannerType.PRODUCT_GRID:
-      return <ProductGrid data={banner} />
-
     case BannerType.PRODUCT_SCROLL:
       return <ProductScroll data={banner} />
 
@@ -34,17 +30,6 @@ export const ProductsBanner = ({ banner }: ProductsBannerProps) => {
     default:
       return null
   }
-}
-
-// ================================================================
-
-export const ProductGrid = ({ data }: { data: IProductListBanner }) => {
-  const products = getProductsByIds(data.productIds)
-  return (
-    <View>
-      <ProductList products={products} type="category" />
-    </View>
-  )
 }
 
 // ================================================================

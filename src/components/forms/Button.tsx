@@ -61,7 +61,7 @@ const variantStyles = {
   },
   negative: {
     container: {
-      backgroundColor: colors.brand.secondary,
+      backgroundColor: colors.ui.background,
     },
     text: {
       fontSize: themeApp.fonts.size.lg,

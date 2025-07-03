@@ -29,7 +29,7 @@ export const ProfileHeader = ({ size, title }: ProfileHeaderProps) => {
 
 const styles = StyleSheet.create({
   profileHeaderTitle: {
-    marginBottom: themeApp.spacing.sm,
+    // marginBottom: themeApp.spacing.xs,
 
     fontFamily: themeApp.fonts.family.semiBold,
   },

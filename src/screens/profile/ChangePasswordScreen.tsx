@@ -3,7 +3,6 @@
 import React from 'react'
 import {
   StyleSheet,
-  SafeAreaView,
   View,
   Text,
   Alert,
@@ -24,6 +23,7 @@ import {
 import { useClientAuth } from '@/contexts/ClientAuthProvider'
 import { InputText } from '@/components/forms/InputText'
 import { Button } from '@/components/forms/Button'
+import { Screen } from '@/components/Screen'
 
 const ChangePasswordScreen = ({ navigation }: ChangePasswordScreenProps) => {
   const { reauthenticate, changePassword, isLoadingAuthFunctions } = useClientAuth()
@@ -65,95 +65,79 @@ const ChangePasswordScreen = ({ navigation }: ChangePasswordScreenProps) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      >
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          keyboardShouldPersistTaps="handled"
-        >
-          <View style={styles.header}>
-            {/* <Text style={styles.title}>Alterar Senha</Text> */}
-            <Text style={styles.subtitle}>
-              Para sua segurança, por favor, confirme sua senha atual antes de definir uma
-              nova.
-            </Text>
-          </View>
+    <Screen type="tab" enableKeyboardAvoiding style={styles.container}>
+      <View style={styles.header}>
+        {/* <Text style={styles.title}>Alterar Senha</Text> */}
+        <Text style={styles.subtitle}>
+          Para sua segurança, por favor, confirme sua senha atual antes de definir uma
+          nova.
+        </Text>
+      </View>
 
-          <View style={styles.formContainer}>
-            {/* <ProfileHeader title="Credenciais" /> */}
-            <Controller
-              control={control}
-              name="currentPassword"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <InputText
-                  label="Senha Atual"
-                  placeholder="Digite sua senha atual"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  isPassword
-                  error={errors.currentPassword?.message}
-                />
-              )}
+      <View style={styles.formContainer}>
+        {/* <ProfileHeader title="Credenciais" /> */}
+        <Controller
+          control={control}
+          name="currentPassword"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputText
+              label="Senha Atual"
+              placeholder="Digite sua senha atual"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              isPassword
+              error={errors.currentPassword?.message}
             />
-            <Controller
-              control={control}
-              name="newPassword"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <InputText
-                  label="Nova Senha"
-                  placeholder="Mínimo 6 caracteres"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  isPassword
-                  error={errors.newPassword?.message}
-                />
-              )}
+          )}
+        />
+        <Controller
+          control={control}
+          name="newPassword"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputText
+              label="Nova Senha"
+              placeholder="Mínimo 6 caracteres"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              isPassword
+              error={errors.newPassword?.message}
             />
-            <Controller
-              control={control}
-              name="confirmNewPassword"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <InputText
-                  label="Confirme a Nova Senha"
-                  placeholder="Repita a nova senha"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  isPassword
-                  error={errors.confirmNewPassword?.message}
-                />
-              )}
+          )}
+        />
+        <Controller
+          control={control}
+          name="confirmNewPassword"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputText
+              label="Confirme a Nova Senha"
+              placeholder="Repita a nova senha"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              isPassword
+              error={errors.confirmNewPassword?.message}
             />
-          </View>
+          )}
+        />
+      </View>
 
-          <Button
-            title="Salvar Nova Senha"
-            variant="primary"
-            onPress={handleSubmit(handlePasswordChange)}
-            loading={isLoadingAuthFunctions}
-            disabled={!isDirty || isLoadingAuthFunctions}
-            style={styles.button}
-          />
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+      <Button
+        title="Salvar Nova Senha"
+        variant="primary"
+        onPress={handleSubmit(handlePasswordChange)}
+        loading={isLoadingAuthFunctions}
+        disabled={!isDirty || isLoadingAuthFunctions}
+        style={styles.button}
+      />
+    </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.ui.surface,
-  },
-  contentContainer: {
-    flexGrow: 1,
-    padding: theme.spacing.lg,
-  },
+  container: {},
+
   header: {
     marginBottom: theme.spacing.lg,
   },
