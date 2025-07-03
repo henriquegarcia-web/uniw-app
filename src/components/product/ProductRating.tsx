@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    columnGap: themeApp.spacing.xs,
+    columnGap: themeApp.spacing.xxs,
   },
   starsContainer: {
     flexDirection: 'row',
@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
   },
   reviewsText: {
     fontFamily: themeApp.fonts.family.regular,
-    fontSize: themeApp.fonts.size.sm,
-    lineHeight: themeApp.fonts.size.sm,
+    fontSize: themeApp.fonts.size.xs,
+    lineHeight: themeApp.fonts.size.xs,
     color: colors.text.tertiary,
   },
 })

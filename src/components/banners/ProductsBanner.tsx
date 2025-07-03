@@ -15,6 +15,8 @@ import { ProductCard } from '../product/ProductCard'
 import { SectionHeader } from '../SectionHeader'
 import { CtaButton } from '../forms/CtaButton'
 
+const { width } = Dimensions.get('window')
+
 type ProductsBannerProps = {
   banner: IProductBanner
 }
@@ -35,9 +37,9 @@ export const ProductsBanner = ({ banner }: ProductsBannerProps) => {
 // ================================================================
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window')
-const GAP_SIZE = themeApp.spacing.sm
+const GAP_SIZE = themeApp.spacing.xs
 const USABLE_WIDTH = SCREEN_WIDTH - themeApp.spacing.lg * 2 - GAP_SIZE
-const CARD_WIDTH = USABLE_WIDTH / 2.5
+const CARD_WIDTH = USABLE_WIDTH / 2.25
 
 export const ProductScroll = ({ data }: { data: IProductListBanner }) => {
   const products = getProductsByIds(data.productIds)
@@ -76,7 +78,7 @@ const productScrollStyles = StyleSheet.create({
   },
   listContent: {
     paddingHorizontal: themeApp.spacing.lg,
-    paddingVertical: themeApp.spacing.sm,
+    paddingBottom: themeApp.spacing.sm,
   },
   cardContainer: {
     width: CARD_WIDTH,
@@ -85,6 +87,8 @@ const productScrollStyles = StyleSheet.create({
 })
 
 // ================================================================
+
+const ADVERTISEMENT_PRODUCT_WIDTH = width * 0.3
 
 export const ProductFeatured = ({ data }: { data: IProductFeaturedBanner }) => {
   const product = getProductById(data.productId)
@@ -113,11 +117,13 @@ const productFeaturedStyles = StyleSheet.create({
     paddingHorizontal: themeApp.spacing.md,
     borderLeftWidth: 5,
     borderLeftColor: colors.semantic.success,
+    borderTopRightRadius: themeApp.borders.radius.xs,
+    borderBottomRightRadius: themeApp.borders.radius.xs,
   },
   mediaImage: {
-    width: 120,
-    height: 120,
-    borderRadius: themeApp.borders.radius.sm,
+    width: ADVERTISEMENT_PRODUCT_WIDTH,
+    height: ADVERTISEMENT_PRODUCT_WIDTH,
+    borderRadius: themeApp.borders.radius.xs,
   },
   productDetails: {
     flex: 1,
@@ -126,13 +132,13 @@ const productFeaturedStyles = StyleSheet.create({
   productName: {
     textAlign: 'right',
     fontFamily: themeApp.fonts.family.bold,
-    fontSize: themeApp.fonts.size.xl,
+    fontSize: themeApp.fonts.size.lg,
     color: colors.text.primary,
   },
   legend: {
     textAlign: 'right',
     fontFamily: themeApp.fonts.family.regular,
-    fontSize: themeApp.fonts.size.md,
+    fontSize: themeApp.fonts.size.sm,
     color: colors.text.primary,
     marginBottom: themeApp.spacing.sm,
   },

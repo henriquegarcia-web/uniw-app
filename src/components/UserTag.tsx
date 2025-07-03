@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     columnGap: 4,
     // paddingVertical: themeApp.spacing.xs,
     paddingHorizontal: themeApp.spacing.xs,
-    borderRadius: themeApp.borders.radius.xs,
+    borderRadius: themeApp.borders.radius.xxs,
     borderWidth: 1,
     borderColor: colors.text.secondary,
   },

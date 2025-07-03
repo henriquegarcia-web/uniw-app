@@ -14,9 +14,9 @@ interface ProductPriceProps {
 export const ProductPrice = ({ price, promotionalPrice, large }: ProductPriceProps) => {
   const isOnSale = promotionalPrice && promotionalPrice < price
 
-  const mainPriceSize = large ? themeApp.fonts.size.xxl : 20
+  const mainPriceSize = large ? themeApp.fonts.size.xxl : themeApp.fonts.size.lg
   const originalPriceSize = large ? themeApp.fonts.size.xl : themeApp.fonts.size.md
-  const discountSize = large ? themeApp.fonts.size.lg : themeApp.fonts.size.sm
+  const discountSize = large ? themeApp.fonts.size.lg : themeApp.fonts.size.xs
 
   const calculateDiscount = () => {
     if (!isOnSale) return 0
@@ -28,7 +28,7 @@ export const ProductPrice = ({ price, promotionalPrice, large }: ProductPricePro
 
   if (isOnSale) {
     return (
-      <View style={[styles.container, { rowGap: large ? themeApp.spacing.xs : 0 }]}>
+      <View style={[styles.container, { rowGap: large ? themeApp.spacing.xs : 2 }]}>
         <Text
           style={[
             styles.promotionalPrice,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   salePriceRow: {
     flexDirection: 'row',
     alignItems: 'baseline',
-    gap: themeApp.spacing.xs,
+    gap: themeApp.spacing.xxs,
   },
   promotionalPrice: {
     fontFamily: themeApp.fonts.family.bold,

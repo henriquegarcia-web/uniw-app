@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   optionButton: {
     borderWidth: 2,
     borderColor: colors.brand.secondary,
-    borderRadius: themeApp.borders.radius.xs,
+    borderRadius: themeApp.borders.radius.xxs,
     paddingVertical: themeApp.spacing.sm,
     paddingHorizontal: themeApp.spacing.md,
     alignItems: 'center',

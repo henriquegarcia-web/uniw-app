@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     paddingRight: themeApp.spacing.sm,
     paddingLeft: 20,
     marginLeft: -20,
-    borderTopRightRadius: themeApp.borders.radius.xs,
-    borderBottomRightRadius: themeApp.borders.radius.xs,
+    borderTopRightRadius: themeApp.borders.radius.xxs,
+    borderBottomRightRadius: themeApp.borders.radius.xxs,
   },
   buyButtonLabel: {
     fontFamily: themeApp.fonts.family.semiBold,

@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 55,
     paddingHorizontal: themeApp.spacing.md,
-    borderRadius: themeApp.borders.radius.xs,
+    borderRadius: themeApp.borders.radius.xxs,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',

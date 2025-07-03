@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: themeApp.spacing.md,
     paddingVertical: themeApp.spacing.md,
     marginBottom: themeApp.spacing.md,
-    borderRadius: themeApp.borders.radius.xs,
+    borderRadius: themeApp.borders.radius.xxs,
     backgroundColor: colors.brand.secondary,
   },
   deliveryBannerTopText: {

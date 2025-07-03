@@ -99,13 +99,14 @@ const styles = StyleSheet.create({
     padding: themeApp.spacing.sm,
   },
   mainContent: {
-    rowGap: themeApp.spacing.xs,
+    rowGap: 2,
   },
   name: {
     fontFamily: themeApp.fonts.family.semiBold,
-    fontSize: themeApp.fonts.size.lg,
+    fontSize: themeApp.fonts.size.md,
     color: colors.text.primary,
     marginBottom: -4,
+    height: 40,
   },
   caption: {
     fontFamily: themeApp.fonts.family.regular,
@@ -113,21 +114,11 @@ const styles = StyleSheet.create({
     color: colors.text.secondary,
   },
   price: {
-    marginVertical: themeApp.spacing.xs,
+    marginVertical: themeApp.spacing.xxs,
   },
   footer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  ratingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  ratingText: {
-    marginLeft: themeApp.spacing.xs,
-    fontFamily: themeApp.fonts.family.regular,
-    fontSize: themeApp.fonts.size.sm,
-    color: colors.text.secondary,
   },
 })

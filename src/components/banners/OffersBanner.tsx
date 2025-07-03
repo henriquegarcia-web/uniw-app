@@ -68,6 +68,7 @@ export const OffersBanner = ({ banner }: OffersBannerProps) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: themeApp.spacing.lg,
+    paddingVertical: themeApp.spacing.xs,
   },
 })
 
@@ -133,14 +134,13 @@ const offerCtaStyles = StyleSheet.create({
   },
   title: {
     fontFamily: themeApp.fonts.family.bold,
-    fontSize: themeApp.fonts.size.xl,
+    fontSize: themeApp.fonts.size.lg,
     color: colors.text.onBrand,
   },
   countdown: {
     fontFamily: themeApp.fonts.family.regular,
     fontSize: themeApp.fonts.size.sm,
     color: colors.text.onBrand,
-    marginTop: themeApp.spacing.xs,
   },
 })
 
@@ -164,7 +164,7 @@ const offerSimpleStyles = StyleSheet.create({
     alignItems: 'center',
     columnGap: themeApp.spacing.lg,
     backgroundColor: colors.brand.secondary,
-    borderRadius: themeApp.borders.radius.sm,
+    borderRadius: themeApp.borders.radius.xs,
     padding: themeApp.spacing.md,
   },
   image: {
@@ -176,13 +176,13 @@ const offerSimpleStyles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontFamily: themeApp.fonts.family.semiBold,
-    fontSize: themeApp.fonts.size.xl,
+    fontFamily: themeApp.fonts.family.bold,
+    fontSize: themeApp.fonts.size.lg,
     color: colors.text.onBrand,
   },
   subtitle: {
     fontFamily: themeApp.fonts.family.regular,
-    fontSize: themeApp.fonts.size.md,
+    fontSize: themeApp.fonts.size.sm,
     color: colors.text.onBrand,
   },
 })

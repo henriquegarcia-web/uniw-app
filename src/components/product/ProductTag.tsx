@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     columnGap: themeApp.spacing.xs,
     paddingVertical: themeApp.spacing.xs,
     paddingHorizontal: themeApp.spacing.sm,
-    borderRadius: themeApp.borders.radius.xs,
+    borderRadius: themeApp.borders.radius.xxs,
     borderWidth: 1,
     borderColor: colors.text.tertiary,
   },

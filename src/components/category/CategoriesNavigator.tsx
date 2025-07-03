@@ -1,7 +1,15 @@
 // src/components/CategoriesNavigator.tsx
 
 import React from 'react'
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native'
 
 import {
   IProductCategory,
@@ -11,6 +19,11 @@ import {
 } from '@papaya-punch/uniw-shared-modules'
 import { useNavigation } from '@react-navigation/native'
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
+
+const { width } = Dimensions.get('window')
+
+const WIDTH_BASE = width - themeApp.spacing.lg * 2
+const NAVIGATOR_ITEM_WIDTH = WIDTH_BASE / 4 - 4
 
 interface CategoriesNavigatorProps {
   categories: IProductCategory[]
@@ -56,22 +69,30 @@ export const CategoriesNavigator = ({ categories }: CategoriesNavigatorProps) =>
 const styles = StyleSheet.create({
   container: {},
   listContentContainer: {
-    columnGap: themeApp.spacing.sm,
+    columnGap: 6,
     paddingHorizontal: themeApp.spacing.lg,
   },
   itemContainer: {
     alignItems: 'center',
-    rowGap: themeApp.spacing.sm,
+    rowGap: themeApp.spacing.xs,
+    width: NAVIGATOR_ITEM_WIDTH,
+
+    // borderWidth: 1,
+    // borderColor: 'red',
   },
   image: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
+    width: NAVIGATOR_ITEM_WIDTH - themeApp.spacing.xs,
+    height: NAVIGATOR_ITEM_WIDTH - themeApp.spacing.xs,
+    borderRadius: 100,
   },
   label: {
-    width: 80,
+    // width: 80,
+    width: '100%',
     textAlign: 'center',
     fontFamily: themeApp.fonts.family.medium,
     fontSize: themeApp.fonts.size.sm,
+
+    // borderWidth: 1,
+    // borderColor: 'blue',
   },
 })
