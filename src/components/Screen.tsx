@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  Dimensions,
   FlatList,
   KeyboardAvoidingView,
   Platform,
@@ -10,7 +11,8 @@ import {
 } from 'react-native'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { colors, themeApp as theme } from '@papaya-punch/uniw-shared-modules'
-import { mockBanners } from '@/types/banners'
+
+const { width, height } = Dimensions.get('window')
 
 interface ScreenProps {
   children?: React.ReactNode
@@ -18,6 +20,7 @@ interface ScreenProps {
   style?: ViewStyle
   enableInsets?: boolean
   enableKeyboardAvoiding?: boolean
+  enableCenteredView?: boolean
   listing?: {
     ref?: any
     data: any[]
@@ -39,6 +42,7 @@ export const Screen = ({
   style,
   enableInsets = false,
   enableKeyboardAvoiding = false,
+  enableCenteredView = false,
   listing,
 }: ScreenProps) => {
   const insets = useSafeAreaInsets()
@@ -85,10 +89,21 @@ export const Screen = ({
       return (
         <ScrollView
           style={styles.scrollView}
-          contentContainerStyle={styles.scrollContentContainer}
+          contentContainerStyle={[
+            styles.scrollContentContainer,
+            !enableCenteredView && {
+              paddingBottom: theme.spacing.custom['botom-tab-height'],
+            },
+            enableCenteredView && {
+              height: height - insets.top - insets.bottom,
+              justifyContent: 'flex-end',
+            },
+          ]}
           keyboardShouldPersistTaps="handled"
         >
-          <View style={styles.content}>{children}</View>
+          <View style={[styles.content, !enableCenteredView && { flex: 1 }]}>
+            {children}
+          </View>
         </ScrollView>
       )
     }
@@ -98,7 +113,16 @@ export const Screen = ({
     <SafeAreaView edges={['bottom']} style={containerStyle}>
       {enableKeyboardAvoiding ? (
         <KeyboardAvoidingView
-          style={{ flex: 1 }}
+          style={[
+            {
+              flex: 1,
+              // borderWidth: 1,
+              // borderColor: 'green',
+            },
+            enableCenteredView && {
+              height: height - insets.top - insets.bottom,
+            },
+          ]}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
           {renderContent()}
@@ -114,15 +138,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.ui.surface,
+
+    // borderWidth: 1,
+    // borderColor: 'blue',
   },
   scrollView: {
     flex: 1,
+
+    // borderWidth: 1,
+    // borderColor: 'red',
   },
   content: {
-    flex: 1,
     rowGap: theme.spacing.md,
     paddingTop: theme.spacing.md,
     paddingHorizontal: theme.spacing.lg,
+
+    // borderWidth: 1,
+    // borderColor: 'purple',
   },
   listingContentContainer: {
     gap: theme.spacing.xs,
@@ -130,7 +162,8 @@ const styles = StyleSheet.create({
     paddingBottom: theme.spacing.custom['botom-tab-height'],
   },
   scrollContentContainer: {
-    paddingBottom: theme.spacing.custom['botom-tab-height'],
+    // borderWidth: 1,
+    // borderColor: 'yellow',
   },
   tabContainer: {
     marginBottom: theme.spacing.custom['botom-tab-height'],

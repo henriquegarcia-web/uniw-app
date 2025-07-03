@@ -31,7 +31,9 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
         </View>
         <View style={styles.userMainInfos}>
           <EditableUserName />
-          <Text style={styles.userEmail}>{user?.baseProfile.email}</Text>
+          <Text style={styles.userEmail} numberOfLines={1}>
+            {user?.baseProfile.email}
+          </Text>
         </View>
       </View>
       <View style={styles.mainContainer}>
@@ -97,7 +99,7 @@ const styles = StyleSheet.create({
   },
   topContainer: {
     position: 'relative',
-    height: 50,
+    height: 55,
     justifyContent: 'flex-end',
     paddingBottom: 12,
   },
@@ -183,7 +185,7 @@ const profileMenuStyles = StyleSheet.create({
 
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: theme.spacing.md,
+    gap: theme.spacing.xs,
   },
 
   listContainer: {

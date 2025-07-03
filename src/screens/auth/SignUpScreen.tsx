@@ -64,170 +64,160 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
   }
 
   return (
-    <Screen style={styles.safeArea}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.contentContainer}
-        keyboardShouldPersistTaps="handled"
-      >
-        <View></View>
-        <View style={styles.content}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Criar uma</Text>
-            <Text style={styles.title}>nova conta</Text>
-          </View>
+    <Screen
+      enableInsets
+      enableCenteredView
+      enableKeyboardAvoiding
+      style={styles.safeArea}
+    >
+      <View></View>
+      <View style={styles.content}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Criar uma</Text>
+          <Text style={styles.title}>nova conta</Text>
+        </View>
 
-          <Controller
-            control={control}
-            name="name"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <InputText
-                iconName="user"
-                placeholder="Nome completo"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                autoCapitalize="words"
-                error={errors.name?.message}
-              />
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="email"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <InputText
-                iconName="mail"
-                placeholder="Seu melhor e-mail"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                error={errors.email?.message}
-              />
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="cpf"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <InputText
-                iconName="credit-card"
-                placeholder="CPF"
-                onBlur={onBlur}
-                onChangeText={(text) => onChange(applyMask(text, 'cpf'))}
-                value={value}
-                keyboardType="numeric"
-                maxLength={14}
-                error={errors.cpf?.message}
-              />
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="password"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <InputText
-                iconName="lock"
-                placeholder="Crie uma senha"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                isPassword
-                error={errors.password?.message}
-              />
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="confirmPassword"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <InputText
-                iconName="lock"
-                placeholder="Confirme sua senha"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                isPassword
-                error={errors.confirmPassword?.message}
-              />
-            )}
-          />
-
-          {isErrorAuth && <Text style={styles.errorText}>{errorAuth.toString()}</Text>}
-
-          <Text style={styles.termsWarningText}>
-            Ao clicar em Criar Conta, você concorda com a oferta pública
-          </Text>
-
-          <View style={styles.submitContainer}>
-            <Button
-              title="Criar Conta"
-              variant="primary"
-              onPress={handleSubmit(handleSignUp)}
-              loading={isLoadingAuthFunctions}
-              disabled={isLoadingAuthFunctions}
+        <Controller
+          control={control}
+          name="name"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputText
+              iconName="user"
+              placeholder="Nome completo"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              autoCapitalize="words"
+              error={errors.name?.message}
             />
-          </View>
+          )}
+        />
 
-          <View style={styles.dividerContainer}>
-            <Text style={styles.dividerText}>- ou continue com -</Text>
-          </View>
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputText
+              iconName="mail"
+              placeholder="Seu melhor e-mail"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              error={errors.email?.message}
+            />
+          )}
+        />
 
-          <View style={styles.socialLoginContainer}>
-            <ButtonIcon>
-              <SocialIcon provider="google" />
-            </ButtonIcon>
-            <ButtonIcon>
-              <SocialIcon provider="apple" />
-            </ButtonIcon>
-            <ButtonIcon>
-              <SocialIcon provider="facebook" />
-            </ButtonIcon>
-          </View>
-        </View>
+        <Controller
+          control={control}
+          name="cpf"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputText
+              iconName="credit-card"
+              placeholder="CPF"
+              onBlur={onBlur}
+              onChangeText={(text) => onChange(applyMask(text, 'cpf'))}
+              value={value}
+              keyboardType="numeric"
+              maxLength={14}
+              error={errors.cpf?.message}
+            />
+          )}
+        />
 
-        <View style={styles.signInContainer}>
-          <Text style={styles.signInText}>Eu já tenho uma conta </Text>
-          <TouchableOpacity
-            onPress={() => {
-              clearAuthError()
-              navigation.navigate('SignIn')
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputText
+              iconName="lock"
+              placeholder="Crie uma senha"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              isPassword
+              error={errors.password?.message}
+            />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="confirmPassword"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputText
+              iconName="lock"
+              placeholder="Confirme sua senha"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              isPassword
+              error={errors.confirmPassword?.message}
+            />
+          )}
+        />
+
+        {isErrorAuth && <Text style={styles.errorText}>{errorAuth.toString()}</Text>}
+
+        <Text style={styles.termsWarningText}>
+          Ao clicar em Criar Conta, você concorda com a oferta pública
+        </Text>
+
+        <View style={styles.submitContainer}>
+          <Button
+            title="Criar Conta"
+            variant="primary"
+            onPress={handleSubmit(handleSignUp)}
+            loading={isLoadingAuthFunctions}
+            disabled={isLoadingAuthFunctions}
+            style={{
+              height: 50,
             }}
-          >
-            <Text style={styles.signInLink}>Entrar</Text>
-          </TouchableOpacity>
+          />
         </View>
-      </ScrollView>
+
+        <View style={styles.dividerContainer}>
+          <Text style={styles.dividerText}>- ou continue com -</Text>
+        </View>
+
+        <View style={styles.socialLoginContainer}>
+          <ButtonIcon>
+            <SocialIcon provider="google" />
+          </ButtonIcon>
+          <ButtonIcon>
+            <SocialIcon provider="apple" />
+          </ButtonIcon>
+          <ButtonIcon>
+            <SocialIcon provider="facebook" />
+          </ButtonIcon>
+        </View>
+      </View>
+
+      <View style={styles.signInContainer}>
+        <Text style={styles.signInText}>Eu já tenho uma conta </Text>
+        <TouchableOpacity
+          onPress={() => {
+            clearAuthError()
+            navigation.navigate('SignIn')
+          }}
+        >
+          <Text style={styles.signInLink}>Entrar</Text>
+        </TouchableOpacity>
+      </View>
     </Screen>
   )
 }
 
 // Estilos baseados nos da tela de SignIn para consistência
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.ui.background,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  contentContainer: {
-    flexGrow: 1,
-    justifyContent: 'space-between',
-    padding: theme.spacing.lg,
-    paddingTop: theme.spacing.custom['botom-tab-height'],
-  },
+  safeArea: {},
   content: {
-    rowGap: theme.spacing.md,
+    rowGap: theme.spacing.sm,
   },
   titleContainer: {
-    marginBottom: theme.spacing.custom['botom-tab-height'],
+    marginBottom: theme.spacing.lg,
   },
   title: {
     fontFamily: theme.fonts.family.bold,
@@ -241,13 +231,12 @@ const styles = StyleSheet.create({
     color: colors.text.secondary,
     textAlign: 'center',
   },
-  submitContainer: {
-    marginVertical: theme.spacing.xl,
-  },
+  submitContainer: {},
   dividerContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginVertical: theme.spacing.sm,
   },
   dividerText: {
     marginHorizontal: theme.spacing.md,
@@ -258,13 +247,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     gap: theme.spacing.lg,
-    marginVertical: theme.spacing.md,
+    marginBottom: theme.spacing.sm,
   },
   signInContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: theme.spacing.lg,
+    paddingBottom: theme.spacing.lg,
   },
   signInText: {
     fontFamily: theme.fonts.family.regular,

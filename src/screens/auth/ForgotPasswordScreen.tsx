@@ -47,73 +47,64 @@ const ForgotPasswordScreen = ({ navigation }: ForgotPasswordScreenProps) => {
   }
 
   return (
-    <Screen style={styles.safeArea}>
-      <View style={styles.container}>
-        <View style={styles.content}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Esqueceu</Text>
-            <Text style={styles.title}>a senha?</Text>
-          </View>
+    <Screen
+      enableInsets
+      enableCenteredView
+      enableKeyboardAvoiding
+      style={styles.safeArea}
+    >
+      <View style={styles.content}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Esqueceu</Text>
+          <Text style={styles.title}>a senha?</Text>
+        </View>
 
-          <Controller
-            control={control}
-            name="email"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <InputText
-                iconName="mail"
-                placeholder="Digite seu email cadastrado"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                error={errors.email?.message}
-              />
-            )}
-          />
-
-          <Text style={styles.infoText}>
-            * Enviaremos uma mensagem para você definir ou redefinir sua nova senha
-          </Text>
-
-          <View style={styles.submitContainer}>
-            <Button
-              title="Enviar"
-              variant="primary"
-              onPress={handleSubmit(handlePasswordReset)}
-              loading={isLoadingAuthFunctions}
-              disabled={isLoadingAuthFunctions}
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputText
+              iconName="mail"
+              placeholder="Digite seu email cadastrado"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              error={errors.email?.message}
             />
-          </View>
-        </View>
+          )}
+        />
 
-        <View style={styles.footer}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={styles.backToLoginLink}>Voltar para o Login</Text>
-          </TouchableOpacity>
+        <Text style={styles.infoText}>
+          * Enviaremos uma mensagem para você definir ou redefinir sua nova senha
+        </Text>
+
+        <View style={styles.submitContainer}>
+          <Button
+            title="Enviar"
+            variant="primary"
+            onPress={handleSubmit(handlePasswordReset)}
+            loading={isLoadingAuthFunctions}
+            disabled={isLoadingAuthFunctions}
+          />
         </View>
+      </View>
+
+      <View style={styles.footer}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={styles.backToLoginLink}>Voltar para o Login</Text>
+        </TouchableOpacity>
       </View>
     </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.ui.background,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    padding: theme.spacing.lg,
-    paddingTop: theme.spacing.custom['botom-tab-height'],
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-  },
+  safeArea: {},
+  content: {},
   titleContainer: {
-    marginBottom: theme.spacing.custom['botom-tab-height'],
+    marginBottom: theme.spacing.lg,
   },
   title: {
     fontFamily: theme.fonts.family.bold,
@@ -133,7 +124,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     alignItems: 'center',
-    paddingBottom: theme.spacing.md,
+    paddingBottom: theme.spacing.lg,
   },
   backToLoginLink: {
     fontFamily: theme.fonts.family.bold,
