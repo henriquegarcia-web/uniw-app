@@ -14,7 +14,7 @@ interface ProductPriceProps {
 export const ProductPrice = ({ price, promotionalPrice, large }: ProductPriceProps) => {
   const isOnSale = promotionalPrice && promotionalPrice < price
 
-  const mainPriceSize = large ? themeApp.fonts.size.xxl : themeApp.fonts.size.lg
+  const mainPriceSize = large ? themeApp.fonts.size.xxl : 18
   const originalPriceSize = large ? themeApp.fonts.size.xl : themeApp.fonts.size.md
   const discountSize = large ? themeApp.fonts.size.lg : themeApp.fonts.size.xs
 

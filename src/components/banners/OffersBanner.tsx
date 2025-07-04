@@ -78,7 +78,12 @@ export const OfferCarousel = ({ data }: { data: IOfferCarouselBanner }) => {
   const images = data.slides.map((slide) => slide.imageUrl)
   return (
     <View style={offerCarouselStyles.container}>
-      <ProductImageCarousel images={images} type="hero" />
+      <ProductImageCarousel
+        images={images}
+        type="hero"
+        autoplay={true}
+        autoplayDelay={4000}
+      />
     </View>
   )
 }

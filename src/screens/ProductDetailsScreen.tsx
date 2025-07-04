@@ -101,10 +101,10 @@ const ProductDetailsScreen = ({ route }: ProductDetailsScreenProps) => {
 const styles = StyleSheet.create({
   container: {},
   priceContainer: {
-    marginTop: theme.spacing.sm,
+    marginTop: theme.spacing.xs,
   },
   variationsContainer: {
-    marginVertical: theme.spacing.sm,
+    marginBottom: theme.spacing.xs,
   },
   buyContainer: {
     flexDirection: 'row',

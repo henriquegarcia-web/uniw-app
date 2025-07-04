@@ -86,14 +86,14 @@ const styles = StyleSheet.create({
   optionsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: themeApp.spacing.md,
+    gap: themeApp.spacing.xs,
   },
   optionButton: {
     borderWidth: 2,
     borderColor: colors.brand.secondary,
     borderRadius: themeApp.borders.radius.xxs,
-    paddingVertical: themeApp.spacing.sm,
-    paddingHorizontal: themeApp.spacing.md,
+    paddingVertical: themeApp.spacing.xxs,
+    paddingHorizontal: themeApp.spacing.xs,
     alignItems: 'center',
     justifyContent: 'center',
   },

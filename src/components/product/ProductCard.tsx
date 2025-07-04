@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   caption: {
     fontFamily: themeApp.fonts.family.regular,
-    fontSize: themeApp.fonts.size.xs,
+    fontSize: 11,
     color: colors.text.secondary,
   },
   price: {

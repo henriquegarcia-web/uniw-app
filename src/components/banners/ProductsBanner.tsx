@@ -78,6 +78,7 @@ const productScrollStyles = StyleSheet.create({
   },
   listContent: {
     paddingHorizontal: themeApp.spacing.lg,
+    paddingTop: themeApp.spacing.xs,
     paddingBottom: themeApp.spacing.sm,
   },
   cardContainer: {

@@ -3,21 +3,23 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 
-import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
-import { Feather } from '@expo/vector-icons'
-
-type FeatherIconName = keyof typeof Feather.glyphMap
+import {
+  themeApp,
+  colors,
+  MaterialCommunityIconsIconType,
+} from '@papaya-punch/uniw-shared-modules'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 interface ProductTagProps {
   label: string
-  leftIcon?: FeatherIconName
+  leftIcon?: MaterialCommunityIconsIconType
 }
 
 export const ProductTag = ({ label, leftIcon }: ProductTagProps) => {
   return (
     <View style={styles.container}>
       {leftIcon && (
-        <Feather
+        <MaterialCommunityIcons
           name={leftIcon}
           size={16}
           color={colors.text.tertiary}

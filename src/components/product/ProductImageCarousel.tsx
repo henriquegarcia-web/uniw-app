@@ -17,13 +17,20 @@ import { themeApp, colors } from '@papaya-punch/uniw-shared-modules'
 interface ProductImageCarouselProps {
   images?: string[]
   type: 'hero' | 'productDetail'
+  autoplay?: boolean
+  autoplayDelay?: number // em milissegundos
 }
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window')
 const ITEM_WIDTH = SCREEN_WIDTH - 2 * themeApp.spacing.lg
 const GAP_SIZE = themeApp.spacing.md
 
-export const ProductImageCarousel = ({ images, type }: ProductImageCarouselProps) => {
+export const ProductImageCarousel = ({
+  images,
+  type,
+  autoplay = false,
+  autoplayDelay = 3000,
+}: ProductImageCarouselProps) => {
   const bannerHeight = type === 'hero' ? 240 : ITEM_WIDTH
 
   const [activeIndex, setActiveIndex] = useState(0)
@@ -37,6 +44,16 @@ export const ProductImageCarousel = ({ images, type }: ProductImageCarouselProps
       }
     },
   ).current
+
+  // Autoplay effect
+  React.useEffect(() => {
+    if (!autoplay || !images || images.length <= 1) return
+    const timer = setInterval(() => {
+      let nextIndex = activeIndex + 1 < images.length ? activeIndex + 1 : 0
+      flatListRef.current?.scrollToIndex({ index: nextIndex, animated: true })
+    }, autoplayDelay)
+    return () => clearInterval(timer)
+  }, [autoplay, autoplayDelay, images, activeIndex])
 
   const handlePrev = () => {
     if (activeIndex > 0) {
@@ -90,17 +107,19 @@ export const ProductImageCarousel = ({ images, type }: ProductImageCarouselProps
         contentContainerStyle={styles.listContentContainer}
       />
 
-      <View style={styles.paginationContainer}>
-        {images.map((_, index) => (
-          <View
-            key={`pagination-dot-${index}`}
-            style={[
-              styles.dot,
-              activeIndex === index ? styles.activeDot : styles.inactiveDot,
-            ]}
-          />
-        ))}
-      </View>
+      {images.length > 1 && (
+        <View style={styles.paginationContainer}>
+          {images.map((_, index) => (
+            <View
+              key={`pagination-dot-${index}`}
+              style={[
+                styles.dot,
+                activeIndex === index ? styles.activeDot : styles.inactiveDot,
+              ]}
+            />
+          ))}
+        </View>
+      )}
 
       {type === 'productDetail' && activeIndex > 0 && (
         <TouchableOpacity
@@ -126,7 +145,6 @@ export const ProductImageCarousel = ({ images, type }: ProductImageCarouselProps
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginBottom: themeApp.spacing.sm,
   },
   noImage: {
     justifyContent: 'center',
@@ -146,7 +164,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     width: ITEM_WIDTH,
     height: '100%',
-    borderRadius: themeApp.borders.radius.md,
+    borderRadius: themeApp.borders.radius.sm,
     overflow: 'hidden',
     backgroundColor: colors.ui.surface,
   },
